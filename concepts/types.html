@@ -3,27 +3,27 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Grammar - ZoKrates</title>
+        <title>Types - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -32,7 +32,7 @@
     </head>
     <body class="light">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">var path_to_root = "";</script>
+        <script type="text/javascript">var path_to_root = "../";</script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="grammar.html" class="active"><strong aria-hidden="true">2.</strong> Grammar</a></li><li><a href="cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><a href="verification.html"><strong aria-hidden="true">4.</strong> Verification</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.5.</strong> Comments</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.2.</strong> Verification</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -105,7 +105,7 @@
                         <h1 class="menu-title">ZoKrates</h1> 
 
                         <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
                         </div>
@@ -136,84 +136,27 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#grammar" id="grammar"><h1>Grammar</h1></a>
-<p>The current syntax of ZoKrates is the following</p>
-<pre><code class="language-k">module ZOKRATES-SYNTAX
-    imports DOMAINS-SYNTAX
-
-    syntax Prog ::= Impts FunDecls [klabel(#Prog)] // should not be required, cf https://github.com/kframework/k-legacy/issues/1839
-
-    syntax ImptBody ::= &quot;import&quot; String
-    syntax Alias ::= &quot;as&quot; Id
-    syntax Impt ::= ImptBody [klabel(#Impt)]
-                  | ImptBody Alias [klabel(#AliasedImpt)]
-    syntax Impts ::= List{Impt,&quot;&quot;}
-
-    syntax Id ::= &quot;main&quot; [token]
-
-    syntax Arg ::= Type Id
-                 | &quot;private&quot; Type Id
-
-    syntax Type ::= &quot;field&quot;
-                  | &quot;bool&quot;
-    syntax ReturnTypes ::= List{Type,&quot;,&quot;}
-
-    syntax Args ::= List{Arg,&quot;,&quot;}
-    syntax FunDecl ::= &quot;def&quot; Id &quot;(&quot; Args &quot;)&quot; &quot;-&gt;&quot; &quot;(&quot; ReturnTypes &quot;)&quot; &quot;:&quot; Stmts
-    syntax FunDecls ::= FunDecl
-                      | FunDecl FunDecls                          [right]
-
-    syntax Stmt ::= Assert
-                  | Define
-                  | Declare
-                  | DeclareDefine
-                  | Return
-                  | For
-                  | Destructure
-
-    syntax HintId ::= Id
-                    | Type Id
-
-    syntax HintIds ::= List{HintId,&quot;,&quot;}
-
-    syntax Destructure ::= HintId &quot;,&quot; HintIds &quot;=&quot; FCall
-
-    syntax Stmts ::= List{Stmt,&quot;&quot;}
-
-    syntax Assert ::= Exp &quot;==&quot; Exp
-    syntax Declare ::= Type Id
-    syntax Define ::= Id &quot;=&quot; Exp
-    syntax DeclareDefine ::= Type Id &quot;=&quot; Exp // should be sugar for Declare then Define
-    syntax Return ::= &quot;return&quot; Exps
-    syntax For ::= &quot;for&quot; Type Id &quot;in&quot; Int &quot;..&quot; Int &quot;do&quot; Stmts &quot;endfor&quot;
-
-
-    syntax Exps ::= List{Exp,&quot;,&quot;}          [strict]
-    syntax Exp ::= Int | Bool | Id
-               | &quot;(&quot; Exp &quot;)&quot;             [bracket]
-               &gt; Exp &quot;(&quot; Exps &quot;)&quot;        [strict]
-               &gt; left:
-                 Exp &quot;*&quot; Exp             [strict, left]
-               | Exp &quot;/&quot; Exp             [strict, left]
-               | Exp &quot;**&quot; Exp 		     [strict, left]
-               &gt; left:
-                 Exp &quot;+&quot; Exp             [strict, left]
-               | Exp &quot;-&quot; Exp             [strict, left]
-               | IfElse
-               &gt; non-assoc:
-                 Exp &quot;&lt;&quot; Exp             [strict, non-assoc]
-               | Exp &quot;&lt;=&quot; Exp            [strict, non-assoc]
-               | Exp &quot;&gt;&quot; Exp             [strict, non-assoc]
-               | Exp &quot;&gt;=&quot; Exp            [strict, non-assoc]
-               | Exp &quot;==&quot; Exp            [strict, non-assoc]
-               &gt; IfElse
-               &gt; FCall
-
-    syntax FCall ::= Id &quot;(&quot; Exps &quot;)&quot;
-
-    syntax IfElse ::= &quot;if&quot; Exp &quot;then&quot; Exp &quot;else&quot; Exp &quot;fi&quot;    [strict(1)]
-
-endmodule
+                        <a class="header" href="#types" id="types"><h2>Types</h2></a>
+<p>ZoKrates currently exposes three types:</p>
+<a class="header" href="#field" id="field"><h3><code>field</code></h3></a>
+<p>This is the most basic type in ZoKrates, and it represents a positive integer between <code>0</code> and <code>p - 1</code>, where <code>p</code> is a (large) prime number.</p>
+<p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495616</code> as imposed by the pairing curve supported by Ethereum.</p>
+<p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2 and underflow at 0, so that we have:</p>
+<pre><code class="language-zokrates">def main() -&gt; (field):
+    field p_minus_one = 21888242871839275222246405745257275088548364400416034343698204186575808495616
+    0 - 1 == p_minus_one
+    return 1
+</code></pre>
+<a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
+<p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... endif</code> expressions.</p>
+<p>You can use them for equality checks, inequality checks and inequality checks between <code>field</code> values.</p>
+<p>Note that while equality checks are cheap, inequality checks should be use wisely as they are orders of magnitude more expensive.</p>
+<a class="header" href="#fieldn" id="fieldn"><h3><code>field[n]</code></h3></a>
+<p>Static arrays of <code>field</code> can be instantiated with a constant size, and their elements can be accessed and updated:</p>
+<pre><code class="language-zokrates">def main() -&gt; (field):
+    field[3] a = [1, 2, 3]
+    a[2] = 4
+    return a[0] + a[2]
 </code></pre>
 
                     </main>
@@ -221,13 +164,13 @@ endmodule
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../concepts/variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="cli.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../concepts/functions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -239,13 +182,13 @@ endmodule
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../concepts/variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="cli.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../concepts/functions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -260,14 +203,14 @@ endmodule
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         

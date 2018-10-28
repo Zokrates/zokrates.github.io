@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="grammar.html"><strong aria-hidden="true">2.</strong> Grammar</a></li><li><a href="cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><a href="verification.html"><strong aria-hidden="true">4.</strong> Verification</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.5.</strong> Comments</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.2.</strong> Verification</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -137,13 +137,16 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="#introduction" id="introduction"><h1>Introduction</h1></a>
-<p>Welcome to the ZoKrates documentation, here's some ZoKrates code:</p>
-<pre><code class="language-zokrates">def main() -&gt; (field):
-    return 42
-</code></pre>
-<p>And here is some invalid ZoKrates code:</p>
-<pre><code class="language-zokrates">🦓
-</code></pre>
+<p>ZoKrates is a toolbox for zkSNARKs on Ethereum. It helps you use verifiable computation in your DApp, from the specification of your program in a high level language to generating proofs of computation to verifying those proofs in Solidity.</p>
+<a class="header" href="#background-on-zksnarks" id="background-on-zksnarks"><h2>Background on zkSNARKs</h2></a>
+<p>Zero-knowledge proofs (ZKPs) are a family of probabilistic protocols, first described by <a href="http://people.csail.mit.edu/silvio/Selected%20Scientific%20Papers/Proof%20Systems/The_Knowledge_Complexity_Of_Interactive_Proof_Systems.pdf">Goldwasser, Micali and Rackoff</a> in 1985.</p>
+<p>One particular family of ZKPs is described as zero-knowledge <strong>S</strong>uccinct <strong>N</strong>on-interactive <strong>AR</strong>guments of <strong>K</strong>nowledge, a.k.a. zkSNARKs. zkSNARKs are the most widely used zero-knowledge protocols, with the anonymous cryptocurrency Zcash and the smart-contract platform Ethereum among the notable early adopters.</p>
+<p>For further details we refer the reader to some introductory material provided by the community: <a href="https://z.cash/technology/zksnarks/">[1]</a>,<a href="https://medium.com/@VitalikButerin/zkSNARKs-under-the-hood-b33151a013f6">[2]</a>, <a href="https://blog.decentriq.ch/zk-SNARKs-primer-part-one/">[3]</a>.</p>
+<a class="header" href="#motivation" id="motivation"><h2>Motivation</h2></a>
+<p>Ethereum runs computations on all nodes of the network, resulting in high costs, limits in complexity, and low privacy. zkSNARKs have been enabling to only verify computations on-chain for a fraction of the cost of running them, but are hard to grasp and work with.</p>
+<p>ZoKrates bridges this gap. It helps you create off-chain programs and link them to the Ethereum blockchain, expanding the possibilities for your DApp.</p>
+<a class="header" href="#license" id="license"><h2>License</h2></a>
+<p>ZoKrates is released under the GNU Lesser General Public License v3.</p>
 
                     </main>
 
@@ -152,7 +155,7 @@
                         
 
                         
-                            <a rel="next" href="grammar.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="gettingstarted.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -166,7 +169,7 @@
                 
 
                 
-                    <a href="grammar.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="gettingstarted.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
