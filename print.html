@@ -165,7 +165,7 @@ cd ZoKrates/target/release
 <a class="header" href="#hello-zokrates" id="hello-zokrates"><h2>Hello ZoKrates!</h2></a>
 <p>First, create the text-file <code>root.code</code> and implement your program. In this example, we will prove knowledge of the square root <code>a</code> of a number <code>b</code>:</p>
 <pre><code class="language-zokrates">def main(private field a, field b) -&gt; (field):
-  field result = if a * a == b then 1 else 0 fi
+  field result = if a * a == b then 1 else 0
   return result
 </code></pre>
 <p>Some observations:</p>
@@ -259,6 +259,12 @@ def main() -&gt; (field):
     field res = incr(x)
     x == 1 // x has not changed
     return 1
+</code></pre>
+<a class="header" href="#if-expressions" id="if-expressions"><h3>If expressions</h3></a>
+<p>An if expression allows you to branch your code depending on conditions.</p>
+<pre><code class="language-zokrates">def main(field x) -&gt; (field):
+  field y = if x + 2 == 3 then 1 else 5 fi
+  return y
 </code></pre>
 <a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
 <p>For loops are available with the following syntax:</p>
