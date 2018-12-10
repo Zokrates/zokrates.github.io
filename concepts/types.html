@@ -143,12 +143,12 @@
 <p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495616</code> as imposed by the pairing curve supported by Ethereum.</p>
 <p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2 and underflow at 0, so that we have:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
-    field p_minus_one = 21888242871839275222246405745257275088548364400416034343698204186575808495616
-    0 - 1 == p_minus_one
+    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616
+    0 - 1 == pMinusOne
     return 1
 </code></pre>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
-<p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... endif</code> expressions.</p>
+<p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... fi</code> expressions.</p>
 <p>You can use them for equality checks, inequality checks and inequality checks between <code>field</code> values.</p>
 <p>Note that while equality checks are cheap, inequality checks should be use wisely as they are orders of magnitude more expensive.</p>
 <a class="header" href="#fieldn" id="fieldn"><h3><code>field[n]</code></h3></a>

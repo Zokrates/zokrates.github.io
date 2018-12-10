@@ -141,15 +141,15 @@
 <a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
 <p>Function calls can help make programs clearer and more modular. However, using function calls is not always zero-cost, so deep call chains should be avoided.</p>
 <p>Arguments are passed by value.</p>
-<pre><code class="language-zokrates">def incr(field a) -&gt; (field)
+<pre><code class="language-zokrates">def incr(field a) -&gt; (field):
     a = a + 1
-    return 1
+    return a
 
 def main() -&gt; (field):
     field x = 1
     field res = incr(x)
     x == 1 // x has not changed
-    return 1
+    return x, res
 </code></pre>
 <a class="header" href="#if-expressions" id="if-expressions"><h3>If expressions</h3></a>
 <p>An if expression allows you to branch your code depending on conditions.</p>
