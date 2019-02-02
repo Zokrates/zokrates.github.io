@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.5.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.6.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.2.</strong> Verification</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/backends.html"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -165,7 +165,7 @@ cd ZoKrates/target/release
 <a class="header" href="#hello-zokrates" id="hello-zokrates"><h2>Hello ZoKrates!</h2></a>
 <p>First, create the text-file <code>root.code</code> and implement your program. In this example, we will prove knowledge of the square root <code>a</code> of a number <code>b</code>:</p>
 <pre><code class="language-zokrates">def main(private field a, field b) -&gt; (field):
-  field result = if a * a == b then 1 else 0
+  field result = if a * a == b then 1 else 0 fi
   return result
 </code></pre>
 <p>Some observations:</p>
@@ -189,7 +189,38 @@ cd ZoKrates/target/release
 <a class="header" href="#programming-concepts" id="programming-concepts"><h1>Programming Concepts</h1></a>
 <a class="header" href="#variables" id="variables"><h2>Variables</h2></a>
 <p>Variables can have any name which does not start with a number. Underscores are not allowed in variable names.
-Variables are mutable, and always passed by values to functions.</p>
+Variables are mutable, and always passed by value to functions.</p>
+<a class="header" href="#shadowing" id="shadowing"><h3>Shadowing</h3></a>
+<p>Shadowing is not allowed.</p>
+<pre><code class="language-zokrates">def main() -&gt; (field):
+    field a = 2
+    // field a = 3 &lt;- not allowed
+    for field i in 0..5 do
+        // field a = 7 &lt;- not allowed
+    endfor
+    return a
+</code></pre>
+<a class="header" href="#scope" id="scope"><h3>Scope</h3></a>
+<a class="header" href="#function" id="function"><h4>Function</h4></a>
+<p>Functions have their own scope</p>
+<pre><code class="language-zokrates">def foo() -&gt; (field):
+    // return myGlobal &lt;- not allowed
+    return 42
+
+def main() -&gt; (field):
+    field myGlobal = 42
+    return foo()
+</code></pre>
+<a class="header" href="#for-loop" id="for-loop"><h4>For-loop</h4></a>
+<p>For-loops have their own scope</p>
+<pre><code class="language-zokrates">def main() -&gt; (field):
+    field a = 0
+    for field i in 0..5 do
+        a = a + i
+    endfor
+    // return i &lt;- not allowed
+    return a
+</code></pre>
 <a class="header" href="#types" id="types"><h2>Types</h2></a>
 <p>ZoKrates currently exposes three types:</p>
 <a class="header" href="#field" id="field"><h3><code>field</code></h3></a>
@@ -197,8 +228,8 @@ Variables are mutable, and always passed by values to functions.</p>
 <p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495616</code> as imposed by the pairing curve supported by Ethereum.</p>
 <p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2 and underflow at 0, so that we have:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
-    field p_minus_one = 21888242871839275222246405745257275088548364400416034343698204186575808495616
-    0 - 1 == p_minus_one
+    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616
+    0 - 1 == pMinusOne
     return 1
 </code></pre>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
@@ -217,7 +248,7 @@ Variables are mutable, and always passed by values to functions.</p>
 <pre><code class="language-zokrates">def foo() -&gt; (field):
     return 1
 
-def bar() -&gt; (field):
+def main() -&gt; (field):
     return foo()
 </code></pre>
 <p>A function's signature has to be explicitly provided.
@@ -250,9 +281,9 @@ def main() -&gt; (field):
 <a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
 <p>Function calls can help make programs clearer and more modular. However, using function calls is not always zero-cost, so deep call chains should be avoided.</p>
 <p>Arguments are passed by value.</p>
-<pre><code class="language-zokrates">def incr(field a) -&gt; (field)
+<pre><code class="language-zokrates">def incr(field a) -&gt; (field):
     a = a + 1
-    return 1
+    return a
 
 def main() -&gt; (field):
     field x = 1
@@ -261,11 +292,15 @@ def main() -&gt; (field):
     return 1
 </code></pre>
 <a class="header" href="#if-expressions" id="if-expressions"><h3>If expressions</h3></a>
-<p>An if expression allows you to branch your code depending on conditions.</p>
+<p>An if expression allows you to branch your code depending on a condition.</p>
 <pre><code class="language-zokrates">def main(field x) -&gt; (field):
   field y = if x + 2 == 3 then 1 else 5 fi
   return y
 </code></pre>
+<p>The condition supports <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, which can be combined with the boolean operators <code>&amp;&amp;</code>, <code>||</code> and <code>!</code>.</p>
+<blockquote>
+<p>When it comes to inequality checks, there is a caveat: when executing <code>a &lt; b</code>, both <code>a</code> and <code>b</code> will be asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code>. This means that <code>a</code> and <code>b</code> are both asserted to be between <code>0</code> and <code>2**252 - 1</code>. The same applies to other inequality checks.</p>
+</blockquote>
 <a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
 <p>For loops are available with the following syntax:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
@@ -277,6 +312,24 @@ def main() -&gt; (field):
 </code></pre>
 <p>The bounds have to be known at compile time, so only constants are allowed.
 For-loops define their own scope.</p>
+<a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
+<p>You can separate your code into multiple ZoKrates files using <code>import</code> statements:</p>
+<a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
+<p>You can import a resource in the same folder directly, like this:</p>
+<pre><code class="language-zokrates">import &quot;./mycode.code&quot;
+</code></pre>
+<p>There also is a handy syntax to import from the parent directory:</p>
+<pre><code class="language-zokrates">import &quot;../mycode.code&quot;
+</code></pre>
+<p>Also imports further up the file-system are supported:</p>
+<pre><code class="language-zokrates">import &quot;../../../mycode.code&quot;
+</code></pre>
+<p>You can also choose to rename the imported resource, like so:</p>
+<pre><code class="language-zokrates">import &quot;./mycode.code&quot; as abc
+</code></pre>
+<a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
+<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.
+`</p>
 <a class="header" href="#comments" id="comments"><h2>Comments</h2></a>
 <p>Comments can be added with double-slashes.</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
@@ -285,24 +338,29 @@ For-loops define their own scope.</p>
     return a
 </code></pre>
 <a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
-<p>ZoKrates comes with a number of reusable components. For now, these components are:</p>
-<a class="header" href="#sha256" id="sha256"><h3>sha256</h3></a>
-<pre><code class="language-zokrates">import &quot;LIBSNARK/sha256&quot;
+<p>ZoKrates comes with a number of reusable components which are defined at <code>./stdlib/</code> in the ZoKrates root repository. In order to import the standard library as described in the <a href="./imports.html">imports</a> section the <code>$ZOKRATES_HOME</code> environment variable needs to be set to the <code>stdlib</code> folder.  The standard library is solely based on the ZoKrates DSL and can be easily extended.</p>
+<p>The following section highlights a subset of available imports:</p>
+<a class="header" href="#sha256" id="sha256"><h4>sha256</h4></a>
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512Padded.code&quot;
 </code></pre>
-<p>A function that takes 512 field elements as inputs, checks that they are all bits, and returns their sha256 hash as 256 field elements.</p>
-<a class="header" href="#sha256compression" id="sha256compression"><h3>sha256compression</h3></a>
-<pre><code class="language-zokrates">import &quot;LIBSNARK/sha256compression&quot;
+<p>A function that takes 2 <code>field[256]</code> arrays as inputs and returns their sha256 compression function as an array of 256 field elements.</p>
+<a class="header" href="#sha256compression" id="sha256compression"><h4>sha256compression</h4></a>
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit.code&quot;
 </code></pre>
-<p>A function that takes 512 field elements as inputs, checks that they are all bits, and returns the result of applying the sha256 compression function on them. The difference with <code>sha256</code> is that no padding is added at the end of the message, which makes it more efficient but also less compatible with Solidity.</p>
-<a class="header" href="#sha256packed" id="sha256packed"><h3>sha256packed</h3></a>
-<pre><code class="language-zokrates">import &quot;LIBSNARK/sha256packed&quot;
+<p>A function that takes 2 <code>field[256]</code> arrays as inputs and returns their sha256 compression function as an array of 256 field elements.
+The difference with <code>sha256</code> is that no padding is added at the end of the message, which makes it more efficient but also less compatible with Solidity.</p>
+<p>There also is support for 2 round (1024bit input) and and 3 round (1536bit input) variants, using  <code>hashes/1024bit.code</code> or <code>hashes/1536bit.code</code> respectively.</p>
+<a class="header" href="#sha256packed" id="sha256packed"><h4>sha256packed</h4></a>
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot; 
 </code></pre>
-<p>A function that takes 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns two field elements, each representing 128 bits of the result.</p>
-<a class="header" href="#pack128" id="pack128"><h3>pack128</h3></a>
+<p>A function that takes an array of 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns an array of 2 field elements, each representing 128 bits of the result.</p>
+<a class="header" href="#direct-imports" id="direct-imports"><h3>Direct imports</h3></a>
+<p>Some components of the standard library cannot yet be efficiently represented in the ZoKrates DSL language. Those functions are injected at compile-time and are available by default.</p>
+<a class="header" href="#pack128" id="pack128"><h4>pack128</h4></a>
 <pre><code class="language-zokrates">import &quot;PACKING/pack128&quot;
 </code></pre>
 <p>Packs 128 field elements as one.</p>
-<a class="header" href="#unpack128" id="unpack128"><h3>unpack128</h3></a>
+<a class="header" href="#unpack128" id="unpack128"><h4>unpack128</h4></a>
 <pre><code class="language-zokrates">import &quot;PACKING/unpack128&quot;
 </code></pre>
 <p>Unpacks a field element to 128 field elements.</p>
@@ -312,6 +370,7 @@ For-loops define their own scope.</p>
 <li><a href="index.html">ZoKrates Reference</a>
 <ul>
 <li><a href="cli.html">CLI</a></li>
+<li><a href="backends.html">Backends</a></li>
 <li><a href="verification.html">Verification</a></li>
 </ul>
 </li>
@@ -362,6 +421,20 @@ For example, using <code>web3</code>, a call would look like the following:</p>
 <pre><code class="language-k">Verifier.at(&lt;verifier contract address&gt;).verifyTx(A, A_p, B, B_p, C, C_p, H, K, [...publicInputs, ...outputs])
 </code></pre>
 <p>Where <code>A, ..., K</code> are defined as above (adding brackets and quotes: <code>A = [&quot;0x123&quot;, &quot;0x345&quot;]</code>), <code>publicInputs</code> are the public inputs supplied to witness generation and <code>outputs</code> are the results of the computation.</p>
+<a class="header" href="#backends" id="backends"><h1>Backends</h1></a>
+<p>ZoKrates supports different proof systems to be used as backends. All of the available backends rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
+<p>We identify the backends by the reference to the paper that introduced them. Currently the options available are:</p>
+<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th></tr></thead><tbody>
+<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--backend pghr13</code> </td></tr>
+<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--backend gm17</code> </td></tr>
+</tbody></table>
+<p>The default backend is PGHR13.</p>
+<p>When not using the default, the CLI flag has to be provided for the following commands:</p>
+<ul>
+<li><code>setup</code></li>
+<li><code>export-verifier</code></li>
+<li><code>generate-proof</code></li>
+</ul>
 <a class="header" href="#verification" id="verification"><h1>Verification</h1></a>
 <p>Passed to the verifier contract, this proof can be checked.
 For example, using <code>web3</code>, a call would look like the following:</p>
@@ -377,11 +450,11 @@ In particular, we'll show how ZoKrates and the Ethereum blockchain can be used t
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
 <p>We will start this tutorial by using ZoKrates to compute the hash for an arbitrarily chosen preimage, being the number <code>5</code> in this example.</p>
 <p>First, we create a new file named <code>hashexample.code</code> with the following content:</p>
-<pre><code class="language-zokrates">import &quot;LIBSNARK/sha256packed&quot;
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot; as sha256packed
 
-def main(private field a, private field b, private field c, private field d) -&gt; (field, field):
-    h0, h1 = sha256packed(a, b, c, d)
-    return h0, h1
+def main(private field a, private field b, private field c, private field d) -&gt; (field[2]):
+    h = sha256packed([a, b, c, d])
+    return h
 </code></pre>
 <p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
 <p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to sha256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
@@ -409,12 +482,12 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor choses the digest to be the one we found in our example above.</p>
 <p>To make it work, the two parties have to follow their roles in the protocol:</p>
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.code</code>:</p>
-<pre><code class="language-zokrates">import &quot;LIBSNARK/sha256packed&quot;
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot; as sha256packed
 
 def main(private field a, private field b, private field c, private field d) -&gt; (field):
-    h0, h1 = sha256packed(a, b, c, d)
-    h0 == 263561599766550617289250058199814760685
-    h1 == 65303172752238645975888084098459749904
+    h = sha256packed([a, b, c, d])
+    h[0] == 263561599766550617289250058199814760685
+    h[1] == 65303172752238645975888084098459749904
     return 1
 </code></pre>
 <p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
