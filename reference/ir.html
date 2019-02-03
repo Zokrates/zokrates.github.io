@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Imports - ZoKrates</title>
+        <title>ZIR - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html" class="active"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/backends.html"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.5.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.6.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/backends.html"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html" class="active"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,37 +136,34 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
-<p>You can separate your code into multiple ZoKrates files using <code>import</code> statements:</p>
-<a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
-<p>You can import a resource in the same folder directly, like this:</p>
-<pre><code class="language-zokrates">import &quot;./mycode.code&quot;
+                        <a class="header" href="#zir" id="zir"><h1>ZIR</h1></a>
+<p>ZIR is the intermediate representation ZoKrates uses to represent programs. It is close to R1CS but still encapsulates witness generation.</p>
+<p><strong>Note that ZIR is still in development and can change without notice.</strong></p>
+<p>When generating R1CS constraints, very large numbers are often used, which can make reading ZIR hard for humans.
+To mitigate this, ZIR applies an isomorphism when displaying field elements: they are shown as members of the interval <code>[- (p - 1)/2, (p - 1)/2]</code>. In other words, the following mapping is used:</p>
+<ul>
+<li>elements in <code>[0, (p - 1)/2]</code> map to themselves</li>
+<li>elements in <code>[(p + 1)/2, p - 1]</code> map to themselves minus <code>p</code></li>
+</ul>
+<p>Therefore, instead of writing <code>p - 1</code> as:</p>
+<pre><code>21888242871839275222246405745257275088548364400416034343698204186575808495616
 </code></pre>
-<p>There also is a handy syntax to import from the parent directory:</p>
-<pre><code class="language-zokrates">import &quot;../mycode.code&quot;
+<p>... in ZIR, we simply write:</p>
+<pre><code>-1
 </code></pre>
-<p>Also imports further up the file-system are supported:</p>
-<pre><code class="language-zokrates">import &quot;../../../mycode.code&quot;
-</code></pre>
-<p>You can also choose to rename the imported resource, like so:</p>
-<pre><code class="language-zokrates">import &quot;./mycode.code&quot; as abc
-</code></pre>
-<a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
-<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.
-`</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../concepts/control_flow.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../reference/verification.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../concepts/comments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../sha256example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -178,13 +175,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../concepts/control_flow.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../reference/verification.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../concepts/comments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../sha256example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
