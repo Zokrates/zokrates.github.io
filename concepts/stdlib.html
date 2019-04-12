@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html" class="active"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/backends.html"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html" class="active"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -139,6 +139,7 @@
                         <a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
 <p>ZoKrates comes with a number of reusable components which are defined at <code>./stdlib/</code> in the ZoKrates root repository. In order to import the standard library as described in the <a href="./imports.html">imports</a> section the <code>$ZOKRATES_HOME</code> environment variable needs to be set to the <code>stdlib</code> folder.  The standard library is solely based on the ZoKrates DSL and can be easily extended.</p>
 <p>The following section highlights a subset of available imports:</p>
+<a class="header" href="#hashes" id="hashes"><h3>Hashes</h3></a>
 <a class="header" href="#sha256" id="sha256"><h4>sha256</h4></a>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512Padded.code&quot;
 </code></pre>
@@ -148,21 +149,35 @@
 </code></pre>
 <p>A function that takes 2 <code>field[256]</code> arrays as inputs and returns their sha256 compression function as an array of 256 field elements.
 The difference with <code>sha256</code> is that no padding is added at the end of the message, which makes it more efficient but also less compatible with Solidity.</p>
-<p>There also is support for 2 round (1024bit input) and and 3 round (1536bit input) variants, using  <code>hashes/1024bit.code</code> or <code>hashes/1536bit.code</code> respectively.</p>
+<p>There also is support for 2-round (1024-bit input) and and 3-round (1536-bit input) variants, using  <code>hashes/1024bit.code</code> or <code>hashes/1536bit.code</code> respectively.</p>
 <a class="header" href="#sha256packed" id="sha256packed"><h4>sha256packed</h4></a>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot; 
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot;
 </code></pre>
 <p>A function that takes an array of 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns an array of 2 field elements, each representing 128 bits of the result.</p>
-<a class="header" href="#direct-imports" id="direct-imports"><h3>Direct imports</h3></a>
-<p>Some components of the standard library cannot yet be efficiently represented in the ZoKrates DSL language. Those functions are injected at compile-time and are available by default.</p>
+<a class="header" href="#public-key-cryptography" id="public-key-cryptography"><h3>Public-key Cryptography</h3></a>
+<a class="header" href="#proof-of-private-key-ownership" id="proof-of-private-key-ownership"><h4>Proof of private-key ownership</h4></a>
+<pre><code class="language-zokrates">import &quot;ecc/proofOfOwnership.code&quot;
+</code></pre>
+<p>Verifies match of a given public/private keypair. Checks if the following equation holds for the provided keypair:<br />
+<code>pk = sk*G</code><br />
+where <code>G</code> is the chosen base point of the subgroup and <code>*</code> denotes scalar multiplication in the subgroup.</p>
+<a class="header" href="#signature-verification" id="signature-verification"><h4>Signature verification</h4></a>
+<pre><code class="language-zokrates">import &quot;signatures/verifyEddsa.code&quot;
+</code></pre>
+<p>Verifies an EdDSA Signature. Checks the correctness of a given EdDSA Signature <code>(R,S)</code> for the provided public key <code>A</code> and message <code>(M0, M1)</code>. Check out this <a href="https://github.com/Zokrates/pycrypto">python repository</a> for tooling to create valid signatures.</p>
+<a class="header" href="#packing--unpacking" id="packing--unpacking"><h3>Packing / Unpacking</h3></a>
 <a class="header" href="#pack128" id="pack128"><h4>pack128</h4></a>
-<pre><code class="language-zokrates">import &quot;PACKING/pack128&quot;
+<pre><code class="language-zokrates">import &quot;utils/pack/pack128&quot;
 </code></pre>
 <p>Packs 128 field elements as one.</p>
 <a class="header" href="#unpack128" id="unpack128"><h4>unpack128</h4></a>
-<pre><code class="language-zokrates">import &quot;PACKING/unpack128&quot;
+<pre><code class="language-zokrates">import &quot;utils/pack/unpack128&quot;
 </code></pre>
 <p>Unpacks a field element to 128 field elements.</p>
+<a class="header" href="#unpack256" id="unpack256"><h4>unpack256</h4></a>
+<pre><code class="language-zokrates">import &quot;utils/pack/unpack256&quot;
+</code></pre>
+<p>Unpacks a field element to 256 field elements.</p>
 
                     </main>
 

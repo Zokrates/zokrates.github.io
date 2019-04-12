@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/backends.html"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -149,17 +149,20 @@
 <p>ZoKrates is released under the GNU Lesser General Public License v3.</p>
 <a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
 <a class="header" href="#installation" id="installation"><h2>Installation</h2></a>
+<a class="header" href="#one-line-install" id="one-line-install"><h3>One-line install</h3></a>
+<p>We provide a one-line install for Linux, MacOS and FreeBSD:</p>
+<pre><code class="language-bash">curl -LSfs get.zokrat.es | sh
+</code></pre>
 <a class="header" href="#docker" id="docker"><h3>Docker</h3></a>
-<p>Using Docker is currently the recommended way to get started with ZoKrates.</p>
+<p>ZoKrates is available on Dockerhub.</p>
 <pre><code class="language-bash">docker run -ti zokrates/zokrates /bin/bash
 </code></pre>
 <p>From there on, you can use the <code>zokrates</code> CLI.</p>
 <a class="header" href="#from-source" id="from-source"><h3>From source</h3></a>
-<p>You can build the container yourself from <a href="https://github.com/JacobEberhardt/ZoKrates/">source</a> with the following commands:</p>
-<pre><code class="language-bash">git clone https://github.com/JacobEberhardt/ZoKrates
+<p>You can build the container yourself from <a href="https://github.com/ZoKrates/ZoKrates/">source</a> with the following commands:</p>
+<pre><code class="language-bash">git clone https://github.com/ZoKrates/ZoKrates
 cd ZoKrates
-docker build -t zokrates .
-docker run -ti zokrates /bin/bash
+cargo build --release
 cd ZoKrates/target/release
 </code></pre>
 <a class="header" href="#hello-zokrates" id="hello-zokrates"><h2>Hello ZoKrates!</h2></a>
@@ -224,9 +227,9 @@ def main() -&gt; (field):
 <a class="header" href="#types" id="types"><h2>Types</h2></a>
 <p>ZoKrates currently exposes three types:</p>
 <a class="header" href="#field" id="field"><h3><code>field</code></h3></a>
-<p>This is the most basic type in ZoKrates, and it represents a positive integer between <code>0</code> and <code>p - 1</code>, where <code>p</code> is a (large) prime number.</p>
-<p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495616</code> as imposed by the pairing curve supported by Ethereum.</p>
-<p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2 and underflow at 0, so that we have:</p>
+<p>This is the most basic type in ZoKrates, and it represents a positive integer in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number.</p>
+<p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495617</code> as imposed by the pairing curve supported by Ethereum.</p>
+<p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2, so that we have:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
     field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616
     0 - 1 == pMinusOne
@@ -340,6 +343,7 @@ For-loops define their own scope.</p>
 <a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
 <p>ZoKrates comes with a number of reusable components which are defined at <code>./stdlib/</code> in the ZoKrates root repository. In order to import the standard library as described in the <a href="./imports.html">imports</a> section the <code>$ZOKRATES_HOME</code> environment variable needs to be set to the <code>stdlib</code> folder.  The standard library is solely based on the ZoKrates DSL and can be easily extended.</p>
 <p>The following section highlights a subset of available imports:</p>
+<a class="header" href="#hashes" id="hashes"><h3>Hashes</h3></a>
 <a class="header" href="#sha256" id="sha256"><h4>sha256</h4></a>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512Padded.code&quot;
 </code></pre>
@@ -349,28 +353,42 @@ For-loops define their own scope.</p>
 </code></pre>
 <p>A function that takes 2 <code>field[256]</code> arrays as inputs and returns their sha256 compression function as an array of 256 field elements.
 The difference with <code>sha256</code> is that no padding is added at the end of the message, which makes it more efficient but also less compatible with Solidity.</p>
-<p>There also is support for 2 round (1024bit input) and and 3 round (1536bit input) variants, using  <code>hashes/1024bit.code</code> or <code>hashes/1536bit.code</code> respectively.</p>
+<p>There also is support for 2-round (1024-bit input) and and 3-round (1536-bit input) variants, using  <code>hashes/1024bit.code</code> or <code>hashes/1536bit.code</code> respectively.</p>
 <a class="header" href="#sha256packed" id="sha256packed"><h4>sha256packed</h4></a>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot; 
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.code&quot;
 </code></pre>
 <p>A function that takes an array of 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns an array of 2 field elements, each representing 128 bits of the result.</p>
-<a class="header" href="#direct-imports" id="direct-imports"><h3>Direct imports</h3></a>
-<p>Some components of the standard library cannot yet be efficiently represented in the ZoKrates DSL language. Those functions are injected at compile-time and are available by default.</p>
+<a class="header" href="#public-key-cryptography" id="public-key-cryptography"><h3>Public-key Cryptography</h3></a>
+<a class="header" href="#proof-of-private-key-ownership" id="proof-of-private-key-ownership"><h4>Proof of private-key ownership</h4></a>
+<pre><code class="language-zokrates">import &quot;ecc/proofOfOwnership.code&quot;
+</code></pre>
+<p>Verifies match of a given public/private keypair. Checks if the following equation holds for the provided keypair:<br />
+<code>pk = sk*G</code><br />
+where <code>G</code> is the chosen base point of the subgroup and <code>*</code> denotes scalar multiplication in the subgroup.</p>
+<a class="header" href="#signature-verification" id="signature-verification"><h4>Signature verification</h4></a>
+<pre><code class="language-zokrates">import &quot;signatures/verifyEddsa.code&quot;
+</code></pre>
+<p>Verifies an EdDSA Signature. Checks the correctness of a given EdDSA Signature <code>(R,S)</code> for the provided public key <code>A</code> and message <code>(M0, M1)</code>. Check out this <a href="https://github.com/Zokrates/pycrypto">python repository</a> for tooling to create valid signatures.</p>
+<a class="header" href="#packing--unpacking" id="packing--unpacking"><h3>Packing / Unpacking</h3></a>
 <a class="header" href="#pack128" id="pack128"><h4>pack128</h4></a>
-<pre><code class="language-zokrates">import &quot;PACKING/pack128&quot;
+<pre><code class="language-zokrates">import &quot;utils/pack/pack128&quot;
 </code></pre>
 <p>Packs 128 field elements as one.</p>
 <a class="header" href="#unpack128" id="unpack128"><h4>unpack128</h4></a>
-<pre><code class="language-zokrates">import &quot;PACKING/unpack128&quot;
+<pre><code class="language-zokrates">import &quot;utils/pack/unpack128&quot;
 </code></pre>
 <p>Unpacks a field element to 128 field elements.</p>
+<a class="header" href="#unpack256" id="unpack256"><h4>unpack256</h4></a>
+<pre><code class="language-zokrates">import &quot;utils/pack/unpack256&quot;
+</code></pre>
+<p>Unpacks a field element to 256 field elements.</p>
 <a class="header" href="#zokrates-reference" id="zokrates-reference"><h1>ZoKrates Reference</h1></a>
 <p>The reference covers the details of various areas of ZoKrates.</p>
 <ul>
 <li><a href="index.html">ZoKrates Reference</a>
 <ul>
 <li><a href="cli.html">CLI</a></li>
-<li><a href="backends.html">Backends</a></li>
+<li><a href="proving_schemes.html">Proving schemes</a></li>
 <li><a href="verification.html">Verification</a></li>
 <li><a href="ir.html">ZIR</a></li>
 </ul>
@@ -384,13 +402,14 @@ You can see an overview of the available subcommands by running</p>
 <a class="header" href="#compile" id="compile"><h2><code>compile</code></h2></a>
 <pre><code class="language-sh">./zokrates compile -i /path/to/add.code
 </code></pre>
-<p>Compiles a <code>.code</code> file into  ZoKrates internal representation of arithmetic circuits.</p>
+<p>Compiles a <code>.code</code> file into ZoKrates internal representation of arithmetic circuits.</p>
 <p>Creates a compiled <code>.code</code> file at <code>./out.code</code>.</p>
 <a class="header" href="#compute-witness" id="compute-witness"><h2><code>compute-witness</code></h2></a>
 <pre><code class="language-sh">./zokrates compute-witness -a 1 2 3
 </code></pre>
 <p>Computes a witness for the compiled program found at <code>./out.code</code> and arguments to the program.
-A witness is a valid assignment of the variables, which include the results of the computation.</p>
+A witness is a valid assignment of the variables, which include the results of the computation.
+Arguments to the program are passed as a space-separated list with the <code>-a</code> flag, or over <code>stdin</code>.</p>
 <p>Creates a witness file at <code>./witness</code></p>
 <a class="header" href="#setup" id="setup"><h2><code>setup</code></h2></a>
 <pre><code class="language-sh">./zokrates setup
@@ -422,19 +441,28 @@ For example, using <code>web3</code>, a call would look like the following:</p>
 <pre><code class="language-k">Verifier.at(&lt;verifier contract address&gt;).verifyTx(A, A_p, B, B_p, C, C_p, H, K, [...publicInputs, ...outputs])
 </code></pre>
 <p>Where <code>A, ..., K</code> are defined as above (adding brackets and quotes: <code>A = [&quot;0x123&quot;, &quot;0x345&quot;]</code>), <code>publicInputs</code> are the public inputs supplied to witness generation and <code>outputs</code> are the results of the computation.</p>
-<a class="header" href="#backends" id="backends"><h1>Backends</h1></a>
-<p>ZoKrates supports different proof systems to be used as backends. All of the available backends rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
-<p>We identify the backends by the reference to the paper that introduced them. Currently the options available are:</p>
-<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th></tr></thead><tbody>
-<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--backend pghr13</code> </td></tr>
-<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--backend gm17</code> </td></tr>
+<a class="header" href="#proving-schemes" id="proving-schemes"><h1>Proving schemes</h1></a>
+<p>ZoKrates supports different proving schemes. All of the available schemes rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
+<p>We identify the schemes by the reference to the paper that introduced them. Currently the options available are:</p>
+<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th><th> Requires libsnark </th></tr></thead><tbody>
+<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> Yes </td></tr>
+<tr><td> G16 </td><td> <a href="https://eprint.iacr.org/2016/260">Here</a> </td><td> <code>--proving-scheme g16</code> </td><td> No </td></tr>
+<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--proving-scheme gm17</code> </td><td> Yes </td></tr>
 </tbody></table>
-<p>The default backend is PGHR13.</p>
+<p>The default proving scheme is G16.</p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
 <li><code>setup</code></li>
 <li><code>export-verifier</code></li>
 <li><code>generate-proof</code></li>
+</ul>
+<a class="header" href="#g16-malleability" id="g16-malleability"><h2>G16 malleability</h2></a>
+<p>When using G16, developers should pay attention to the fact that an attacker seeing a valid proof can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
+<ul>
+<li>signed proofs</li>
+<li>nullifiers</li>
+<li>usage of an ethereum address as a public input to the program</li>
+<li>usage of non-malleable schemes such as GM17</li>
 </ul>
 <a class="header" href="#verification" id="verification"><h1>Verification</h1></a>
 <p>Passed to the verifier contract, this proof can be checked.

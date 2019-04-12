@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Backends - ZoKrates</title>
+        <title>Proving schemes - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/backends.html" class="active"><strong aria-hidden="true">4.2.</strong> Backends</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html" class="active"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,19 +136,28 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#backends" id="backends"><h1>Backends</h1></a>
-<p>ZoKrates supports different proof systems to be used as backends. All of the available backends rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
-<p>We identify the backends by the reference to the paper that introduced them. Currently the options available are:</p>
-<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th></tr></thead><tbody>
-<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--backend pghr13</code> </td></tr>
-<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--backend gm17</code> </td></tr>
+                        <a class="header" href="#proving-schemes" id="proving-schemes"><h1>Proving schemes</h1></a>
+<p>ZoKrates supports different proving schemes. All of the available schemes rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
+<p>We identify the schemes by the reference to the paper that introduced them. Currently the options available are:</p>
+<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th><th> Requires libsnark </th></tr></thead><tbody>
+<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> Yes </td></tr>
+<tr><td> G16 </td><td> <a href="https://eprint.iacr.org/2016/260">Here</a> </td><td> <code>--proving-scheme g16</code> </td><td> No </td></tr>
+<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--proving-scheme gm17</code> </td><td> Yes </td></tr>
 </tbody></table>
-<p>The default backend is PGHR13.</p>
+<p>The default proving scheme is G16.</p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
 <li><code>setup</code></li>
 <li><code>export-verifier</code></li>
 <li><code>generate-proof</code></li>
+</ul>
+<a class="header" href="#g16-malleability" id="g16-malleability"><h2>G16 malleability</h2></a>
+<p>When using G16, developers should pay attention to the fact that an attacker seeing a valid proof can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
+<ul>
+<li>signed proofs</li>
+<li>nullifiers</li>
+<li>usage of an ethereum address as a public input to the program</li>
+<li>usage of non-malleable schemes such as GM17</li>
 </ul>
 
                     </main>
