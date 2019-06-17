@@ -242,9 +242,13 @@ def main() -&gt; (field):
 <a class="header" href="#fieldn" id="fieldn"><h3><code>field[n]</code></h3></a>
 <p>Static arrays of <code>field</code> can be instantiated with a constant size, and their elements can be accessed and updated:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
-    field[3] a = [1, 2, 3]
-    a[2] = 4
-    return a[0] + a[2]
+    field[3] a = [1, 2, 3] // initialize an array with values
+    a[2] = 4               // set a member to a value
+    field[4] b = [42; 4]   // initialize an array of 4 values all equal to 42
+    field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
+    field[2] d = a[1..3]   // initialize an array copying a slice from `a`
+    return a[0] + b[1] + c[2]
+
 </code></pre>
 <a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
 <p>A function has to be declared at the top level before it is called.</p>
