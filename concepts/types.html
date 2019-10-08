@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.5.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,8 +136,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#types" id="types"><h2>Types</h2></a>
-<p>ZoKrates currently exposes three types:</p>
+                        <a class="header" href="#types" id="types"><h1>Types</h1></a>
+<p>ZoKrates currently exposes two primitive types and two complex types:</p>
+<a class="header" href="#primitive-types" id="primitive-types"><h2>Primitive Types</h2></a>
 <a class="header" href="#field" id="field"><h3><code>field</code></h3></a>
 <p>This is the most basic type in ZoKrates, and it represents a positive integer in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number.</p>
 <p>The prime <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495617</code> as imposed by the pairing curve supported by Ethereum.</p>
@@ -151,15 +152,116 @@
 <p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... endif</code> expressions.</p>
 <p>You can use them for equality checks, inequality checks and inequality checks between <code>field</code> values.</p>
 <p>Note that while equality checks are cheap, inequality checks should be use wisely as they are orders of magnitude more expensive.</p>
-<a class="header" href="#fieldn" id="fieldn"><h3><code>field[n]</code></h3></a>
-<p>Static arrays of <code>field</code> can be instantiated with a constant size, and their elements can be accessed and updated:</p>
+<a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
+<p>ZoKrates provides two complex types, Arrays and Structs.</p>
+<a class="header" href="#arrays" id="arrays"><h3>Arrays</h3></a>
+<p>ZoKrates supports static arrays, i.e., their length needs to be known at compile time.
+Arrays can contain elements of any type and have arbitrary dimensions.</p>
+<p>The following examples code shows examples of how to use arrays:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
-    field[3] a = [1, 2, 3] // initialize an array with values
+    field[3] a = [1, 2, 3] // initialize a field array with field values
     a[2] = 4               // set a member to a value
     field[4] b = [42; 4]   // initialize an array of 4 values all equal to 42
     field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
     field[2] d = a[1..3]   // initialize an array copying a slice from `a`
+    bool[3] e = [true, true || false, true] // initialize a boolean array
     return a[0] + b[1] + c[2]
+
+</code></pre>
+<a class="header" href="#declaration-and-initialization" id="declaration-and-initialization"><h4>Declaration and Initialization</h4></a>
+<p>An array is defined by appending <code>[]</code> to a type literal representing the type of the array's elements.</p>
+<p>Initialization always needs to happen in the same statement as declaration, unless the array is declared within a function's signature.</p>
+<p>For initialization, a list of comma-separated values is provided within brackets <code>[]</code>.</p>
+<p>ZoKrates offers a special shorthand syntax to initialize an array with a constant value:
+<code>[value;repetitions]</code></p>
+<p>The following code provides examples for declaration and initialization:</p>
+<pre><code class="language-zokrates">    field[3] a = [1, 2, 3] // initialize a field array with field values
+    bool[13] b = [false; 13] // initialize a bool array with value false
+</code></pre>
+<a class="header" href="#multidimensional-arrays" id="multidimensional-arrays"><h4>Multidimensional Arrays</h4></a>
+<p>As an array can contain any type of elements, it can contain arrays again.
+There is a special syntax to declare such multi-dimensional arrays, i.e., arrays of arrays.
+To declare an array of an inner array, i.e., and array of elements of a type, prepend brackets <code>[size]</code> to the declaration of the inner array.
+In summary, this leads to the following scheme for array declarations:
+<code>data_type[size of 1st dimension][size of 2nd dimension]</code>.
+Consider the following example:</p>
+<pre><code class="language-zokrates">def main() -&gt; (field):
+
+    // Array of two elements of array of 3 elements
+    field[2][3] a = [[1, 2, 3],[4, 5, 6]]
+
+    field[3] b = a[0] // should be [1, 2, 3]
+
+    // allowed access [0..2][0..3]
+    return a[1][2]
+</code></pre>
+<a class="header" href="#spreads-and-slices" id="spreads-and-slices"><h4>Spreads and Slices</h4></a>
+<p>ZoKrates provides some syntactic sugar to retrieve subsets of arrays.</p>
+<a class="header" href="#spreads" id="spreads"><h5>Spreads</h5></a>
+<p>The spread operator <code>...</code> applied to an array copies the elements of the existing array.
+This can be used to conveniently compose new arrays, as shown in the following example:</p>
+<pre><code>field[3] = [1, 2, 3]
+field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
+</code></pre>
+<a class="header" href="#slices" id="slices"><h5>Slices</h5></a>
+<p>An array can also be assigned to by creating a copy of a subset of an existing array.
+This operation is called slicing, and the following example shows how to slice in ZoKrates:</p>
+<pre><code>field[3] a = [1, 2, 3]
+field[2] b = a[1..3]   // initialize an array copying a slice from `a`
+</code></pre>
+<a class="header" href="#structs" id="structs"><h3>Structs</h3></a>
+<p>A struct is a composite datatype representing a named collection of variables.
+The contained variables can be of any type.</p>
+<p>The following code shows an example of how to use structs.</p>
+<pre><code class="language-zokrates">struct Bar {
+    field[2] c
+    bool d
+}
+
+struct Foo {
+    Bar a
+    bool b 
+}
+
+def main() -&gt; (Foo):
+    Foo[2] f = [Foo { a: Bar { c: [0, 0], d: false }, b: true}, Foo { a: Bar {c: [0, 0], d: false}, b: true}]
+    f[0].a.c = [42, 43]
+    return f[0]
+
+</code></pre>
+<a class="header" href="#definition" id="definition"><h4>Definition</h4></a>
+<p>Before a struct data type can be used, it needs to be defined.
+A struct definition starts with the <code>struct</code> keyword followed by a name. Afterwards, a new-line separated list of variables is declared in curly braces <code>{}</code>. For example:</p>
+<pre><code class="language-zokrates">struct Point {
+    field x
+    field y
+}
+</code></pre>
+<a class="header" href="#declaration-and-initialization-1" id="declaration-and-initialization-1"><h4>Declaration and Initialization</h4></a>
+<p>Initialization of a variable of a struct type always needs to happen in the same statement as declaration, unless the struct-typed variable is declared within a function's signature.</p>
+<p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
+<pre><code class="language-zokrates">struct Point {
+    field x
+    field y
+}
+
+def main() -&gt; (Point):
+    Point p = Point {x: 1, y: 0}
+    return p
+
+</code></pre>
+<a class="header" href="#assignment" id="assignment"><h4>Assignment</h4></a>
+<p>The variables within a struct instance, the so called members, can be accessed through the <code>.</code> operator as shown in the following extended example:</p>
+<pre><code class="language-zokrates">struct Point {
+    field x
+    field y
+}
+
+def main(field a) -&gt; (Point):
+    Point p = Point {x: 1, y: 0}
+    p.x = a
+    p.y = p.x
+    return p
 
 </code></pre>
 
