@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="reference/testing.html"><strong aria-hidden="true">4.5.</strong> Testing</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -149,6 +149,8 @@
 <p>ZoKrates is released under the GNU Lesser General Public License v3.</p>
 <a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
 <a class="header" href="#installation" id="installation"><h2>Installation</h2></a>
+<a class="header" href="#remix-online-ide" id="remix-online-ide"><h3>Remix online IDE</h3></a>
+<p>To write your first SNARK program, check out the ZoKrates plugin in the <a href="https://remix.ethereum.org">Remix online IDE</a>!</p>
 <a class="header" href="#one-line-install" id="one-line-install"><h3>One-line install</h3></a>
 <p>We provide a one-line install for Linux, MacOS and FreeBSD:</p>
 <pre><code class="language-bash">curl -LSfs get.zokrat.es | sh
@@ -159,7 +161,7 @@
 </code></pre>
 <p>From there on, you can use the <code>zokrates</code> CLI.</p>
 <a class="header" href="#from-source" id="from-source"><h3>From source</h3></a>
-<p>You can build the container yourself from <a href="https://github.com/ZoKrates/ZoKrates/">source</a> with the following commands:</p>
+<p>You can build ZoKrates from <a href="https://github.com/ZoKrates/ZoKrates/">source</a> with the following commands:</p>
 <pre><code class="language-bash">git clone https://github.com/ZoKrates/ZoKrates
 cd ZoKrates
 cargo +nightly build --release
@@ -178,15 +180,15 @@ cd target/release
 </ul>
 <p>Then run the different phases of the protocol:</p>
 <pre><code class="language-bash"># compile
-./zokrates compile -i root.zok
+zokrates compile -i root.zok
 # perform the setup phase
-./zokrates setup
+zokrates setup
 # execute the program
-./zokrates compute-witness -a 337 113569
+zokrates compute-witness -a 337 113569
 # generate a proof of computation
-./zokrates generate-proof
+zokrates generate-proof
 # export a solidity verifier
-./zokrates export-verifier
+zokrates export-verifier
 </code></pre>
 <p>The CLI commands are explained in more detail in the <a href="reference/cli.html">CLI reference</a>.</p>
 <a class="header" href="#programming-concepts" id="programming-concepts"><h1>Programming Concepts</h1></a>
@@ -238,14 +240,14 @@ def main() -&gt; (field):
 </code></pre>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
 <p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... endif</code> expressions.</p>
-<p>You can use them for equality checks, inequality checks and inequality checks between <code>field</code> values.</p>
-<p>Note that while equality checks are cheap, inequality checks should be use wisely as they are orders of magnitude more expensive.</p>
+<p>You can use them for equality and inequality checks between <code>field</code> values.</p>
+<p>Note that while equality checks are cheap, inequality checks should be used wisely as they are orders of magnitude more expensive.</p>
 <a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
 <p>ZoKrates provides two complex types, Arrays and Structs.</p>
 <a class="header" href="#arrays" id="arrays"><h3>Arrays</h3></a>
 <p>ZoKrates supports static arrays, i.e., their length needs to be known at compile time.
 Arrays can contain elements of any type and have arbitrary dimensions.</p>
-<p>The following examples code shows examples of how to use arrays:</p>
+<p>The following example code shows examples of how to use arrays:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
     field[3] a = [1, 2, 3] // initialize a field array with field values
     a[2] = 4               // set a member to a value
@@ -258,7 +260,7 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 </code></pre>
 <a class="header" href="#declaration-and-initialization" id="declaration-and-initialization"><h4>Declaration and Initialization</h4></a>
 <p>An array is defined by appending <code>[]</code> to a type literal representing the type of the array's elements.</p>
-<p>Initialization always needs to happen in the same statement as declaration, unless the array is declared within a function's signature.</p>
+<p>Initialization always needs to happen in the same statement as a declaration, unless the array is declared within a function's signature.</p>
 <p>For initialization, a list of comma-separated values is provided within brackets <code>[]</code>.</p>
 <p>ZoKrates offers a special shorthand syntax to initialize an array with a constant value:
 <code>[value;repetitions]</code></p>
@@ -269,7 +271,7 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <a class="header" href="#multidimensional-arrays" id="multidimensional-arrays"><h4>Multidimensional Arrays</h4></a>
 <p>As an array can contain any type of elements, it can contain arrays again.
 There is a special syntax to declare such multi-dimensional arrays, i.e., arrays of arrays.
-To declare an array of an inner array, i.e., and array of elements of a type, prepend brackets <code>[size]</code> to the declaration of the inner array.
+To declare an array of an inner array, i.e., and an array of elements of a type, prepend brackets <code>[size]</code> to the declaration of the inner array.
 In summary, this leads to the following scheme for array declarations:
 <code>data_type[size of 1st dimension][size of 2nd dimension]</code>.
 Consider the following example:</p>
@@ -288,7 +290,7 @@ Consider the following example:</p>
 <a class="header" href="#spreads" id="spreads"><h5>Spreads</h5></a>
 <p>The spread operator <code>...</code> applied to an array copies the elements of the existing array.
 This can be used to conveniently compose new arrays, as shown in the following example:</p>
-<pre><code>field[3] = [1, 2, 3]
+<pre><code>field[3] a = [1, 2, 3]
 field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
 </code></pre>
 <a class="header" href="#slices" id="slices"><h5>Slices</h5></a>
@@ -308,7 +310,7 @@ The contained variables can be of any type.</p>
 
 struct Foo {
     Bar a
-    bool b 
+    bool b
 }
 
 def main() -&gt; (Foo):
@@ -326,7 +328,7 @@ A struct definition starts with the <code>struct</code> keyword followed by a na
 }
 </code></pre>
 <a class="header" href="#declaration-and-initialization-1" id="declaration-and-initialization-1"><h4>Declaration and Initialization</h4></a>
-<p>Initialization of a variable of a struct type always needs to happen in the same statement as declaration, unless the struct-typed variable is declared within a function's signature.</p>
+<p>Initialization of a variable of a struct type always needs to happen in the same statement as a declaration, unless the struct-typed variable is declared within a function's signature.</p>
 <p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
 <pre><code class="language-zokrates">struct Point {
     field x
@@ -374,7 +376,7 @@ def main() -&gt; (field):
     a, b = foo()
     return 1
 </code></pre>
-<p>If there is an ambiguity, providing the types of some of the assigned variables is necessary.</p>
+<p>If there is any ambiguity, providing the types of some of the assigned variables is necessary.</p>
 <pre><code class="language-zokrates">def foo() -&gt; (field, field[3]):
     return 1, [2, 3, 4]
 
@@ -401,7 +403,7 @@ def main() -&gt; (field):
     return 1
 </code></pre>
 <a class="header" href="#if-expressions" id="if-expressions"><h3>If expressions</h3></a>
-<p>An if expression allows you to branch your code depending on a condition.</p>
+<p>An if-expression allows you to branch your code depending on a condition.</p>
 <pre><code class="language-zokrates">def main(field x) -&gt; (field):
   field y = if x + 2 == 3 then 1 else 5 fi
   return y
@@ -419,7 +421,7 @@ def main() -&gt; (field):
     endfor
     return res
 </code></pre>
-<p>The bounds have to be known at compile time, so only constants are allowed.
+<p>The bounds have to be known at compile-time, so only constants are allowed.
 For-loops define their own scope.</p>
 <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
 <p>You can separate your code into multiple ZoKrates files using <code>import</code> statements to import symbols, ignoring the <code>.zok</code> extension of the imported file.</p>
@@ -445,11 +447,11 @@ For-loops define their own scope.</p>
 
 // `main` is now in scope under the alias `module`.
 </code></pre>
-<p>Note that this legacy method is likely to be become deprecated, so it is recommended to use the preferred way instead.</p>
+<p>Note that this legacy method is likely to become deprecated, so it is recommended to use the preferred way instead.</p>
 <a class="header" href="#symbols" id="symbols"><h3>Symbols</h3></a>
-<p>Two type of symbols can be imported</p>
+<p>Two types of symbols can be imported</p>
 <a class="header" href="#functions-1" id="functions-1"><h4>Functions</h4></a>
-<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is infered.</p>
+<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is inferred.</p>
 <a class="header" href="#user-defined-types" id="user-defined-types"><h4>User-defined types</h4></a>
 <p>User-defined types declared with the <code>struct</code> keyword are imported by name.</p>
 <a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
@@ -459,12 +461,11 @@ For-loops define their own scope.</p>
 <p>There also is a handy syntax to import from the parent directory:</p>
 <pre><code class="language-zokrates">from &quot;../mycode&quot; import foo
 </code></pre>
-<p>Also imports further up the file-system are supported:</p>
+<p>Also, imports further up the file-system are supported:</p>
 <pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
 </code></pre>
 <a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
-<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.
-`</p>
+<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.</p>
 <a class="header" href="#comments" id="comments"><h2>Comments</h2></a>
 <p>Comments can be added with double-slashes.</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
@@ -485,17 +486,17 @@ For-loops define their own scope.</p>
 </code></pre>
 <p>A function that takes 2 <code>field[256]</code> arrays as inputs and returns their sha256 compression function as an array of 256 field elements.
 The difference with <code>sha256</code> is that no padding is added at the end of the message, which makes it more efficient but also less compatible with Solidity.</p>
-<p>There also is support for 2-round (1024-bit input) and and 3-round (1536-bit input) variants, using  <code>hashes/1024bit.zok</code> or <code>hashes/1536bit.zok</code> respectively.</p>
+<p>There also is support for 2-round (1024-bit input) and 3-round (1536-bit input) variants, using  <code>hashes/1024bit.zok</code> and <code>hashes/1536bit.zok</code> respectively.</p>
 <a class="header" href="#sha256packed" id="sha256packed"><h4>sha256packed</h4></a>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked.zok&quot;
 </code></pre>
-<p>A function that takes an array of 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns an array of 2 field elements, each representing 128 bits of the result.</p>
+<p>A function that takes an array of 4 field elements as inputs, unpacks each of them to 128 bits (big-endian), concatenates them and applies sha256. It then returns an array of 2 field elements, each representing 128 bits of the result.</p>
 <a class="header" href="#public-key-cryptography" id="public-key-cryptography"><h3>Public-key Cryptography</h3></a>
 <a class="header" href="#proof-of-private-key-ownership" id="proof-of-private-key-ownership"><h4>Proof of private-key ownership</h4></a>
 <pre><code class="language-zokrates">import &quot;ecc/proofOfOwnership.zok&quot;
 </code></pre>
-<p>Verifies match of a given public/private keypair. Checks if the following equation holds for the provided keypair:<br />
-<code>pk = sk*G</code><br />
+<p>Verifies match of a given public/private keypair. Checks if the following equation holds for the provided keypair:
+<code>pk = sk*G</code>
 where <code>G</code> is the chosen base point of the subgroup and <code>*</code> denotes scalar multiplication in the subgroup.</p>
 <a class="header" href="#signature-verification" id="signature-verification"><h4>Signature verification</h4></a>
 <pre><code class="language-zokrates">import &quot;signatures/verifyEddsa.zok&quot;
@@ -517,7 +518,7 @@ where <code>G</code> is the chosen base point of the subgroup and <code>*</code>
 <a class="header" href="#nonstrictunpack256" id="nonstrictunpack256"><h4>nonStrictUnpack256</h4></a>
 <pre><code class="language-zokrates">import &quot;utils/pack/nonStrictUnpack256&quot;
 </code></pre>
-<p>Unpacks a field element to 256 field elements. Uniqueness of the output is not guaranteed.</p>
+<p>Unpacks a field element into 256 field elements. Uniqueness of the output is not guaranteed.</p>
 <a class="header" href="#zokrates-reference" id="zokrates-reference"><h1>ZoKrates Reference</h1></a>
 <p>The reference covers the details of various areas of ZoKrates.</p>
 <ul>
@@ -527,6 +528,7 @@ where <code>G</code> is the chosen base point of the subgroup and <code>*</code>
 <li><a href="proving_schemes.html">Proving schemes</a></li>
 <li><a href="verification.html">Verification</a></li>
 <li><a href="ir.html">ZIR</a></li>
+<li><a href="abi.html">JSON ABI</a></li>
 <li><a href="testing.html">Testing</a></li>
 </ul>
 </li>
@@ -534,34 +536,38 @@ where <code>G</code> is the chosen base point of the subgroup and <code>*</code>
 <a class="header" href="#command-line-tool" id="command-line-tool"><h1>Command Line Tool</h1></a>
 <p>ZoKrates provides a command line interface.
 You can see an overview of the available subcommands by running</p>
-<pre><code class="language-sh">./zokrates
+<pre><code class="language-sh">zokrates
 </code></pre>
+<p>For each command, you can get the list of expected arguments using <code>--help</code>.</p>
 <a class="header" href="#compile" id="compile"><h2><code>compile</code></h2></a>
-<pre><code class="language-sh">./zokrates compile -i /path/to/add.zok
+<pre><code class="language-sh">zokrates compile -i /path/to/add.zok
 </code></pre>
 <p>Compiles a <code>.zok</code> source code file into ZoKrates internal representation of arithmetic circuits.</p>
 <p>Creates a compiled binary file at <code>./out</code>.
-Unless the <code>--light</code> flag is set, a human readable <code>.ztf</code> file is generated, which displays the compilation output in ZoKrates Text Format.</p>
+Unless the <code>--light</code> flag is set, a human-readable <code>.ztf</code> file is generated, which displays the compilation output in ZoKrates Text Format.</p>
 <a class="header" href="#compute-witness" id="compute-witness"><h2><code>compute-witness</code></h2></a>
-<pre><code class="language-sh">./zokrates compute-witness -a 1 2 3
+<pre><code class="language-sh">zokrates compute-witness -a 1 2 3
 </code></pre>
-<p>Computes a witness for the compiled program found at <code>./out</code> and arguments to the program.
-A witness is a valid assignment of the variables, which include the results of the computation.
-Arguments to the program are passed as a space-separated list with the <code>-a</code> flag, or over <code>stdin</code>.</p>
+<p>Computes a witness for the compiled program found at <code>./out</code> and computes arguments of the program.
+A witness is a valid assignment of the variables, including the results of the computation.
+Arguments of the program are passed as a space-separated list with the <code>-a</code> flag, or over <code>stdin</code> with the <code>--stdin</code> flag.</p>
+<p>With the <code>--abi</code> flag, arguments are passed in the ZoKrates JSON ABI format described <a href="reference/abi.html">here</a>:</p>
+<pre><code class="language-sh">cat arguments.json | zokrates compute-witness --stdin --abi
+</code></pre>
 <p>Creates a witness file at <code>./witness</code></p>
 <a class="header" href="#setup" id="setup"><h2><code>setup</code></h2></a>
-<pre><code class="language-sh">./zokrates setup
+<pre><code class="language-sh">zokrates setup
 </code></pre>
 <p>Generates a trusted setup for the compiled program found at <code>./out</code>.</p>
 <p>Creates a proving key and a verifying key at <code>./proving.key</code> and <code>./verifying.key</code>.
-These keys are derived from a source of randomness, commonly referred to as “toxic waste”. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.</p>
+These keys are derived from a source of randomness, commonly referred to as &quot;toxic waste&quot;. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.</p>
 <a class="header" href="#export-verifier" id="export-verifier"><h2><code>export-verifier</code></h2></a>
-<pre><code class="language-sh">./zokrates export-verifier
+<pre><code class="language-sh">zokrates export-verifier
 </code></pre>
-<p>Using the verifying key at <code>./verifying.key</code>, generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program at <code>./out</code>.</p>
+<p>Using the verifying key at <code>./verifying.key</code>, generates a Solidity contract that contains the generated verification key and a public function to verify a solution to the compiled program at <code>./out</code>.</p>
 <p>Creates a verifier contract at <code>./verifier.sol</code>.</p>
 <a class="header" href="#generate-proof" id="generate-proof"><h2><code>generate-proof</code></h2></a>
-<pre><code class="language-sh">./zokrates generate-proof
+<pre><code class="language-sh">zokrates generate-proof
 </code></pre>
 <p>Using the proving key at <code>./proving.key</code>, generates a proof for a computation of the compiled program <code>./out</code> resulting in <code>./witness</code>.</p>
 <p>Returns the proof, for example:</p>
@@ -601,7 +607,7 @@ For example, using <code>web3</code>, a call would look like the following:</p>
 </code></pre>
 <p>Note, that this is only tested for Linux. If you are on another OS, consider using our Docker container, which includes a libsnark installation.</p>
 <a class="header" href="#g16-malleability" id="g16-malleability"><h2>G16 malleability</h2></a>
-<p>When using G16, developers should pay attention to the fact that an attacker seeing a valid proof can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
+<p>When using G16, developers should pay attention to the fact that an attacker, seeing a valid proof, can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
 <ul>
 <li>signed proofs</li>
 <li>nullifiers</li>
@@ -629,11 +635,97 @@ To mitigate this, ZIR applies an isomorphism when displaying field elements: the
 <p>... in ZIR, we simply write:</p>
 <pre><code>-1
 </code></pre>
+<a class="header" href="#zokrates-abi" id="zokrates-abi"><h1>ZoKrates ABI</h1></a>
+<p>In order to interact programatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
+<p>To illustrate this, we'll use the following example program:</p>
+<pre><code>struct Bar {
+    field a
+}
+
+struct Foo {
+    field a
+    Bar b
+}
+
+def main(private Foo foo, bool[2] bar, field num) -&gt; (field):
+    return 42
+</code></pre>
+<a class="header" href="#abi-specification" id="abi-specification"><h2>ABI specification</h2></a>
+<p>When compiling a program, an ABI specification <code>abi.json</code> file is created and describes the interface of the program.</p>
+<p>In this example, the generate ABI specification is:</p>
+<pre><code class="language-json">{
+    &quot;inputs&quot;: [
+        {
+            &quot;name&quot;: &quot;foo&quot;,
+            &quot;public&quot;: false,
+            &quot;type&quot;: &quot;struct&quot;,
+            &quot;components&quot;: [ 
+                {
+                    &quot;name&quot;: &quot;a&quot;,
+                    &quot;type&quot;: &quot;field&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;b&quot;,
+                    &quot;type&quot;: &quot;struct&quot;,
+                    &quot;components&quot;: [
+                        {
+                            &quot;name&quot;: &quot;a&quot;,
+                            &quot;type&quot;: &quot;field&quot;
+                        }
+                    ]
+                }
+            ]
+        },
+        { 
+            &quot;name&quot;: &quot;bar&quot;,
+            &quot;public&quot;: &quot;true&quot;,
+            &quot;type&quot;: &quot;array&quot;,
+            &quot;components&quot;: {
+                &quot;size&quot;: 2,
+                &quot;type&quot;: &quot;bool&quot;
+            }
+        },
+        { 
+            &quot;name&quot;: &quot;num&quot;,
+            &quot;public&quot;: &quot;true&quot;,
+            &quot;type&quot;: &quot;field&quot;
+        }
+    ],
+    &quot;outputs&quot;: [
+        {
+            &quot;type&quot;: &quot;field&quot;
+        }
+    ]
+}
+``
+
+
+## ABI input format
+
+When executing a program, arguments can be passed as a JSON object of the following form:
+
+```json
+[
+    {
+        &quot;a&quot;: &quot;42&quot;,
+        &quot;b&quot;: 
+        {
+            &quot;a&quot;: &quot;42&quot;
+        }
+    },
+    [
+        true,
+        false
+    ],
+    &quot;42&quot;
+]
+</code></pre>
+<p>Note that field elements are passed as JSON strings in order to support arbitrary large numbers.</p>
 <a class="header" href="#testing" id="testing"><h1>Testing</h1></a>
-<p>Before running any tests, make sure make sure your <code>ZOKRATES_HOME</code> environment variable is set correctly.
+<p>Before running any tests, make sure your <code>ZOKRATES_HOME</code> environment variable is set correctly.
 It has to point to <code>zokrates_stdlib/stdlib/</code></p>
 <a class="header" href="#unit-tests" id="unit-tests"><h2>Unit tests</h2></a>
-<p>In ZoKrates, unit tests comprise</p>
+<p>In ZoKrates, unit tests comprise of</p>
 <ul>
 <li>internal tests for all zokrates crates</li>
 <li>compilation tests for all examples in <code>zokrates_cli/examples</code>. These tests only ensure that the examples compile.</li>
@@ -673,9 +765,9 @@ They are defined in the <code>zokrates_cli</code> crate in <code>integration.rs<
 <pre><code>cargo test --release &amp; cargo test --release -- --ignored
 </code></pre>
 <a class="header" href="#tutorial-proving-knowledge-of-a-hash-preimage" id="tutorial-proving-knowledge-of-a-hash-preimage"><h1>Tutorial: Proving knowledge of a hash preimage</h1></a>
-<p>Let’s jump into ZoKrates by working through a hands-on project together!</p>
-<p>We’ll implement an operation that's very typical in blockchain use-cases: proving knowledge of the preimage for a given hash digest.<br />
-In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let’s call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let’s call him Victor, that she knows a hash preimage for a digest chosen by Victor, without revealing what the preimage is.</p>
+<p>Let's jump into ZoKrates by working through a hands-on project together!</p>
+<p>We'll implement an operation that's very typical in blockchain use-cases: proving knowledge of the preimage for a given hash digest.
+In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let's call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let's call him Victor, that she knows a hash preimage for a digest chosen by Victor, without revealing what the preimage is.</p>
 <a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
 <p>Make sure you have followed the instructions in the <a href="gettingstarted.html">Getting Started</a> chapter and are able to run the &quot;Hello World&quot; example described there.</p>
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
@@ -688,8 +780,8 @@ def main(private field a, private field b, private field c, private field d) -&g
     return h
 </code></pre>
 <p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
-<p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to sha256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
-<p>In case you are interested in an example that is fully compliant with existing SHA256 implementations in Python or Solidity you can have a look at this <a href="https://blog.decentriq.ch/proving-hash-pre-image-zksnarks-zokrates">blog</a> post.</p>
+<p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to SHA256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
+<p>In case you are interested in an example that is fully compliant with existing SHA256 implementations in Python or Solidity, you can have a look at this <a href="https://blog.decentriq.ch/proving-hash-pre-image-zksnarks-zokrates">blog</a> post.</p>
 <p>Our code is really just using the <code>sha256packed</code>, returning the computed hash.</p>
 <p>Having our problem described in ZoKrates' DSL, we can now continue using ZoKrates for the rest of our workflow.</p>
 <p>First, we compile the program into an arithmetic circuit using the <code>compile</code> command.</p>
@@ -710,7 +802,7 @@ def main(private field a, private field b, private field c, private field d) -&g
 <code>0xc6481e22c5ff4164af680b8cfaa5e8ed3120eeff89c4f307c4a6faaae059ce10</code></p>
 <a class="header" href="#prove-knowledge-of-pre-image" id="prove-knowledge-of-pre-image"><h2>Prove knowledge of pre-image</h2></a>
 <p>For now, we have seen that we can compute a hash using ZoKrates.</p>
-<p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor choses the digest to be the one we found in our example above.</p>
+<p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor chooses the digest to be the one we found in our example above.</p>
 <p>To make it work, the two parties have to follow their roles in the protocol:</p>
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
@@ -725,7 +817,7 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>So, having defined the program, Victor is now ready to compile the code:</p>
 <pre><code class="language-sh">./zokrates compile -i hashexample.zok
 </code></pre>
-<p>Based on that Victor can run the setup phase and export verifier smart contract as a Solidity file:</p>
+<p>Based on that Victor can run the setup phase and export a verifier smart contract as a Solidity file:</p>
 <pre><code class="language-sh">./zokrates setup
 ./zokrates export-verifier
 </code></pre>
@@ -737,22 +829,51 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>Finally, Peggy can run the command to construct the proof:</p>
 <pre><code class="language-sh">./zokrates generate-proof
 </code></pre>
-<p>As the inputs were declared as private in the program, they do not appear in the proof thanks to the zero knowledge property of the protocol.</p>
+<p>As the inputs were declared as private in the program, they do not appear in the proof thanks to the zero-knowledge property of the protocol.</p>
 <p>ZoKrates creates a file, <code>proof.json</code>,  consisting of the three elliptic curve points that make up the zkSNARKs proof. The <code>verifyTx</code> function in the smart contract deployed by Victor accepts these three values, along with an array of public inputs. The array of public inputs consists of:</p>
 <ul>
 <li>any public inputs to the main function, declared without the <code>private</code> keyword</li>
 <li>the return values of the ZoKrates function</li>
 </ul>
-<p>In the example we're considering, all inputs are private and there is a single return value of <code>1</code>, hence Peggy has to define her public input array as follows: <code>[1]</code></p>
+<p>In the example we're considering, all inputs are private and there is a single return value of <code>1</code>, hence Peggy has to define her public input array as follows: <code>[1]</code>.</p>
 <p>Peggy can then submit her proof by calling <code>verifyTx</code>.</p>
 <p>Victor monitors the verification smart contract for the <code>Verified</code> event, which is emitted upon successful verification of a transaction. As soon as he observes the event triggered by a transaction from Peggy's public address, he can be sure that Peggy has a valid pre-image for the hash he set in the smart contract.</p>
 <a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
-<p>At this point, you’ve successfully ran you first zkSNARK on the Ethereum blockchain. Congratulations!</p>
+<p>At this point, you've successfully ran you first zkSNARK on the Ethereum blockchain. Congratulations!</p>
 <blockquote>
 <p>Remember that in this example only two parties were involved. This special case makes it easy to deal with the trust assumptions of zkSNARKs: only Victor was interested in verifying the claim by Peggy, hence he can trust his execution of the setup phase.</p>
-<p>In general, multiple parties may be interested in verifying the correctness of Peggy's statement. For example, in the zero-knowledge based cryptocurrency Zcash, each node needs to be able to validate the correctness of transactions. In order to generalize the setup phase to these multi-party use-cases a tricky process, commonly referred to as “trusted setup” or &quot;ceremony&quot; needs to be conducted.</p>
+<p>In general, multiple parties may be interested in verifying the correctness of Peggy's statement. For example, in the zero-knowledge based cryptocurrency Zcash, each node needs to be able to validate the correctness of transactions. In order to generalize the setup phase to these multi-party use-cases a tricky process, commonly referred to as &quot;trusted setup&quot; or &quot;ceremony&quot; needs to be conducted.</p>
 <p>ZoKrates would welcome ideas to add support for such ceremonies!</p>
 </blockquote>
+<a class="header" href="#zokratesjs" id="zokratesjs"><h1>zokrates.js</h1></a>
+<p>You can get JavaScript bindings for ZoKrates by running</p>
+<pre><code class="language-bash">npm install zokrates-js
+</code></pre>
+<a class="header" href="#api" id="api"><h2>API</h2></a>
+<table><thead><tr><th> Function </th><th> Description </th></tr></thead><tbody>
+<tr><td> initialize </td><td> Loads binding wasm module and returns a promise with ZoKrates provider </td></tr>
+<tr><td> compile </td><td> Compiles source code into ZoKrates internal representation of arithmetic circuits </td></tr>
+<tr><td> computeWitness </td><td> Computes a valid assignment of the variables, which include the results of the computation </td></tr>
+<tr><td> setup </td><td> Generates a trusted setup for the compiled program </td></tr>
+<tr><td> exportSolidityVerifier </td><td> Generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program </td></tr>
+<tr><td> generateProof </td><td> Generates a proof for a computation of the compiled program </td></tr>
+</tbody></table>
+<a class="header" href="#usage" id="usage"><h2>Usage</h2></a>
+<pre><code class="language-js">import { initialize } from 'zokrates-js';
+
+function importResolver(location, path) {
+  // implement your resolving logic here
+  return { 
+    source: &quot;def main() -&gt; (): return&quot;, 
+    location: path 
+  };
+}
+
+initialize().then((zokratesProvider) =&gt; {
+    // we have to initialize the wasm module before calling api functions
+    zokratesProvider.compile(&quot;def main(private field a) -&gt; (field): return a&quot;, &quot;main&quot;, importResolver)
+});
+</code></pre>
 
                     </main>
 

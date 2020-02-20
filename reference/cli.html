@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html" class="active"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.5.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html" class="active"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -139,34 +139,38 @@
                         <a class="header" href="#command-line-tool" id="command-line-tool"><h1>Command Line Tool</h1></a>
 <p>ZoKrates provides a command line interface.
 You can see an overview of the available subcommands by running</p>
-<pre><code class="language-sh">./zokrates
+<pre><code class="language-sh">zokrates
 </code></pre>
+<p>For each command, you can get the list of expected arguments using <code>--help</code>.</p>
 <a class="header" href="#compile" id="compile"><h2><code>compile</code></h2></a>
-<pre><code class="language-sh">./zokrates compile -i /path/to/add.zok
+<pre><code class="language-sh">zokrates compile -i /path/to/add.zok
 </code></pre>
 <p>Compiles a <code>.zok</code> source code file into ZoKrates internal representation of arithmetic circuits.</p>
 <p>Creates a compiled binary file at <code>./out</code>.
-Unless the <code>--light</code> flag is set, a human readable <code>.ztf</code> file is generated, which displays the compilation output in ZoKrates Text Format.</p>
+Unless the <code>--light</code> flag is set, a human-readable <code>.ztf</code> file is generated, which displays the compilation output in ZoKrates Text Format.</p>
 <a class="header" href="#compute-witness" id="compute-witness"><h2><code>compute-witness</code></h2></a>
-<pre><code class="language-sh">./zokrates compute-witness -a 1 2 3
+<pre><code class="language-sh">zokrates compute-witness -a 1 2 3
 </code></pre>
-<p>Computes a witness for the compiled program found at <code>./out</code> and arguments to the program.
-A witness is a valid assignment of the variables, which include the results of the computation.
-Arguments to the program are passed as a space-separated list with the <code>-a</code> flag, or over <code>stdin</code>.</p>
+<p>Computes a witness for the compiled program found at <code>./out</code> and computes arguments of the program.
+A witness is a valid assignment of the variables, including the results of the computation.
+Arguments of the program are passed as a space-separated list with the <code>-a</code> flag, or over <code>stdin</code> with the <code>--stdin</code> flag.</p>
+<p>With the <code>--abi</code> flag, arguments are passed in the ZoKrates JSON ABI format described <a href="reference/abi.html">here</a>:</p>
+<pre><code class="language-sh">cat arguments.json | zokrates compute-witness --stdin --abi
+</code></pre>
 <p>Creates a witness file at <code>./witness</code></p>
 <a class="header" href="#setup" id="setup"><h2><code>setup</code></h2></a>
-<pre><code class="language-sh">./zokrates setup
+<pre><code class="language-sh">zokrates setup
 </code></pre>
 <p>Generates a trusted setup for the compiled program found at <code>./out</code>.</p>
 <p>Creates a proving key and a verifying key at <code>./proving.key</code> and <code>./verifying.key</code>.
-These keys are derived from a source of randomness, commonly referred to as “toxic waste”. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.</p>
+These keys are derived from a source of randomness, commonly referred to as &quot;toxic waste&quot;. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.</p>
 <a class="header" href="#export-verifier" id="export-verifier"><h2><code>export-verifier</code></h2></a>
-<pre><code class="language-sh">./zokrates export-verifier
+<pre><code class="language-sh">zokrates export-verifier
 </code></pre>
-<p>Using the verifying key at <code>./verifying.key</code>, generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program at <code>./out</code>.</p>
+<p>Using the verifying key at <code>./verifying.key</code>, generates a Solidity contract that contains the generated verification key and a public function to verify a solution to the compiled program at <code>./out</code>.</p>
 <p>Creates a verifier contract at <code>./verifier.sol</code>.</p>
 <a class="header" href="#generate-proof" id="generate-proof"><h2><code>generate-proof</code></h2></a>
-<pre><code class="language-sh">./zokrates generate-proof
+<pre><code class="language-sh">zokrates generate-proof
 </code></pre>
 <p>Using the proving key at <code>./proving.key</code>, generates a proof for a computation of the compiled program <code>./out</code> resulting in <code>./witness</code>.</p>
 <p>Returns the proof, for example:</p>

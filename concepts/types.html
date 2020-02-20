@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.5.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -150,14 +150,14 @@
 </code></pre>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
 <p>ZoKrates has limited support for booleans, to the extent that they can only be used as the condition in <code>if ... else ... endif</code> expressions.</p>
-<p>You can use them for equality checks, inequality checks and inequality checks between <code>field</code> values.</p>
-<p>Note that while equality checks are cheap, inequality checks should be use wisely as they are orders of magnitude more expensive.</p>
+<p>You can use them for equality and inequality checks between <code>field</code> values.</p>
+<p>Note that while equality checks are cheap, inequality checks should be used wisely as they are orders of magnitude more expensive.</p>
 <a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
 <p>ZoKrates provides two complex types, Arrays and Structs.</p>
 <a class="header" href="#arrays" id="arrays"><h3>Arrays</h3></a>
 <p>ZoKrates supports static arrays, i.e., their length needs to be known at compile time.
 Arrays can contain elements of any type and have arbitrary dimensions.</p>
-<p>The following examples code shows examples of how to use arrays:</p>
+<p>The following example code shows examples of how to use arrays:</p>
 <pre><code class="language-zokrates">def main() -&gt; (field):
     field[3] a = [1, 2, 3] // initialize a field array with field values
     a[2] = 4               // set a member to a value
@@ -170,7 +170,7 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 </code></pre>
 <a class="header" href="#declaration-and-initialization" id="declaration-and-initialization"><h4>Declaration and Initialization</h4></a>
 <p>An array is defined by appending <code>[]</code> to a type literal representing the type of the array's elements.</p>
-<p>Initialization always needs to happen in the same statement as declaration, unless the array is declared within a function's signature.</p>
+<p>Initialization always needs to happen in the same statement as a declaration, unless the array is declared within a function's signature.</p>
 <p>For initialization, a list of comma-separated values is provided within brackets <code>[]</code>.</p>
 <p>ZoKrates offers a special shorthand syntax to initialize an array with a constant value:
 <code>[value;repetitions]</code></p>
@@ -181,7 +181,7 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <a class="header" href="#multidimensional-arrays" id="multidimensional-arrays"><h4>Multidimensional Arrays</h4></a>
 <p>As an array can contain any type of elements, it can contain arrays again.
 There is a special syntax to declare such multi-dimensional arrays, i.e., arrays of arrays.
-To declare an array of an inner array, i.e., and array of elements of a type, prepend brackets <code>[size]</code> to the declaration of the inner array.
+To declare an array of an inner array, i.e., and an array of elements of a type, prepend brackets <code>[size]</code> to the declaration of the inner array.
 In summary, this leads to the following scheme for array declarations:
 <code>data_type[size of 1st dimension][size of 2nd dimension]</code>.
 Consider the following example:</p>
@@ -200,7 +200,7 @@ Consider the following example:</p>
 <a class="header" href="#spreads" id="spreads"><h5>Spreads</h5></a>
 <p>The spread operator <code>...</code> applied to an array copies the elements of the existing array.
 This can be used to conveniently compose new arrays, as shown in the following example:</p>
-<pre><code>field[3] = [1, 2, 3]
+<pre><code>field[3] a = [1, 2, 3]
 field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
 </code></pre>
 <a class="header" href="#slices" id="slices"><h5>Slices</h5></a>
@@ -220,7 +220,7 @@ The contained variables can be of any type.</p>
 
 struct Foo {
     Bar a
-    bool b 
+    bool b
 }
 
 def main() -&gt; (Foo):
@@ -238,7 +238,7 @@ A struct definition starts with the <code>struct</code> keyword followed by a na
 }
 </code></pre>
 <a class="header" href="#declaration-and-initialization-1" id="declaration-and-initialization-1"><h4>Declaration and Initialization</h4></a>
-<p>Initialization of a variable of a struct type always needs to happen in the same statement as declaration, unless the struct-typed variable is declared within a function's signature.</p>
+<p>Initialization of a variable of a struct type always needs to happen in the same statement as a declaration, unless the struct-typed variable is declared within a function's signature.</p>
 <p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
 <pre><code class="language-zokrates">struct Point {
     field x

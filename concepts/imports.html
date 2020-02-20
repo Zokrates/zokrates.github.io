@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html" class="active"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.5.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html" class="active"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -160,11 +160,11 @@
 
 // `main` is now in scope under the alias `module`.
 </code></pre>
-<p>Note that this legacy method is likely to be become deprecated, so it is recommended to use the preferred way instead.</p>
+<p>Note that this legacy method is likely to become deprecated, so it is recommended to use the preferred way instead.</p>
 <a class="header" href="#symbols" id="symbols"><h3>Symbols</h3></a>
-<p>Two type of symbols can be imported</p>
+<p>Two types of symbols can be imported</p>
 <a class="header" href="#functions" id="functions"><h4>Functions</h4></a>
-<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is infered.</p>
+<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is inferred.</p>
 <a class="header" href="#user-defined-types" id="user-defined-types"><h4>User-defined types</h4></a>
 <p>User-defined types declared with the <code>struct</code> keyword are imported by name.</p>
 <a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
@@ -174,12 +174,11 @@
 <p>There also is a handy syntax to import from the parent directory:</p>
 <pre><code class="language-zokrates">from &quot;../mycode&quot; import foo
 </code></pre>
-<p>Also imports further up the file-system are supported:</p>
+<p>Also, imports further up the file-system are supported:</p>
 <pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
 </code></pre>
 <a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
-<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.
-`</p>
+<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.</p>
 
                     </main>
 
