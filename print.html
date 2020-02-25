@@ -651,8 +651,8 @@ def main(private Foo foo, bool[2] bar, field num) -&gt; (field):
     return 42
 </code></pre>
 <a class="header" href="#abi-specification" id="abi-specification"><h2>ABI specification</h2></a>
-<p>When compiling a program, an ABI specification <code>abi.json</code> file is created and describes the interface of the program.</p>
-<p>In this example, the generate ABI specification is:</p>
+<p>When compiling a program, an ABI specification is generated and describes the interface of the program.</p>
+<p>In this example, the ABI specification is:</p>
 <pre><code class="language-json">{
     &quot;inputs&quot;: [
         {
@@ -697,15 +697,10 @@ def main(private Foo foo, bool[2] bar, field num) -&gt; (field):
         }
     ]
 }
-``
-
-
-## ABI input format
-
-When executing a program, arguments can be passed as a JSON object of the following form:
-
-```json
-[
+</code></pre>
+<a class="header" href="#abi-input-format" id="abi-input-format"><h2>ABI input format</h2></a>
+<p>When executing a program, arguments can be passed as a JSON object of the following form:</p>
+<pre><code class="language-json">[
     {
         &quot;a&quot;: &quot;42&quot;,
         &quot;b&quot;: 
