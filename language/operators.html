@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Proving schemes - ZoKrates</title>
+        <title>Operators - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html" class="active"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html" class="active"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,48 +136,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#proving-schemes" id="proving-schemes"><h1>Proving schemes</h1></a>
-<p>ZoKrates supports different proving schemes. All of the available schemes rely on the ALT_BN128 curve, which means that they're all compatible with Ethereum.</p>
-<p>We identify the schemes by the reference to the paper that introduced them. Currently the options available are:</p>
-<table><thead><tr><th> Name </th><th> Paper </th><th> CLI flag </th><th> Requires libsnark </th></tr></thead><tbody>
-<tr><td> PGHR13 </td><td> <a href="https://eprint.iacr.org/2013/279">Here</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> Yes </td></tr>
-<tr><td> G16 </td><td> <a href="https://eprint.iacr.org/2016/260">Here</a> </td><td> <code>--proving-scheme g16</code> </td><td> No </td></tr>
-<tr><td> GM17 </td><td> <a href="https://eprint.iacr.org/2017/540">Here</a> </td><td> <code>--proving-scheme gm17</code> </td><td> Yes </td></tr>
+                        <a class="header" href="#operators" id="operators"><h2>Operators</h2></a>
+<p>The following table lists the precedence and associativity of all available operators. Operators are listed top to bottom, in ascending precedence.</p>
+<table><thead><tr><th> Operator                     </th><th> Description                                                  </th><th> Associativity                      </th><th> Remarks </th></tr></thead><tbody>
+<tr><td> ** <br>                      </td><td> Power                                                        </td><td> Left                               </td><td> <sup class="footnote-reference"><a href="#1">1</a></sup>     </td></tr>
+<tr><td> * <br> /<br>                 </td><td> Multiplication <br>  Division <br>                           </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> + <br> - <br>                </td><td> Addition <br>  Subtraction <br>                              </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> &lt;&lt; <br> &gt;&gt; <br>              </td><td> Left shift <br>  Right shift <br>                            </td><td> Left <br> Left                     </td><td> <sup class="footnote-reference"><a href="#2">2</a></sup>     </td></tr>
+<tr><td> &amp;                            </td><td> Bitwise AND                                                  </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> |                           </td><td> Bitwise OR                                                   </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> ^                            </td><td> Bitwise XOR                                                  </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> &gt;= <br><br> &gt; <br> &lt;= <br> &lt; </td><td> Greater or equal <br> Greater <br> Lower or equal <br> Lower </td><td> Left <br> Left <br> Left <br> Left </td><td> <sup class="footnote-reference"><a href="#3">3</a></sup>     </td></tr>
+<tr><td> != <br> == <br>              </td><td> Not Equal <br> Equal  <br>                                   </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> &amp;&amp;                           </td><td> Boolean AND                                                  </td><td> Left                               </td><td>         </td></tr>
+<tr><td> ||                         </td><td> Boolean OR                                                   </td><td> Left                               </td><td>         </td></tr>
 </tbody></table>
-<p>The default proving scheme is G16.</p>
-<p>When not using the default, the CLI flag has to be provided for the following commands:</p>
-<ul>
-<li><code>setup</code></li>
-<li><code>export-verifier</code></li>
-<li><code>generate-proof</code></li>
-</ul>
-<a class="header" href="#supporting-backends" id="supporting-backends"><h2>Supporting backends</h2></a>
-<p>As shown in the table above, the <code>PGHR13</code> and <code>GM17</code>schemes require <a href="https://github.com/scipr-lab/libsnark">libsnark</a> as a backend, while G16 uses <a href="https://github.com/zkcrypto/bellman">bellman</a>, which is included as the default backend.</p>
-<p>To include libsnark in the build, compile ZoKrates from <a href="https://github.com/ZoKrates/ZoKrates/">source</a> with the <code>libsnark</code> feature:</p>
-<pre><code class="language-bash">cargo +nightly -Z package-features build --release --package zokrates_cli --features=&quot;libsnark&quot;
-</code></pre>
-<p>Note, that this is only tested for Linux. If you are on another OS, consider using our Docker container, which includes a libsnark installation.</p>
-<a class="header" href="#g16-malleability" id="g16-malleability"><h2>G16 malleability</h2></a>
-<p>When using G16, developers should pay attention to the fact that an attacker, seeing a valid proof, can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
-<ul>
-<li>signed proofs</li>
-<li>nullifiers</li>
-<li>usage of an ethereum address as a public input to the program</li>
-<li>usage of non-malleable schemes such as GM17</li>
-</ul>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>The exponent must be a compile-time constant</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>The right operand must be a compile time constant</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Both operands are be asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code></p>
+</div>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../reference/cli.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../reference/verification.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../language/functions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -189,13 +184,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../reference/cli.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../reference/verification.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../language/functions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

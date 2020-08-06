@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Comments - ZoKrates</title>
+        <title>Standard Library - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html" class="active"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html" class="active"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,26 +136,65 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#comments" id="comments"><h2>Comments</h2></a>
-<p>Comments can be added with double-slashes.</p>
-<pre><code class="language-zokrates">def main() -&gt; (field):
-    field a = 42 // this is an end of line comment
-    // this is a full line comment
-    return a
-</code></pre>
+                        <a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
+<p>ZoKrates comes with a number of reusable components in the form of a Standard Library. In order to import it as described in the <a href="./imports.html">imports</a> section, the <code>$ZOKRATES_HOME</code> environment variable must be set to the <code>stdlib</code> folder.</p>
+<p>The full ZoKrates Standard Library can be found <a href="https://github.com/Zokrates/ZoKrates/tree/latest/zokrates_stdlib/stdlib">here</a>.</p>
+<a class="header" href="#hashes" id="hashes"><h3>Hashes</h3></a>
+<a class="header" href="#sha256" id="sha256"><h4>SHA256</h4></a>
+<p>We provide an implementation of the SHA256 function from the SHA-2 family of secure hash functions <sup class="footnote-reference"><a href="#1">1</a></sup>. The hash functions of the SHA-2 family are considered to be pseudorandom.</p>
+<p>SHA256 is available in Ethereum as a pre-compiled contract and thus a hash function that is cheap to evaluate in the EVM. However, the implementation inside a circuit is comparatively expensive, as it is defined for binary in- and outputs and heavily relies on bit manipulation.</p>
+<a class="header" href="#pedersen-hashes" id="pedersen-hashes"><h4>Pedersen Hashes</h4></a>
+<p>The pedersen hash function is inspired by a commitment scheme published by Pedersen <sup class="footnote-reference"><a href="#2">2</a></sup>.
+This hash function’s security is based on the discrete logarithm problem.
+Pedersen-hashes cannot be assumed to be pseudorandom and should therefore not be used where a hash function serves as a random oracle.</p>
+<p>In the EVM, operations on the BabyJubJub curve are not natively supported. Therefore, Pedersen hashes are expensive to evaluate on-chain and should be avoided.</p>
+<p>By definition, the Pedersen hash function has a fixed-length binary input and outputs a group element, i.e., a point on the BabyJubJub elliptic curve in our case.</p>
+<a class="header" href="#mimc" id="mimc"><h4>MiMC</h4></a>
+<p>The MiMC hash function was designed by using the MiMC-Feistel permutation <sup class="footnote-reference"><a href="#3">3</a></sup> over a prime field in a sponge construction <sup class="footnote-reference"><a href="#4">4</a></sup> to arrive at a secure and efficiently provable hash function.
+The construction is based on established hash function design principles from symmetric cryptography but is still novel and should thus be used cautiously. MiMC hashes are considered to be pseudorandom.</p>
+<p>Due to its native use of prime field arithmetics, MiMC hash functions are efficient in circuits. At the same time, they can be evaluated by the EVM with comparatively little overhead.</p>
+<p>The MiMC hash function maps from field elements to field elements; applying the function to its output again does not introduce overhead for packing/unpacking.</p>
+<a class="header" href="#elliptic-curve-cryptography" id="elliptic-curve-cryptography"><h3>Elliptic curve cryptography</h3></a>
+<p>Thanks to the existence of BabyJubJub, an efficient elliptic curve embedded in ALT_BN128, we provide tools to perform elliptic curve operations such as:</p>
+<ul>
+<li>Point operations</li>
+<li>Proving knowledge of a private EdDSA key</li>
+<li>Proving validity of an EdDSA signature</li>
+</ul>
+<p>Check out this <a href="https://github.com/Zokrates/pycrypto">python repository</a> for tooling, for example to generate EdDSA signatures to then check in a SNARK.</p>
+<a class="header" href="#utils" id="utils"><h3>Utils</h3></a>
+<a class="header" href="#packing--unpacking" id="packing--unpacking"><h4>Packing / Unpacking</h4></a>
+<p>As some operations require their input to be provided in the form of bits, we provide tools to convert back and forth between field elements and their bit representations.</p>
+<a class="header" href="#casts" id="casts"><h4>Casts</h4></a>
+<p>Helpers to convert between types representing binary data.</p>
+<a class="header" href="#multiplexer" id="multiplexer"><h4>Multiplexer</h4></a>
+<p>Optimised tools to branch inside circuits.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>P. FIPS. “180-4 FEDERAL INFORMATION PROCESSING STANDARDS PUBLICA- TION”. In: Secure Hash Standard (SHS), National Institute of Standards and Technology (2012).</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>T. P. Pedersen. “Non-interactive and information-theoretic secure verifiable secret shar- ing”. In: Annual International Cryptology Conference. Springer. 1991, pp. 129–140.</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>M. Albrecht, L. Grassi, C. Rechberger, A. Roy, and T. Tiessen. “MiMC: Efficient en- cryption and cryptographic hashing with minimal multiplicative complexity”. In: In- ternational Conference on the Theory and Application of Cryptology and Information Security. Springer. 2016, pp. 191–219.</p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>G. Bertoni, J. Daemen, M. Peeters, and G. Van Assche. “On the indifferentiability of the sponge construction”. In: Annual International Conference on the Theory and Applica-
+tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
+</div>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../concepts/imports.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../toolbox/cli.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../concepts/stdlib.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../toolbox/proving_schemes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -167,13 +206,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../concepts/imports.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../toolbox/cli.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../concepts/stdlib.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../toolbox/proving_schemes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

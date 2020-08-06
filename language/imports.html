@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>JSON ABI - ZoKrates</title>
+        <title>Imports - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html" class="active"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html" class="active"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,100 +136,59 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#zokrates-abi" id="zokrates-abi"><h1>ZoKrates ABI</h1></a>
-<p>In order to interact programatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
-<p>To illustrate this, we'll use the following example program:</p>
-<pre><code>struct Bar {
-    field a
-}
+                        <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
+<p>You can separate your code into multiple ZoKrates files using <code>import</code> statements to import symbols, ignoring the <code>.zok</code> extension of the imported file.</p>
+<a class="header" href="#import-syntax" id="import-syntax"><h3>Import syntax</h3></a>
+<a class="header" href="#symbol-selection" id="symbol-selection"><h4>Symbol selection</h4></a>
+<p>The preferred way to import a symbol is by module and name:</p>
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol
 
-struct Foo {
-    field a
-    Bar b
-}
+// `MySymbol` is now in scope.
+</code></pre>
+<a class="header" href="#aliasing" id="aliasing"><h4>Aliasing</h4></a>
+<p>The <code>as</code> keyword enables renaming symbols:</p>
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias
 
-def main(private Foo foo, bool[2] bar, field num) -&gt; (field):
-    return 42
+// `MySymbol` is now in scope under the alias MyAlias.
 </code></pre>
-<a class="header" href="#abi-specification" id="abi-specification"><h2>ABI specification</h2></a>
-<p>When compiling a program, an ABI specification is generated and describes the interface of the program.</p>
-<p>In this example, the ABI specification is:</p>
-<pre><code class="language-json">{
-    &quot;inputs&quot;: [
-        {
-            &quot;name&quot;: &quot;foo&quot;,
-            &quot;public&quot;: false,
-            &quot;type&quot;: &quot;struct&quot;,
-            &quot;components&quot;: [ 
-                {
-                    &quot;name&quot;: &quot;a&quot;,
-                    &quot;type&quot;: &quot;field&quot;
-                },
-                {
-                    &quot;name&quot;: &quot;b&quot;,
-                    &quot;type&quot;: &quot;struct&quot;,
-                    &quot;components&quot;: [
-                        {
-                            &quot;name&quot;: &quot;a&quot;,
-                            &quot;type&quot;: &quot;field&quot;
-                        }
-                    ]
-                }
-            ]
-        },
-        { 
-            &quot;name&quot;: &quot;bar&quot;,
-            &quot;public&quot;: &quot;true&quot;,
-            &quot;type&quot;: &quot;array&quot;,
-            &quot;components&quot;: {
-                &quot;size&quot;: 2,
-                &quot;type&quot;: &quot;bool&quot;
-            }
-        },
-        { 
-            &quot;name&quot;: &quot;num&quot;,
-            &quot;public&quot;: &quot;true&quot;,
-            &quot;type&quot;: &quot;field&quot;
-        }
-    ],
-    &quot;outputs&quot;: [
-        {
-            &quot;type&quot;: &quot;field&quot;
-        }
-    ]
-}
+<a class="header" href="#legacy" id="legacy"><h4>Legacy</h4></a>
+<p>The legacy way to import a symbol is by only specifying a module:</p>
+<pre><code>import &quot;./path/to/my/module&quot;
 </code></pre>
-<a class="header" href="#abi-input-format" id="abi-input-format"><h2>ABI input format</h2></a>
-<p>When executing a program, arguments can be passed as a JSON object of the following form:</p>
-<pre><code class="language-json">[
-    {
-        &quot;a&quot;: &quot;42&quot;,
-        &quot;b&quot;: 
-        {
-            &quot;a&quot;: &quot;42&quot;
-        }
-    },
-    [
-        true,
-        false
-    ],
-    &quot;42&quot;
-]
+<p>In this case, the name of the symbol is assumed to be <code>main</code> and the alias is assumed to be the module's filename so that the above is equivalent to</p>
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module
+
+// `main` is now in scope under the alias `module`.
 </code></pre>
-<p>Note that field elements are passed as JSON strings in order to support arbitrary large numbers.</p>
+<p>Note that this legacy method is likely to become deprecated, so it is recommended to use the preferred way instead.</p>
+<a class="header" href="#symbols" id="symbols"><h3>Symbols</h3></a>
+<p>Two types of symbols can be imported</p>
+<a class="header" href="#functions" id="functions"><h4>Functions</h4></a>
+<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is inferred.</p>
+<a class="header" href="#user-defined-types" id="user-defined-types"><h4>User-defined types</h4></a>
+<p>User-defined types declared with the <code>struct</code> keyword are imported by name.</p>
+<a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
+<p>You can import a resource in the same folder directly, like this:</p>
+<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo
+</code></pre>
+<p>Imports up the file-system tree are supported:</p>
+<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
+</code></pre>
+<a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
+<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../reference/ir.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/control_flow.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../reference/testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../language/comments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -241,13 +200,13 @@ def main(private Foo foo, bool[2] bar, field num) -&gt; (field):
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../reference/ir.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/control_flow.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../reference/testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../language/comments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

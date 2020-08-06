@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="sha256example.html" class="active"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="sha256example.html" class="active"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -147,8 +147,8 @@ In particular, we'll show how ZoKrates and the Ethereum blockchain can be used t
 <p>First, we create a new file named <code>hashexample.zok</code> with the following content:</p>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
 
-def main(private field a, private field b, private field c, private field d) -&gt; (field[2]):
-    h = sha256packed([a, b, c, d])
+def main(private field a, private field b, private field c, private field d) -&gt; field[2]:
+    field[2] h = sha256packed([a, b, c, d])
     return h
 </code></pre>
 <p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
@@ -179,11 +179,11 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
 
-def main(private field a, private field b, private field c, private field d) -&gt; (field):
-    h = sha256packed([a, b, c, d])
-    h[0] == 263561599766550617289250058199814760685
-    h[1] == 65303172752238645975888084098459749904
-    return 1
+def main(private field a, private field b, private field c, private field d):
+    field[2] h = sha256packed([a, b, c, d])
+    assert(h[0] == 263561599766550617289250058199814760685)
+    assert(h[1] == 65303172752238645975888084098459749904)
+    return
 </code></pre>
 <p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
 <p>So, having defined the program, Victor is now ready to compile the code:</p>
@@ -209,7 +209,7 @@ def main(private field a, private field b, private field c, private field d) -&g
 </ul>
 <p>In the example we're considering, all inputs are private and there is a single return value of <code>1</code>, hence Peggy has to define her public input array as follows: <code>[1]</code>.</p>
 <p>Peggy can then submit her proof by calling <code>verifyTx</code>.</p>
-<p>Victor monitors the verification smart contract for the <code>Verified</code> event, which is emitted upon successful verification of a transaction. As soon as he observes the event triggered by a transaction from Peggy's public address, he can be sure that Peggy has a valid pre-image for the hash he set in the smart contract.</p>
+<p>Victor monitors the verification smart contract for the return value of Peggy's transaction. As soon as he observes a transaction from Peggy's public address with a <code>true</code> return value, he can be sure that she has a valid pre-image for the hash he set in the smart contract.</p>
 <a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
 <p>At this point, you've successfully ran you first zkSNARK on the Ethereum blockchain. Congratulations!</p>
 <blockquote>
@@ -223,13 +223,13 @@ def main(private field a, private field b, private field c, private field d) -&g
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="reference/testing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="toolbox/zokrates_js.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="zokrates_js.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="testing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -241,13 +241,13 @@ def main(private field a, private field b, private field c, private field d) -&g
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="reference/testing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="toolbox/zokrates_js.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="zokrates_js.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="testing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

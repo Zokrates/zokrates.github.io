@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Imports - ZoKrates</title>
+        <title>zokrates.js - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html" class="active"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html" class="active"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,62 +136,134 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
-<p>You can separate your code into multiple ZoKrates files using <code>import</code> statements to import symbols, ignoring the <code>.zok</code> extension of the imported file.</p>
-<a class="header" href="#import-syntax" id="import-syntax"><h3>Import syntax</h3></a>
-<a class="header" href="#symbol-selection" id="symbol-selection"><h4>Symbol selection</h4></a>
-<p>The preferred way to import a symbol is by module and name:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol
+                        <a class="header" href="#zokratesjs" id="zokratesjs"><h1>zokrates.js</h1></a>
+<p>JavaScript bindings for <a href="https://github.com/Zokrates/ZoKrates">ZoKrates</a>.</p>
+<pre><code class="language-bash">npm install zokrates-js
+</code></pre>
+<a class="header" href="#importing" id="importing"><h2>Importing</h2></a>
+<a class="header" href="#bundlers" id="bundlers"><h5>Bundlers</h5></a>
+<p><strong>Note:</strong> As this library uses a model where the wasm module itself is natively an ES module, you will need a bundler of some form.
+Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a>.
+The choice of this default was done to reflect the trends of the JS ecosystem.</p>
+<pre><code class="language-js">import { initialize } from 'zokrates-js';
+</code></pre>
+<a class="header" href="#node" id="node"><h5>Node</h5></a>
+<pre><code class="language-js">const { initialize } = require('zokrates-js/node');
+</code></pre>
+<a class="header" href="#example" id="example"><h2>Example</h2></a>
+<pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
+    const source = &quot;def main(private field a) -&gt; field: return a * a&quot;;
 
-// `MySymbol` is now in scope.
-</code></pre>
-<a class="header" href="#aliasing" id="aliasing"><h4>Aliasing</h4></a>
-<p>The <code>as</code> keyword enables renaming symbols:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias
+    // compilation
+    const artifacts = zokratesProvider.compile(source);
 
-// `MySymbol` is now in scope under the alias MyAlias.
-</code></pre>
-<a class="header" href="#legacy" id="legacy"><h4>Legacy</h4></a>
-<p>The legacy way to import a symbol is by only specifying a module:</p>
-<pre><code>import &quot;./path/to/my/module&quot;
-</code></pre>
-<p>In this case, the name of the symbol is assumed to be <code>main</code> and the alias is assumed to be the module's filename so that the above is equivalent to</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module
+    // computation
+    const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
 
-// `main` is now in scope under the alias `module`.
+    // run setup
+    const keypair = zokratesProvider.setup(artifacts.program);
+
+    // generate proof
+    const proof = zokratesProvider.generateProof(artifacts.program, witness, keypair.pk);
+
+    // export solidity verifier
+    const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk, &quot;v1&quot;);
+});
 </code></pre>
-<p>Note that this legacy method is likely to become deprecated, so it is recommended to use the preferred way instead.</p>
-<a class="header" href="#symbols" id="symbols"><h3>Symbols</h3></a>
-<p>Two types of symbols can be imported</p>
-<a class="header" href="#functions" id="functions"><h4>Functions</h4></a>
-<p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is inferred.</p>
-<a class="header" href="#user-defined-types" id="user-defined-types"><h4>User-defined types</h4></a>
-<p>User-defined types declared with the <code>struct</code> keyword are imported by name.</p>
-<a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
-<p>You can import a resource in the same folder directly, like this:</p>
-<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo
+<a class="header" href="#api" id="api"><h2>API</h2></a>
+<a class="header" href="#initialize" id="initialize"><h5>initialize()</h5></a>
+<p>Returns an initialized <code>ZoKratesProvider</code> as a promise.</p>
+<pre><code class="language-js">initialize().then(zokratesProvider =&gt; { 
+    // call api functions here
+});
 </code></pre>
-<p>There also is a handy syntax to import from the parent directory:</p>
-<pre><code class="language-zokrates">from &quot;../mycode&quot; import foo
+<p>Returns: <code>Promise&lt;ZoKratesProvider&gt;</code></p>
+<a class="header" href="#compilesource-options" id="compilesource-options"><h5>compile(source[, options])</h5></a>
+<p>Compiles source code into ZoKrates internal representation of arithmetic circuits.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>source</code> - Source code to compile</li>
+<li><code>options</code> - Compilation options</li>
+</ul>
+<p>Returns: <code>CompilationArtifacts</code></p>
+<p><strong>Examples:</strong></p>
+<p>Compilation:</p>
+<pre><code class="language-js">const artifacts = zokratesProvider.compile(&quot;def main() -&gt; (): return&quot;);
 </code></pre>
-<p>Also, imports further up the file-system are supported:</p>
-<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
+<p>Compilation with custom options:</p>
+<pre><code class="language-js">const source = &quot;...&quot;;
+const options = {
+    location: &quot;main.zok&quot;, // location of the root module
+    resolveCallback: (currentLocation, importLocation) =&gt; {
+        console.log(currentLocation + ' is importing ' + importLocation);
+        return { 
+            source: &quot;def main() -&gt; (): return&quot;, 
+            location: importLocation 
+        };
+    },
+    config: {
+        is_release: true
+    }
+};
+const artifacts = zokratesProvider.compile(source, options);
 </code></pre>
-<a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
-<p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="./stdlib.html">section</a> for more details.</p>
+<p><strong>Note:</strong> The <code>resolveCallback</code> function is used to resolve dependencies.
+This callback receives the current module location and the import location of the module which is being imported.
+The callback must synchronously return either an error, <code>null</code> or a valid <code>ResolverResult</code> object like shown in the example above.</p>
+<a class="header" href="#computewitnessartifacts-args" id="computewitnessartifacts-args"><h5>computeWitness(artifacts, args)</h5></a>
+<p>Computes a valid assignment of the variables, which include the results of the computation.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>artifacts</code> - Compilation artifacts</li>
+<li><code>args</code> - Array of arguments (eg. <code>[&quot;1&quot;, &quot;2&quot;, true]</code>)</li>
+</ul>
+<p>Returns: <code>ComputationResult</code></p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-js">const code = 'def main(private field a) -&gt; (field): return a * a';
+const artifacts = zokratesProvider.compile(code);
+
+const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
+
+console.log(witness); // Resulting witness which can be used to generate a proof
+console.log(output); // Computation output: [&quot;4&quot;]
+</code></pre>
+<a class="header" href="#setupprogram" id="setupprogram"><h5>setup(program)</h5></a>
+<p>Generates a trusted setup for the compiled program.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>program</code> - Compiled program</li>
+</ul>
+<p>Returns: <code>SetupKeypair</code></p>
+<a class="header" href="#exportsolidityverifierverificationkey-abi" id="exportsolidityverifierverificationkey-abi"><h5>exportSolidityVerifier(verificationKey, abi)</h5></a>
+<p>Generates a Solidity contract which contains the generated verification key and a public function to verify proofs of computation of the compiled program.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>verificationKey</code> - Verification key from the setup keypair</li>
+<li><code>abi</code> - Abi version (<code>&quot;v1&quot;</code> | <code>&quot;v2&quot;</code>)</li>
+</ul>
+<p>Returns: <code>string</code></p>
+<a class="header" href="#generateproofprogram-witness-provingkey" id="generateproofprogram-witness-provingkey"><h5>generateProof(program, witness, provingKey)</h5></a>
+<p>Generates a proof for a computation of the compiled program.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>program</code> - Compiled program</li>
+<li><code>witness</code> - Witness (valid assignment of the variables) from the computation result</li>
+<li><code>provingKey</code> - Proving key from the setup keypair</li>
+</ul>
+<p>Returns: <code>Proof</code></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../concepts/control_flow.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../toolbox/abi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../concepts/comments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../sha256example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -203,13 +275,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../concepts/control_flow.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../toolbox/abi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../concepts/comments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../sha256example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

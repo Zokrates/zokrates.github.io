@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Control flow - ZoKrates</title>
+        <title>Variables - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html" class="active"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html" class="active"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,55 +136,62 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#control-flow" id="control-flow"><h2>Control Flow</h2></a>
-<p>ZoKrates provide a single thread of execution with two control flow constructs.</p>
-<a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
-<p>Function calls can help make programs clearer and more modular. However, using function calls is not always zero-cost, so deep call chains should be avoided.</p>
-<p>Arguments are passed by value.</p>
-<pre><code class="language-zokrates">def incr(field a) -&gt; (field):
-    a = a + 1
-    return a
-
-def main() -&gt; (field):
-    field x = 1
-    field res = incr(x)
-    x == 1 // x has not changed
-    return 1
+                        <a class="header" href="#variables" id="variables"><h2>Variables</h2></a>
+<p>Variables can have any name which does not start with a number.
+Variables are mutable, and always passed by value to functions.</p>
+<a class="header" href="#declaration" id="declaration"><h3>Declaration</h3></a>
+<p>Variables need to be declared to be used. Declaration and definition are always combined, so that undefined variables do not exist.</p>
+<pre><code class="language-zokrates">def main():
+    // declare and define `my_variable`
+    field my_variable = 2
+    // redefine `my_variable`
+    my_variable = 3
+    return
 </code></pre>
-<a class="header" href="#if-expressions" id="if-expressions"><h3>If expressions</h3></a>
-<p>An if-expression allows you to branch your code depending on a condition.</p>
-<pre><code class="language-zokrates">def main(field x) -&gt; (field):
-  field y = if x + 2 == 3 then 1 else 5 fi
-  return y
-</code></pre>
-<p>The condition supports <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, which can be combined with the boolean operators <code>&amp;&amp;</code>, <code>||</code> and <code>!</code>.</p>
-<blockquote>
-<p>When it comes to inequality checks, there is a caveat: when executing <code>a &lt; b</code>, both <code>a</code> and <code>b</code> will be asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code>. This means that <code>a</code> and <code>b</code> are both asserted to be between <code>0</code> and <code>2**252 - 1</code>. The same applies to other inequality checks.</p>
-</blockquote>
-<a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
-<p>For loops are available with the following syntax:</p>
-<pre><code class="language-zokrates">def main() -&gt; (field):
-    field res = 0
-    for field i in 0..4 do
-        res = res + i
+<a class="header" href="#shadowing" id="shadowing"><h3>Shadowing</h3></a>
+<p>Shadowing is not allowed.</p>
+<pre><code class="language-zokrates">def main() -&gt; field:
+    field a = 2
+    // field a = 3 &lt;- not allowed
+    for field i in 0..5 do
+        // field a = 7 &lt;- not allowed
     endfor
-    return res
+    return a
 </code></pre>
-<p>The bounds have to be known at compile-time, so only constants are allowed.
-For-loops define their own scope.</p>
+<a class="header" href="#scope" id="scope"><h3>Scope</h3></a>
+<a class="header" href="#function" id="function"><h4>Function</h4></a>
+<p>Functions have their own scope</p>
+<pre><code class="language-zokrates">def foo() -&gt; field:
+    // return myGlobal &lt;- not allowed
+    return 42
+
+def main() -&gt; field:
+    field myGlobal = 42
+    return foo()
+</code></pre>
+<a class="header" href="#for-loop" id="for-loop"><h4>For-loop</h4></a>
+<p>For-loops have their own scope</p>
+<pre><code class="language-zokrates">def main() -&gt; field:
+    field a = 0
+    for field i in 0..5 do
+        a = a + i
+    endfor
+    // return i &lt;- not allowed
+    return a
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../concepts/functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../concepts/imports.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../language/types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -196,13 +203,13 @@ For-loops define their own scope.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../concepts/functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../concepts/imports.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../language/types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

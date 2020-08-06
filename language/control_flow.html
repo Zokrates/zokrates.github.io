@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Testing - ZoKrates</title>
+        <title>Control flow - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Programming Concepts</a></li><li><ol class="section"><li><a href="../concepts/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../concepts/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../concepts/functions.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li><a href="../concepts/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../concepts/imports.html"><strong aria-hidden="true">3.5.</strong> Imports</a></li><li><a href="../concepts/comments.html"><strong aria-hidden="true">3.6.</strong> Comments</a></li><li><a href="../concepts/stdlib.html"><strong aria-hidden="true">3.7.</strong> Standard Library</a></li></ol></li><li><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li><a href="../reference/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../reference/proving_schemes.html"><strong aria-hidden="true">4.2.</strong> Proving schemes</a></li><li><a href="../reference/verification.html"><strong aria-hidden="true">4.3.</strong> Verification</a></li><li><a href="../reference/ir.html"><strong aria-hidden="true">4.4.</strong> ZIR</a></li><li><a href="../reference/abi.html"><strong aria-hidden="true">4.5.</strong> JSON ABI</a></li><li><a href="../reference/testing.html" class="active"><strong aria-hidden="true">4.6.</strong> Testing</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../zokrates_js.html"><strong aria-hidden="true">6.</strong> zokrates.js</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html" class="active"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,62 +136,59 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#testing" id="testing"><h1>Testing</h1></a>
-<p>Before running any tests, make sure your <code>ZOKRATES_HOME</code> environment variable is set correctly.
-It has to point to <code>zokrates_stdlib/stdlib/</code></p>
-<a class="header" href="#unit-tests" id="unit-tests"><h2>Unit tests</h2></a>
-<p>In ZoKrates, unit tests comprise of</p>
-<ul>
-<li>internal tests for all zokrates crates</li>
-<li>compilation tests for all examples in <code>zokrates_cli/examples</code>. These tests only ensure that the examples compile.</li>
-<li>compilation + witness-computation tests. These tests compile the test cases, compute a witness and compare the result with a pre-defined expected result.
-Such test cases exist for
-<ul>
-<li>The zokrates_core crate in <code>zokrates_core_test/tests</code></li>
-<li>The zokrates_stdlib crate in <code>zokrates_stdlib/tests</code></li>
-</ul>
-</li>
-</ul>
-<p>Unit tests can be executed with the following command:</p>
-<pre><code>cargo test --release
+                        <a class="header" href="#control-flow" id="control-flow"><h2>Control Flow</h2></a>
+<p>ZoKrates provides a single thread of execution with a few flow constructs.</p>
+<a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
+<p>Function calls help make programs clear and modular.</p>
+<p>Arguments are passed by value.</p>
+<pre><code class="language-zokrates">def incr(field a) -&gt; field:
+    a = a + 1
+    return a
+
+def main():
+    field x = 1
+    field res = incr(x)
+    assert(x == 1) // x has not changed
+    return
 </code></pre>
-<a class="header" href="#integration-tests" id="integration-tests"><h2>Integration tests</h2></a>
-<p>Integration tests are excluded from <code>cargo test</code> by default.
-They are defined in the <code>zokrates_cli</code> crate in <code>integration.rs</code> and use the test cases specified in <code>zokrates_cli/tests/code</code>.</p>
-<p>Before running integration tests:</p>
-<ol>
-<li>
-<p>Make sure your <code>$ZOKRATES_HOME</code> is set correctly</p>
-</li>
-<li>
-<p>You have <a href="https://github.com/ethereum/solc-js">solc</a> installed and in your <code>$PATH</code>.</p>
-<p>Solc can conveniently be installed through <code>npm</code> by running</p>
-<pre><code>npm install -g solc
+<a class="header" href="#if-expressions" id="if-expressions"><h3>If-expressions</h3></a>
+<p>An if-expression allows you to branch your code depending on a boolean condition.</p>
+<pre><code class="language-zokrates">def main(field x) -&gt; field:
+  field y = if x + 2 == 3 then 1 else 5 fi
+  return y
 </code></pre>
-</li>
-<li>
-<p>You have an Ethereum node running on localhost with a JSON-RPC interface on the default port 8545 (<code>http://localhost:8545</code>).</p>
-</li>
-</ol>
-<p>Integration tests can then be run with the following command:</p>
-<pre><code>cargo test --release -- --ignored
+<a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
+<p>For loops are available with the following syntax:</p>
+<pre><code class="language-zokrates">def main() -&gt; field:
+    field res = 0
+    for field i in 0..4 do
+        for field j in i..5 do
+            res = res + i
+        endfor
+    endfor
+    return res
 </code></pre>
-<p>If you want to run unit and integrations tests together, run the following command:</p>
-<pre><code>cargo test --release &amp; cargo test --release -- --ignored
+<p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs.</p>
+<a class="header" href="#assertions" id="assertions"><h3>Assertions</h3></a>
+<p>Any boolean can be asserted to be true using the <code>assert</code> function.</p>
+<pre><code class="language-zokrates">def main() -&gt; ():
+    assert(1 == 2)
+    return
 </code></pre>
+<p>If any assertion fails, execution stops as no valid proof could be generated from it.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../reference/abi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../sha256example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../language/imports.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -203,13 +200,13 @@ They are defined in the <code>zokrates_cli</code> crate in <code>integration.rs<
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../reference/abi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../sha256example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../language/imports.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
