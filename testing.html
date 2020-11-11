@@ -137,8 +137,6 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="#testing" id="testing"><h1>Testing</h1></a>
-<p>Before running any tests, make sure your <code>ZOKRATES_HOME</code> environment variable is set correctly.
-It has to point to <code>zokrates_stdlib/stdlib/</code></p>
 <a class="header" href="#unit-tests" id="unit-tests"><h2>Unit tests</h2></a>
 <p>In ZoKrates, unit tests comprise of</p>
 <ul>
@@ -158,11 +156,8 @@ Such test cases exist for
 <a class="header" href="#integration-tests" id="integration-tests"><h2>Integration tests</h2></a>
 <p>Integration tests are excluded from <code>cargo test</code> by default.
 They are defined in the <code>zokrates_cli</code> crate in <code>integration.rs</code> and use the test cases specified in <code>zokrates_cli/tests/code</code>.</p>
-<p>Before running integration tests:</p>
+<p>Before running integration tests, make sure:</p>
 <ol>
-<li>
-<p>Make sure your <code>$ZOKRATES_HOME</code> is set correctly</p>
-</li>
 <li>
 <p>You have <a href="https://github.com/ethereum/solc-js">solc</a> installed and in your <code>$PATH</code>.</p>
 <p>Solc can conveniently be installed through <code>npm</code> by running</p>
