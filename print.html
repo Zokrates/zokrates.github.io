@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="sha256example.html"><strong aria-hidden="true">5.</strong> Tutorial: Proof of preimage</a></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -246,12 +246,14 @@ def main() -&gt; field:
     assert(0 - 1 == pMinusOne)
     return
 </code></pre>
+<p>Note that for field elements, the division operation multiplies the numerator with the denominator's inverse field element. The results coincide with integer divisions for cases with remainder 0, but differ otherwise.</p>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
 <p>Booleans are available in ZoKrates. When a boolean is used as a parameter of the main function, the program is constrained to only accept <code>0</code> or <code>1</code> for that parameter. A boolean can be asserted to be true using an <code>assert(bool)</code> statement.</p>
 <a class="header" href="#u8u16u32" id="u8u16u32"><h3><code>u8/u16/u32</code></h3></a>
 <p>Unsigned integers represent positive numbers of the interval <code>[0, 2 ** bitwidth[</code>, where <code>bitwidth</code> is specified in the type's name, e.g., 32 bits in the case of u32. Their arithmetics are defined modulo <code>2 ** bitwidth</code>.</p>
 <p>Internally, they use a binary encoding, which makes them particularly efficient for implementing programs that operate on that binary representation, e.g., the SHA256 hash function.</p>
 <p>Similarly to booleans, unsigned integer inputs of the main function only accept values of the appropriate range.</p>
+<p>The division operation calculates the standard floor division for integers. The <code>%</code> operand can be used to obtain the remainder.</p>
 <a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
 <p>ZoKrates provides two complex types: arrays and structs.</p>
 <a class="header" href="#arrays" id="arrays"><h3>Arrays</h3></a>
@@ -368,7 +370,7 @@ def main(field a) -&gt; (Point):
 <p>The following table lists the precedence and associativity of all available operators. Operators are listed top to bottom, in ascending precedence.</p>
 <table><thead><tr><th> Operator                     </th><th> Description                                                  </th><th> Associativity                      </th><th> Remarks </th></tr></thead><tbody>
 <tr><td> ** <br>                      </td><td> Power                                                        </td><td> Left                               </td><td> <sup class="footnote-reference"><a href="#1">1</a></sup>     </td></tr>
-<tr><td> * <br> /<br>                 </td><td> Multiplication <br>  Division <br>                           </td><td> Left <br> Left                     </td><td>         </td></tr>
+<tr><td> *<br> /<br> %<br>                </td><td> Multiplication <br>  Division <br>  Remainder                </td><td> Left <br> Left <br>Left                     </td><td>         </td></tr>
 <tr><td> + <br> - <br>                </td><td> Addition <br>  Subtraction <br>                              </td><td> Left <br> Left                     </td><td>         </td></tr>
 <tr><td> &lt;&lt; <br> &gt;&gt; <br>              </td><td> Left shift <br>  Right shift <br>                            </td><td> Left <br> Left                     </td><td> <sup class="footnote-reference"><a href="#2">2</a></sup>     </td></tr>
 <tr><td> &amp;                            </td><td> Bitwise AND                                                  </td><td> Left <br> Left                     </td><td>         </td></tr>
@@ -386,7 +388,7 @@ def main(field a) -&gt; (Point):
 <p>The right operand must be a compile time constant</p>
 </div>
 <div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
-<p>Both operands are be asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code></p>
+<p>Both operands are asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code></p>
 </div>
 <a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
 <p>A function has to be declared at the top level before it is called.</p>
@@ -607,7 +609,7 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <table><thead><tr><th> Backend </th><th> CLI flag </th><th> Proving schemes </th><th> Curves </th></tr></thead><tbody>
 <tr><td> Bellman </td><td> <code>--backend bellman</code> </td><td> G16 </td><td> ALTBN_128, BLS12_381 </td></tr>
 <tr><td> Libsnark </td><td> <code>--backend libsnark</code> </td><td> GM17, PGHR13 </td><td> ALTBN_128 </td></tr>
-<tr><td> Zexe </td><td> <code>--backend zexe</code> </td><td> GM17 </td><td> ALTBN_128, BLS12_377, BW6_761 </td></tr>
+<tr><td> Ark </td><td> <code>--backend ark</code> </td><td> GM17 </td><td> ALTBN_128, BLS12_377, BW6_761 </td></tr>
 </tbody></table>
 <p>Default: <code>bellman</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
@@ -877,87 +879,272 @@ console.log(output); // Computation output: [&quot;4&quot;]
 <li><code>proof</code> - Generated proof</li>
 </ul>
 <p>Returns: <code>boolean</code></p>
-<a class="header" href="#tutorial-proving-knowledge-of-a-hash-preimage" id="tutorial-proving-knowledge-of-a-hash-preimage"><h1>Tutorial: Proving knowledge of a hash preimage</h1></a>
-<p>Let's jump into ZoKrates by working through a hands-on project together!</p>
-<p>We'll implement an operation that's very typical in blockchain use-cases: proving knowledge of the preimage for a given hash digest.
-In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let's call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let's call him Victor, that she knows a hash preimage for a digest chosen by Victor, without revealing what the preimage is.</p>
-<a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
+<a class="header" href="#tutorial-a-snark-powered-rng" id="tutorial-a-snark-powered-rng"><h1>Tutorial: A SNARK Powered RNG</h1></a>
+<a class="header" href="#prerequisites" id="prerequisites"><h2>Prerequisites</h2></a>
 <p>Make sure you have followed the instructions in the <a href="gettingstarted.html">Getting Started</a> chapter and are able to run the &quot;Hello World&quot; example described there.</p>
-<a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
-<p>We will start this tutorial by using ZoKrates to compute the hash for an arbitrarily chosen preimage, being the number <code>5</code> in this example.</p>
-<p>First, we create a new file named <code>hashexample.zok</code> with the following content:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+<a class="header" href="#description-of-the-problem" id="description-of-the-problem"><h2>Description of the problem</h2></a>
+<p>Alice and Bob want to bet on the result of a series of coin tosses. To do so, they need to generate a series of random bits. They proceed as follows:</p>
+<ol>
+<li>Each of them commits to a 512 bit value. Let’s call this value the <strong><em>preimage</em></strong>. They publish the hash of the preimage.</li>
+<li>Each time they need a new random value, they reveal one bit from their preimage, and agree that the new random value is the result of XORing these
+two bits, so that neither of them can control the output.</li>
+</ol>
+<p>Note that we are making a few assumptions here:</p>
+<ol>
+<li>They make sure they do not use all 512 bits of their preimage, as the more they reveal, the easier it gets for the other to brute-force their preimage.</li>
+<li>They need a way to be convinced that the bit the other revealed is indeed part of their preimage.</li>
+</ol>
+<p>In this tutorial you learn how to use Zokrates and zero knowledge proofs to reveal a single bit from the preimage of a hash value.</p>
+<a class="header" href="#commit-to-a-preimage" id="commit-to-a-preimage"><h2>Commit to a preimage</h2></a>
+<p>The first step is for Alice and Bob to each come up with a preimage value and calculate the hash to commit to it.
+There are many ways to calculate a hash, but here we use Zokrates.</p>
+<ol>
+<li>Create this file under the name <code>get_hash.zok</code>:</li>
+</ol>
+<pre><code class="language-javascript">import &quot;hashes/sha256/512bit&quot; as sha256
 
-def main(private field a, private field b, private field c, private field d) -&gt; field[2]:
-    field[2] h = sha256packed([a, b, c, d])
-    return h
+def main(u32[16] hashMe) -&gt; u32[8]:
+  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
+  return h
 </code></pre>
-<p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
-<p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to SHA256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
-<p>In case you are interested in an example that is fully compliant with existing SHA256 implementations in Python or Solidity, you can have a look at this <a href="https://blog.decentriq.ch/proving-hash-pre-image-zksnarks-zokrates">blog</a> post.</p>
-<p>Our code is really just using the <code>sha256packed</code>, returning the computed hash.</p>
-<p>Having our problem described in ZoKrates' DSL, we can now continue using ZoKrates for the rest of our workflow.</p>
-<p>First, we compile the program into an arithmetic circuit using the <code>compile</code> command.</p>
-<pre><code class="language-sh">./zokrates compile -i hashexample.zok
+<ol start="2">
+<li>Compile the program to a form that is usable for zero knowledge proofs. This command writes
+the binary to <code>get_hash</code>. You can see a textual representation, somewhat analogous to assembler
+coming from a compiler, at <code>get_hash.ztf</code> if you remove the <code>--light</code> command line option.</li>
+</ol>
+<pre><code>zokrates compile -i get_hash.zok -o get_hash --light
 </code></pre>
-<p>As a next step we can create a witness file using the following command:</p>
-<pre><code class="language-sh">./zokrates compute-witness -a 0 0 0 5
+<ol start="3">
+<li>The input to the Zokrates program is sixteen 32 bit values, each in decimal. specify those values
+to get a hash. For example, to calculate the hash of <code>0x00000000000000010000000200000003000000040000000500000006...</code>
+use this command:</li>
+</ol>
+<pre><code>zokrates compute-witness --light -i get_hash -a 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 </code></pre>
-<p>Using the flag <code>-a</code> we pass arguments to the program. Recall that our goal is to compute the hash for the number <code>5</code>. Consequently we set <code>a</code>, <code>b</code> and <code>c</code> to <code>0</code> and  <code>d</code> to  <code>5</code>.</p>
-<p>Still here? Great! At this point, we can check the <code>witness</code> file for the return values:</p>
-<pre><code class="language-sh">grep '~out' witness
-</code></pre>
-<p>which should lead to the following output:</p>
-<pre><code class="language-sh">~out_0 263561599766550617289250058199814760685
-~out_1 65303172752238645975888084098459749904
-</code></pre>
-<p>Hence, by concatenating the outputs as 128 bit numbers, we arrive at the following value as the hash for our selected pre-image :
-<code>0xc6481e22c5ff4164af680b8cfaa5e8ed3120eeff89c4f307c4a6faaae059ce10</code></p>
-<a class="header" href="#prove-knowledge-of-pre-image" id="prove-knowledge-of-pre-image"><h2>Prove knowledge of pre-image</h2></a>
-<p>For now, we have seen that we can compute a hash using ZoKrates.</p>
-<p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor chooses the digest to be the one we found in our example above.</p>
-<p>To make it work, the two parties have to follow their roles in the protocol:</p>
-<p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+<p>The result is:</p>
+<pre><code>Computing witness...
 
-def main(private field a, private field b, private field c, private field d):
-    field[2] h = sha256packed([a, b, c, d])
-    assert(h[0] == 263561599766550617289250058199814760685)
-    assert(h[1] == 65303172752238645975888084098459749904)
-    return
+Witness:
+
+[&quot;3592665057&quot;,&quot;2164530888&quot;,&quot;1223339564&quot;,&quot;3041196771&quot;,&quot;2006723467&quot;,&quot;2963045520&quot;,&quot;3851824201&quot;,&quot;3453903005&quot;]
 </code></pre>
-<p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
-<p>So, having defined the program, Victor is now ready to compile the code:</p>
-<pre><code class="language-sh">./zokrates compile -i hashexample.zok
+<p>Pick your own value and store it somewhere.</p>
+<a class="header" href="#detailed-explanation" id="detailed-explanation"><h3>Detailed explanation</h3></a>
+<p>This line imports a Zokrates function from the <a href="https://github.com/Zokrates/ZoKrates/tree/master/zokrates_stdlib/stdlib">standard library</a>.
+You can see the specific function we are importing
+<a href="https://github.com/Zokrates/ZoKrates/blob/master/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">here</a>. It will be
+called <code>sha256</code>.</p>
+<pre><code class="language-javascript">import &quot;hashes/sha256/512bit&quot; as sha256
 </code></pre>
-<p>Based on that Victor can run the setup phase and export a verifier smart contract as a Solidity file:</p>
-<pre><code class="language-sh">./zokrates setup
-./zokrates export-verifier
+<p> </p>
+<p>This is the main function. The input (<code>u32[16]</code>) is an array of sixteen values, each an unsigned 32-bit integer (a number
+between \(0\) and \( 2^{32} - 1 \)). As you have seen above, you specify these numbers using the <code>-a</code> command
+line parameter. The total number of input bits is <em>32 × 16 = 512</em>.</p>
+<p>The output is <code>u32[8]</code>, a <em>32 × 8 = 256</em> bit value.</p>
+<pre><code class="language-javascript">def main(u32[16] hashMe) -&gt; u32[8]:
 </code></pre>
-<p><code>setup</code> creates a <code>verifiation.key</code> file and a <code>proving.key</code> file. Victor gives the proving key to Peggy.</p>
-<p><code>export-verifier</code> creates a <code>verifier.sol</code> contract that contains our verification key and a function <code>verifyTx</code>. Victor deploys this smart contract to the Ethereum network.</p>
-<p>Peggy provides the correct pre-image as an argument to the program.</p>
-<pre><code class="language-sh">./zokrates compute-witness -a 0 0 0 5
+<p> </p>
+<p>This line does several things. First, <code>u32[8] h</code> defines a variable called <code>h</code>, whose type is an array of eight 32-bit unsigned integers.
+This variable is initialized using <code>sha256</code>, the function we
+<a href="https://github.com/Zokrates/ZoKrates/blob/master/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">imported from the standard library</a>.
+The <code>sha256</code> function expects to get two arrays of eight values each, so we use a <a href="https://zokrates.github.io/language/types.html#slices">slice <code>..</code></a>
+to divide <code>hashMe</code> into two arrays.</p>
+<pre><code class="language-javascript">  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
 </code></pre>
-<p>Finally, Peggy can run the command to construct the proof:</p>
-<pre><code class="language-sh">./zokrates generate-proof
+<p> </p>
+<p>Finally, return <code>h</code> to the caller to display the hash.</p>
+<pre><code class="language-javascript">  return h
 </code></pre>
-<p>As the inputs were declared as private in the program, they do not appear in the proof thanks to the zero-knowledge property of the protocol.</p>
-<p>ZoKrates creates a file, <code>proof.json</code>,  consisting of the three elliptic curve points that make up the zkSNARKs proof. The <code>verifyTx</code> function in the smart contract deployed by Victor accepts these three values, along with an array of public inputs. The array of public inputs consists of:</p>
+<a class="header" href="#reveal-a-single-bit" id="reveal-a-single-bit"><h2>Reveal a single bit</h2></a>
+<p>The next step is to reveal a single bit.</p>
+<ol>
+<li>Use this program, <code>reveal_bit.zok</code>:</li>
+</ol>
+<pre><code class="language-javascript">import &quot;hashes/sha256/512bit&quot; as sha256
+import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+
+// Reveal a bit from a 512 bit value, and return it with the corresponding hash
+// for that value.
+//
+// WARNING, once enough bits have been revealed it is possible to brute force
+// the remaining preimage bits.
+
+def main(private u32[16] preimage, field bitNum) -&gt; (u32[8], bool):
+                                                                                                                       
+  // Convert the preimage to bits
+  bool[512] preimageBits = [false; 512]
+  for field i in 0..16 do
+    bool[32] val = u32_to_bits(preimage[i])
+    for field bit in 0..32 do
+      preimageBits[i*32+bit] = val[bit]
+    endfor
+  endfor
+  
+  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+</code></pre>
+<ol start="2">
+<li>Compile and run as you did the previous program:</li>
+</ol>
+<pre><code class="language-bash">zokrates compile -i reveal_bit.zok -o reveal_bit --light
+zokrates compute-witness --light -i reveal_bit -a 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 510
+</code></pre>
+<ol start="3">
+<li>The output should be similar to:</li>
+</ol>
+<pre><code>Witness:
+
+[&quot;3592665057&quot;,&quot;2164530888&quot;,&quot;1223339564&quot;,&quot;3041196771&quot;,&quot;2006723467&quot;,&quot;2963045520&quot;,&quot;3851824201&quot;,&quot;3453903005&quot;,&quot;1&quot;]
+</code></pre>
+<a class="header" href="#detailed-explanation-1" id="detailed-explanation-1"><h3>Detailed explanation</h3></a>
+<p>This line imports a function that converts a <code>u32</code> value to an array of 32 booleans.
+There are cast functions to convert <code>u8</code>s, <code>u16</code>s, and <code>u32</code>s to boolean arrays and back again,
+<a href="https://github.com/Zokrates/ZoKrates/blob/master/zokrates_stdlib/stdlib/utils/casts">you can see them here</a>.</p>
+<pre><code class="language-javascript">import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+</code></pre>
+<p> </p>
+<p>The preimage is declared <code>private</code> so it won't be revealed by the zero knowledge proof.</p>
+<p>A Zokrates function can return multiple values. In this case, it returns the hash and a boolean which is the
+value of the bit being revealed.</p>
+<pre><code class="language-javascript">def main(private u32[16] preimage, field bitNum) -&gt; (u32[8], bool):
+</code></pre>
+<p> </p>
+<p>To find the value of the bit being revealed, we convert the entire preimage into bits and access it at the index <code>bitNum</code>.
+The first line defines an array of 512 boolean values (<code>bool[512]</code>) called <code>preimageBits</code>. It is initialized to
+an array of 512 <code>false</code> values. The syntax <code>[&lt;value&gt;; &lt;number&gt;]</code> initializes the an array of <code>&lt;number&gt;</code>
+copies of <code>&lt;value&gt;</code>. It is necessary to include it here because a Zokrates variable must be initialized
+when it is declared.</p>
+<pre><code class="language-javascript">  // Convert the secret to bits
+  bool[512] preimageBits = [false; 512]
+</code></pre>
+<p> </p>
+<p>This is a <a href="https://zokrates.github.io/language/control_flow.html#for-loops">for loop</a>. For loops
+have to have an index of type <code>field</code>, and their bounds need to be known at compile time.
+In this case, we go over each of the sixteen 32 bit words.</p>
+<pre><code class="language-javascript">  for field i in 0..16 do
+</code></pre>
+<p>The function we imported, <code>u32_to_bits</code>, converts a <code>u32</code> value to an array of bits.</p>
+<pre><code class="language-javascript">    bool[32] val = u32_to_bits(preimage[i])
+</code></pre>
+<p> </p>
+<p>The inner loop copies the bits from <code>val</code> to <code>preimageBits</code>, the bit array for the preimage.</p>
+<pre><code class="language-javascript">    for field bit in 0..32 do
+      preimageBits[i*32+bit] = val[bit]
+    endfor
+  endfor
+</code></pre>
+<p> </p>
+<p>To return multiple values, separate them by commas.</p>
+<pre><code class="language-javascript">  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+</code></pre>
+<a class="header" href="#actually-using-zero-knowledge-proofs" id="actually-using-zero-knowledge-proofs"><h2>Actually using zero knowledge proofs</h2></a>
+<p>The <code>reveal_bit.zok</code>program reveals a bit from the preimage, but who runs it?</p>
+<ol>
+<li>If Alice runs the program, she can feed it her secret preimage and receive the correct result. However, when she sends the output there is no reason
+for Bob to trust that she is providing the correct output.</li>
+<li>If Bob runs the program, he does not have Alice's secret preimage. If Alice discloses her secret preimage, Bob can know the value of all the bits.</li>
+</ol>
+<p>Therefore, we need to have Alice run the program and produce the output, but produce it in such a way Bob will know it is the correct output. This is what Zero Knowledge
+Proofs give us.</p>
+<a class="header" href="#set-up-the-environment" id="set-up-the-environment"><h3>Set up the environment</h3></a>
+<ol>
+<li>Create two separate directories, <code>alice</code> and <code>bob</code>. You will perform the actions of Alice in the <code>alice</code> directory,
+and the actions of Bob in the <code>bob</code> directory.</li>
+</ol>
+<a class="header" href="#bobs-setup-stage" id="bobs-setup-stage"><h3>Bob's setup stage</h3></a>
+<ol start="2">
+<li>Compile <code>reveal_bit.zok</code> and create the proving and verification keys.
+<pre><code>zokrates compile -i reveal_bit.zok -o reveal_bit --light
+zokrates setup -i reveal_bit --light
+</code></pre>
+</li>
+<li>Copy the file <code>proving.key</code> to Alice's directory.</li>
+</ol>
+<a class="header" href="#alice-reveals-a-bit" id="alice-reveals-a-bit"><h3>Alice reveals a bit</h3></a>
+<ol start="4">
+<li>
+<p>Alice should compile <code>reveal_bit.zok</code> independently to make sure it doesn't disclose information she wants to keep secret.</p>
+<pre><code>zokrates compile -i reveal_bit.zok -o reveal_bit --light
+</code></pre>
+</li>
+<li>
+<p>Next, Alice creates the <code>witness</code> file with the values of all the parameters in the program. Using this <code>witness</code>,
+Bob's <code>proving.key</code>, and the compiled program she generates the actual proof.</p>
+<pre><code>zokrates compute-witness -i reveal_bit -a 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 510 --light
+zokrates generate-proof -i reveal_bit
+</code></pre>
+</li>
+<li>
+<p>The proof is created in the file <code>proof.json</code>. Copy this file to Bob's directory.</p>
+</li>
+</ol>
+<a class="header" href="#bob-accepts-the-proof" id="bob-accepts-the-proof"><h3>Bob accepts the proof</h3></a>
+<ol start="7">
+<li>
+<p>Finally, Bob verifies the proof:</p>
+<pre><code>zokrates verify
+</code></pre>
+</li>
+<li>
+<p>As a sanity check, modify any of the values in <code>proof.json</code> and see that the verification fails.</p>
+</li>
+</ol>
+<a class="header" href="#connecting-to-ethereum" id="connecting-to-ethereum"><h2>Connecting to Ethereum</h2></a>
+<p>So far, Alice and Bob calculated the random bit between themselves. However, it is often useful to have the values
+published on the blockchain. To do this, Bob creates a Solidity program:</p>
+<pre><code>zokrates export-verifier
+</code></pre>
+<p>The Solidity program is called <code>verifier.sol</code>.</p>
+<p>Here are the instructions to use this program when using <a href="https://www.trufflesuite.com/">Truffle and Ganache</a>.
+We'll assume they are installed, and the Ganache blockchain is running.</p>
+<ol>
+<li>Create a new project with <code>truffle init</code> and copy <code>verify.sol</code> to the subdirectory <code>contracts</code>.</li>
+<li>Identify the version of Solidity used by <code>verifier.sol</code>:
+<pre><code>grep solidity contracts/verifier.sol
+</code></pre>
+</li>
+<li>Edit <code>truffle-config.js</code>:
 <ul>
-<li>any public inputs to the main function, declared without the <code>private</code> keyword</li>
-<li>the return values of the ZoKrates function</li>
+<li>Change <code>module.exports.compilers.solc.version</code> to the version required by <code>verifier.sol</code>.</li>
+<li>Uncomment <code>modules.exports.networks.development</code>. Make sure you delete the comma after the definition.</li>
 </ul>
-<p>In the example we're considering, all inputs are private and there is a single return value of <code>1</code>, hence Peggy has to define her public input array as follows: <code>[1]</code>.</p>
-<p>Peggy can then submit her proof by calling <code>verifyTx</code>.</p>
-<p>Victor monitors the verification smart contract for the return value of Peggy's transaction. As soon as he observes a transaction from Peggy's public address with a <code>true</code> return value, he can be sure that she has a valid pre-image for the hash he set in the smart contract.</p>
+</li>
+<li>Compile the contract.
+<pre><code>truffle compile
+</code></pre>
+</li>
+<li>Start the Truffle console. The rest of this procedure is done in the JavaScript prompt inside that console.
+<pre><code>truffle console
+</code></pre>
+</li>
+<li>Deploy the Verifier contract.
+<pre><code class="language-javascript">contract = await Verifier.new()
+</code></pre>
+</li>
+<li>Read the content of <code>proof.json</code>.
+<pre><code class="language-javascript">proof = JSON.parse(fs.readFileSync(&quot;path/to/your/proof.json&quot;))
+</code></pre>
+</li>
+<li>Verify the proof. Check that you get the result <code>true</code>.
+<pre><code class="language-javascript">await contract.verifyTx(proof.proof.a, proof.proof.b, proof.proof.c, proof.inputs)
+</code></pre>
+</li>
+<li>Pretend to be Alice and try to cheat. Create <code>cheat</code> which flips the result
+bit.
+<pre><code class="language-javascript">cheat = [...proof.inputs]
+cheat[cheat.length-1] = cheat[cheat.length-1].replace(/[01]$/, cheat[cheat.length-1][65] == '1' ? '0': '1')
+</code></pre>
+</li>
+<li>As Bob, try to verify a cheating proof, and check that it fails.
+<pre><code class="language-javascript">await contract.verifyTx(proof.proof.a, proof.proof.b, proof.proof.c, cheat)
+</code></pre>
+</li>
+</ol>
 <a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
-<p>At this point, you've successfully ran you first zkSNARK on the Ethereum blockchain. Congratulations!</p>
-<blockquote>
-<p>Remember that in this example only two parties were involved. This special case makes it easy to deal with the trust assumptions of zkSNARKs: only Victor was interested in verifying the claim by Peggy, hence he can trust his execution of the setup phase.</p>
-<p>In general, multiple parties may be interested in verifying the correctness of Peggy's statement. For example, in the zero-knowledge based cryptocurrency Zcash, each node needs to be able to validate the correctness of transactions. In order to generalize the setup phase to these multi-party use-cases a tricky process, commonly referred to as &quot;trusted setup&quot; or &quot;ceremony&quot; needs to be conducted.</p>
-<p>ZoKrates would welcome ideas to add support for such ceremonies!</p>
-</blockquote>
+<p>At this point you should know how to use Zokrates to create zero knowledge proofs and verify them from the command
+line. You should also be able to publish a verifier to a blockchain, generate proofs from the command line, and submit
+them using JavaScript.</p>
+<hr />
+<p>Original version of this tutorial by Ori Pomerantz qbzzt1@gmail.com</p>
 <a class="header" href="#testing" id="testing"><h1>Testing</h1></a>
 <a class="header" href="#unit-tests" id="unit-tests"><h2>Unit tests</h2></a>
 <p>In ZoKrates, unit tests comprise of</p>
