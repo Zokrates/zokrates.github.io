@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html" class="active"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.8.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="../language/control_flow.html" class="active"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.8.</strong> Generics</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.9.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -151,6 +151,15 @@ def main():
     assert(x == 1) // x has not changed
     return
 </code></pre>
+<p>Generic paramaters, if any, must be compile-time constants. They are inferred by the compiler if that is possible, but can also be provided explicitly.</p>
+<pre><code class="language-zokrates">def foo&lt;N, P&gt;() -&gt; field[P]:
+    return [42; P]
+
+def main() -&gt; field[2]:
+    // `P` is inferred from the declaration of `res`, while `N` is provided explicitly
+    field[2] res = foo::&lt;3, _&gt;()
+    return res
+</code></pre>
 <a class="header" href="#if-expressions" id="if-expressions"><h3>If-expressions</h3></a>
 <p>An if-expression allows you to branch your code depending on a boolean condition.</p>
 <pre><code class="language-zokrates">def main(field x) -&gt; field:
@@ -159,20 +168,20 @@ def main():
 </code></pre>
 <a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
 <p>For loops are available with the following syntax:</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-    field res = 0
-    for field i in 0..4 do
-        for field j in i..5 do
+<pre><code class="language-zokrates">def main() -&gt; u32:
+    u32 res = 0
+    for u32 i in 0..4 do
+        for u32 j in i..5 do
             res = res + i
         endfor
     endfor
     return res
 </code></pre>
-<p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs.</p>
+<p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs. They can depend on generic parameters.</p>
 <a class="header" href="#assertions" id="assertions"><h3>Assertions</h3></a>
 <p>Any boolean can be asserted to be true using the <code>assert</code> function.</p>
 <pre><code class="language-zokrates">def main() -&gt; ():
-    assert(1 == 2)
+    assert(1f == 2f)
     return
 </code></pre>
 <p>If any assertion fails, execution stops as no valid proof could be generated from it.</p>
