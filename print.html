@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.4.</strong> Functions</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.5.</strong> Control flow</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.6.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.7.</strong> Comments</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.8.</strong> Generics</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.9.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -405,41 +405,8 @@ def main(field a) -&gt; (Point):
 <p>The right operand must be a compile time constant of type <code>u32</code></p>
 </div>
 <div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
-<p>Both operands are asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code></p>
+<p>Both operands are asserted to be strictly lower than the biggest power of 2 lower than <code>p/2</code>, unless one of them can be determined to be a compile-time constant</p>
 </div>
-<a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
-<p>A function has to be declared at the top level before it is called.</p>
-<pre><code class="language-zokrates">def foo(field a, field b) -&gt; field:
-    return a + b
-
-def main() -&gt; field:
-    return foo(1, 2)
-</code></pre>
-<p>A function's signature has to be explicitly provided.</p>
-<p>A function can be generic over any number of values of type <code>u32</code>.</p>
-<pre><code class="language-zokrates">def foo&lt;N&gt;() -&gt; field[N]:
-    return [42; N]
-
-def main() -&gt; field[2]:
-    field[2] res = foo()
-    return res
-</code></pre>
-<p>Functions can return multiple values by providing them as a comma-separated list.</p>
-<pre><code class="language-zokrates">def main() -&gt; (field, field[3]):
-    return 1, [2, 3, 4]
-</code></pre>
-<a class="header" href="#inference" id="inference"><h3>Inference</h3></a>
-<p>When defining a variable as the return value of a function, types are provided when the variable needs to be declared:</p>
-<pre><code class="language-zokrates">def foo() -&gt; (field, field):
-    return 21, 42
-
-def main() -&gt; field:
-    // a is declared here
-    field a = 1
-    // b is declared here
-    a, field b = foo()
-    return 1
-</code></pre>
 <a class="header" href="#control-flow" id="control-flow"><h2>Control Flow</h2></a>
 <p>ZoKrates provides a single thread of execution with a few flow constructs.</p>
 <a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
@@ -485,10 +452,71 @@ def main() -&gt; field[2]:
 <a class="header" href="#assertions" id="assertions"><h3>Assertions</h3></a>
 <p>Any boolean can be asserted to be true using the <code>assert</code> function.</p>
 <pre><code class="language-zokrates">def main() -&gt; ():
-    assert(1f == 2f)
+    assert(1f + 1f == 2f)
     return
 </code></pre>
 <p>If any assertion fails, execution stops as no valid proof could be generated from it.</p>
+<a class="header" href="#constants" id="constants"><h2>Constants</h2></a>
+<p>Constants must be globally defined outside all other scopes by using a <code>const</code> keyword. Constants can be set only to a constant expression.</p>
+<pre><code class="language-zokrates">const field PRIME = 31
+
+def main() -&gt; field:
+    return PRIME
+</code></pre>
+<p>The value of a constant can't be changed through reassignment, and it can't be redeclared.</p>
+<p>Constants must be explicitly typed. One can reference other constants inside the expression, as long as the referenced constant is already defined.</p>
+<pre><code class="language-zokrates">const field ONE = 1
+const field TWO = ONE + ONE
+
+def main() -&gt; field:
+    return TWO
+</code></pre>
+<p>The naming convention for constants are similar to that of variables. All characters in a constant name are usually in uppercase.</p>
+<a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
+<p>A function has to be declared at the top level before it is called.</p>
+<pre><code class="language-zokrates">def foo(field a, field b) -&gt; field:
+    return a + b
+
+def main() -&gt; field:
+    return foo(1, 2)
+</code></pre>
+<p>A function's signature has to be explicitly provided.</p>
+<p>A function can be generic over any number of values of type <code>u32</code>.</p>
+<pre><code class="language-zokrates">def foo&lt;N&gt;() -&gt; field[N]:
+    return [42; N]
+
+def main() -&gt; field[2]:
+    field[2] res = foo()
+    return res
+</code></pre>
+<p>Functions can return multiple values by providing them as a comma-separated list.</p>
+<pre><code class="language-zokrates">def main() -&gt; (field, field[3]):
+    return 1, [2, 3, 4]
+</code></pre>
+<a class="header" href="#inference" id="inference"><h3>Inference</h3></a>
+<p>When defining a variable as the return value of a function, types are provided when the variable needs to be declared:</p>
+<pre><code class="language-zokrates">def foo() -&gt; (field, field):
+    return 21, 42
+
+def main() -&gt; field:
+    // a is declared here
+    field a = 1
+    // b is declared here
+    a, field b = foo()
+    return 1
+</code></pre>
+<a class="header" href="#generics" id="generics"><h2>Generics</h2></a>
+<p>ZoKrates supports code that is generic over constants of the <code>u32</code> type. No specific keyword is used: the compiler determines if the generic parameters are indeed constant at compile time. Here's an example of generic code in ZoKrates:</p>
+<pre><code class="language-zokrates">def sum&lt;N&gt;(field[N] a) -&gt; field:
+    field res = 0
+    for u32 i in 0..N do
+        res = res + a[i]
+    endfor
+    return res
+
+def main(field[3] a) -&gt; field:
+    return sum(a)
+</code></pre>
 <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
 <p>You can separate your code into multiple ZoKrates files using <code>import</code> statements to import symbols, ignoring the <code>.zok</code> extension of the imported file.</p>
 <a class="header" href="#import-syntax" id="import-syntax"><h3>Import syntax</h3></a>
@@ -497,6 +525,9 @@ def main() -&gt; field[2]:
 <pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol
 
 // `MySymbol` is now in scope.
+</code></pre>
+<p>To import multiple symbols with a single import statement, separate the symbols names with commas:</p>
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol, MyOtherSymbol
 </code></pre>
 <a class="header" href="#aliasing" id="aliasing"><h4>Aliasing</h4></a>
 <p>The <code>as</code> keyword enables renaming symbols:</p>
@@ -515,11 +546,13 @@ def main() -&gt; field[2]:
 </code></pre>
 <p>Note that this legacy method is likely to become deprecated, so it is recommended to use the preferred way instead.</p>
 <a class="header" href="#symbols" id="symbols"><h3>Symbols</h3></a>
-<p>Two types of symbols can be imported</p>
+<p>Three types of symbols can be imported</p>
 <a class="header" href="#functions-1" id="functions-1"><h4>Functions</h4></a>
 <p>Functions are imported by name. If many functions have the same name but different signatures, all of them get imported, and which one to use in a particular call is inferred.</p>
 <a class="header" href="#user-defined-types" id="user-defined-types"><h4>User-defined types</h4></a>
 <p>User-defined types declared with the <code>struct</code> keyword are imported by name.</p>
+<a class="header" href="#constants-1" id="constants-1"><h4>Constants</h4></a>
+<p>Constants declared with the <code>const</code> keyword are imported by name.</p>
 <a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
 <p>You can import a resource in the same folder directly, like this:</p>
 <pre><code class="language-zokrates">from &quot;./mycode&quot; import foo
@@ -545,18 +578,6 @@ def main() -&gt; field[2]:
 */
 def main() -&gt; field:
     return 42
-</code></pre>
-<a class="header" href="#generics" id="generics"><h2>Generics</h2></a>
-<p>ZoKrates supports code that is generic over constants of the <code>u32</code> type. No specific keyword is used: the compiler determines if the generic parameters are indeed constant at compile time. Here's an example of generic code in ZoKrates:</p>
-<pre><code class="language-zokrates">def sum&lt;N&gt;(field[N] a) -&gt; field:
-    field res = 0
-    for u32 i in 0..N do
-        res = res + a[i]
-    endfor
-    return res
-
-def main(field[3] a) -&gt; field:
-    return sum(a)
 </code></pre>
 <a class="header" href="#macros" id="macros"><h2>Macros</h2></a>
 <p>ZoKrates currently exposes a single macro:</p>
