@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html" class="active"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../rng_tutorial.html"><strong aria-hidden="true">5.</strong> Tutorial: A zkSNARK RNG</a></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html" class="active"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -206,7 +206,17 @@ const artifacts = zokratesProvider.compile(source, options);
 </code></pre>
 <p><strong>Note:</strong> The <code>resolveCallback</code> function is used to resolve dependencies.
 This callback receives the current module location and the import location of the module which is being imported.
-The callback must synchronously return either an error, <code>null</code> or a valid <code>ResolverResult</code> object like shown in the example above.</p>
+The callback must synchronously return either an error, <code>null</code> or a valid <code>ResolverResult</code> object like shown in the example above.
+A simple file system resolver for a node environment can be implemented as follows:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+const path = require(&quot;path&quot;);
+
+const fileSystemResolver = (from, to) =&gt; {
+  const location = path.resolve(path.dirname(path.resolve(from)), to);
+  const source = fs.readFileSync(location).toString();
+  return { source, location };
+};
+</code></pre>
 <a class="header" href="#computewitnessartifacts-args" id="computewitnessartifacts-args"><h5>computeWitness(artifacts, args)</h5></a>
 <p>Computes a valid assignment of the variables, which include the results of the computation.</p>
 <p>Parameters:</p>
@@ -268,7 +278,7 @@ console.log(output); // Computation output: [&quot;4&quot;]
                         
 
                         
-                            <a rel="next" href="../rng_tutorial.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../examples/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -286,7 +296,7 @@ console.log(output); // Computation output: [&quot;4&quot;]
                 
 
                 
-                    <a href="../rng_tutorial.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../examples/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
