@@ -158,7 +158,12 @@ There are many ways to calculate a hash, but here we use Zokrates.</p>
 <ol>
 <li>Create this file under the name <code>get_hash.zok</code>:</li>
 </ol>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/rng_tutorial/get_hash.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+
+def main(u32[16] hashMe) -&gt; u32[8]:
+  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
+  return h
+
 </code></pre>
 <ol start="2">
 <li>Compile the program to a form that is usable for zero knowledge proofs. This command writes
@@ -213,7 +218,27 @@ to divide <code>hashMe</code> into two arrays.</p>
 <ol>
 <li>Use this program, <code>reveal_bit.zok</code>:</li>
 </ol>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/rng_tutorial/reveal_bit.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+
+// Reveal a bit from a 512 bit value, and return it with the corresponding hash
+// for that value.
+//
+// WARNING, once enough bits have been revealed it is possible to brute force
+// the remaining preimage bits.
+
+def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
+  // Convert the preimage to bits
+  bool[512] preimageBits = [false; 512]
+  for u32 i in 0..16 do
+    bool[32] val = u32_to_bits(preimage[i])
+    for u32 bit in 0..32 do
+      preimageBits[i*32+bit] = val[bit]
+    endfor
+  endfor
+  
+  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+
 </code></pre>
 <ol start="2">
 <li>Compile and run as you did the previous program:</li>

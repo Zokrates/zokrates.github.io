@@ -487,6 +487,9 @@ def main(field x) -&gt; field:
     return res
 </code></pre>
 <p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs. They can depend on generic parameters.</p>
+<blockquote>
+<p>For loops are only syntactic sugar for repeating a block of statements many times. No condition of the type <code>index &lt; max</code> is being checked at run-time after each iteration. Instead, at compile-time, the index is incremented and the block is executed again. Therefore, assigning to the loop index does not have any influence on the number of iterations performed and is considered bad practice.</p>
+</blockquote>
 <a class="header" href="#assertions" id="assertions"><h3>Assertions</h3></a>
 <p>Any boolean can be asserted to be true using the <code>assert</code> function.</p>
 <pre><code class="language-zokrates">def main() -&gt; ():
@@ -690,20 +693,24 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <p>Default: <code>ALT_BN128</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>compile</code></li>
 <li><code>export-verifier</code></li>
 <li><code>verify</code></li>
 </ul>
 <a class="header" href="#schemes" id="schemes"><h2>Schemes</h2></a>
 <p>ZoKrates supports different proving schemes. We identify the schemes by the reference to the paper that introduced them. Currently the options available are:</p>
-<table><thead><tr><th> Scheme </th><th> CLI flag </th><th> Curves </th></tr></thead><tbody>
-<tr><td> <a href="https://eprint.iacr.org/2016/260">G16</a> </td><td> <code>--proving-scheme g16</code> </td><td> ALTBN_128, BLS12_381 </td></tr>
-<tr><td> <a href="https://eprint.iacr.org/2017/540">GM17</a> </td><td> <code>--proving-scheme gm17</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td></tr>
-<tr><td> <a href="https://eprint.iacr.org/2013/279">PGHR13</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> ALTBN_128 </td></tr>
+<table><thead><tr><th> Scheme </th><th> CLI flag </th><th> Curves </th><th> Universal </th></tr></thead><tbody>
+<tr><td> <a href="https://eprint.iacr.org/2016/260">G16</a> </td><td> <code>--proving-scheme g16</code> </td><td> ALTBN_128, BLS12_381 </td><td> No </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2017/540">GM17</a> </td><td> <code>--proving-scheme gm17</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td><td> No </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2019/1047">Marlin</a> </td><td> <code>--proving-scheme marlin</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td><td> Yes </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2013/279">PGHR13</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> ALTBN_128 </td><td> No </td></tr>
 </tbody></table>
-<p>Default: <code>G16</code></p>
+<p>All schemes have a circuit-specific setup phase called <code>setup</code>. Universal schemes also feature a preliminary, circuit-agnostic step called <code>universal-setup</code>. The advantage of universal schemes is that only the <code>universal-setup</code> step requires trust, so that it can be run a single time and reused trustlessly for many programs.</p>
+<p>Default: <code>G16</code>, except for <code>universal-setup</code> for which the default is <code>Marlin</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>setup</code></li>
 <li><code>export-verifier</code></li>
 <li><code>generate-proof</code></li>
@@ -719,6 +726,7 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <p>Default: <code>bellman</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>setup</code></li>
 <li><code>generate-proof</code></li>
 <li><code>verify</code></li>
@@ -1023,7 +1031,12 @@ There are many ways to calculate a hash, but here we use Zokrates.</p>
 <ol>
 <li>Create this file under the name <code>get_hash.zok</code>:</li>
 </ol>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/rng_tutorial/get_hash.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+
+def main(u32[16] hashMe) -&gt; u32[8]:
+  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
+  return h
+
 </code></pre>
 <ol start="2">
 <li>Compile the program to a form that is usable for zero knowledge proofs. This command writes
@@ -1078,7 +1091,27 @@ to divide <code>hashMe</code> into two arrays.</p>
 <ol>
 <li>Use this program, <code>reveal_bit.zok</code>:</li>
 </ol>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/rng_tutorial/reveal_bit.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+
+// Reveal a bit from a 512 bit value, and return it with the corresponding hash
+// for that value.
+//
+// WARNING, once enough bits have been revealed it is possible to brute force
+// the remaining preimage bits.
+
+def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
+  // Convert the preimage to bits
+  bool[512] preimageBits = [false; 512]
+  for u32 i in 0..16 do
+    bool[32] val = u32_to_bits(preimage[i])
+    for u32 bit in 0..32 do
+      preimageBits[i*32+bit] = val[bit]
+    endfor
+  endfor
+  
+  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+
 </code></pre>
 <ol start="2">
 <li>Compile and run as you did the previous program:</li>
@@ -1252,7 +1285,11 @@ In particular, we'll show how ZoKrates and the Ethereum blockchain can be used t
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
 <p>We will start this tutorial by using ZoKrates to compute the hash for an arbitrarily chosen preimage, being the number <code>5</code> in this example.</p>
 <p>First, we create a new file named <code>hashexample.zok</code> with the following content:</p>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/hashexample.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+
+def main(private field a, private field b, private field c, private field d) -&gt; field[2]:
+    field[2] h = sha256packed([a, b, c, d])
+    return h
 </code></pre>
 <p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
 <p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to SHA256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
@@ -1280,7 +1317,13 @@ In particular, we'll show how ZoKrates and the Ethereum blockchain can be used t
 <p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor chooses the digest to be the one we found in our example above.</p>
 <p>To make it work, the two parties have to follow their roles in the protocol:</p>
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
-<pre><code class="language-zokrates">{{#include ../../zokrates_cli/examples/book/hashexample_updated.zok}}
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+
+def main(private field a, private field b, private field c, private field d):
+    field[2] h = sha256packed([a, b, c, d])
+    assert(h[0] == 263561599766550617289250058199814760685)
+    assert(h[1] == 65303172752238645975888084098459749904)
+    return
 </code></pre>
 <p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
 <p>So, having defined the program, Victor is now ready to compile the code:</p>

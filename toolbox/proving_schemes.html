@@ -148,20 +148,24 @@
 <p>Default: <code>ALT_BN128</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>compile</code></li>
 <li><code>export-verifier</code></li>
 <li><code>verify</code></li>
 </ul>
 <a class="header" href="#schemes" id="schemes"><h2>Schemes</h2></a>
 <p>ZoKrates supports different proving schemes. We identify the schemes by the reference to the paper that introduced them. Currently the options available are:</p>
-<table><thead><tr><th> Scheme </th><th> CLI flag </th><th> Curves </th></tr></thead><tbody>
-<tr><td> <a href="https://eprint.iacr.org/2016/260">G16</a> </td><td> <code>--proving-scheme g16</code> </td><td> ALTBN_128, BLS12_381 </td></tr>
-<tr><td> <a href="https://eprint.iacr.org/2017/540">GM17</a> </td><td> <code>--proving-scheme gm17</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td></tr>
-<tr><td> <a href="https://eprint.iacr.org/2013/279">PGHR13</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> ALTBN_128 </td></tr>
+<table><thead><tr><th> Scheme </th><th> CLI flag </th><th> Curves </th><th> Universal </th></tr></thead><tbody>
+<tr><td> <a href="https://eprint.iacr.org/2016/260">G16</a> </td><td> <code>--proving-scheme g16</code> </td><td> ALTBN_128, BLS12_381 </td><td> No </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2017/540">GM17</a> </td><td> <code>--proving-scheme gm17</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td><td> No </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2019/1047">Marlin</a> </td><td> <code>--proving-scheme marlin</code> </td><td> ALTBN_128, BLS12_377, BW6_761 </td><td> Yes </td></tr>
+<tr><td> <a href="https://eprint.iacr.org/2013/279">PGHR13</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> ALTBN_128 </td><td> No </td></tr>
 </tbody></table>
-<p>Default: <code>G16</code></p>
+<p>All schemes have a circuit-specific setup phase called <code>setup</code>. Universal schemes also feature a preliminary, circuit-agnostic step called <code>universal-setup</code>. The advantage of universal schemes is that only the <code>universal-setup</code> step requires trust, so that it can be run a single time and reused trustlessly for many programs.</p>
+<p>Default: <code>G16</code>, except for <code>universal-setup</code> for which the default is <code>Marlin</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>setup</code></li>
 <li><code>export-verifier</code></li>
 <li><code>generate-proof</code></li>
@@ -177,6 +181,7 @@
 <p>Default: <code>bellman</code></p>
 <p>When not using the default, the CLI flag has to be provided for the following commands:</p>
 <ul>
+<li><code>universal-setup</code></li>
 <li><code>setup</code></li>
 <li><code>generate-proof</code></li>
 <li><code>verify</code></li>
