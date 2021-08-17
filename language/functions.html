@@ -153,11 +153,24 @@ def main() -&gt; field[2]:
     field[2] res = foo()
     return res
 </code></pre>
+<p>The generic parameters can be provided explicitly, especially when they cannot be inferred.</p>
+<pre><code class="language-zokrates">// a function to sum the N first powers of a field element
+def sum_powers&lt;N&gt;(field a) -&gt; field:
+    field res = 0
+    for u32 i in 0..N do
+        res = res + a ** i
+    endfor
+    return res
+
+def main(field a) -&gt; field:
+    // call `sum_powers` providing the explicit generic parameter `N := 5`
+    return sum_powers::&lt;5&gt;(a)
+</code></pre>
 <p>Functions can return multiple values by providing them as a comma-separated list.</p>
 <pre><code class="language-zokrates">def main() -&gt; (field, field[3]):
     return 1, [2, 3, 4]
 </code></pre>
-<a class="header" href="#inference" id="inference"><h3>Inference</h3></a>
+<a class="header" href="#variable-declaration" id="variable-declaration"><h3>Variable declaration</h3></a>
 <p>When defining a variable as the return value of a function, types are provided when the variable needs to be declared:</p>
 <pre><code class="language-zokrates">def foo() -&gt; (field, field):
     return 21, 42

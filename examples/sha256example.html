@@ -157,14 +157,14 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>Our code is really just using the <code>sha256packed</code>, returning the computed hash.</p>
 <p>Having our problem described in ZoKrates' DSL, we can now continue using ZoKrates for the rest of our workflow.</p>
 <p>First, we compile the program into an arithmetic circuit using the <code>compile</code> command.</p>
-<pre><code class="language-sh">./zokrates compile -i hashexample.zok
+<pre><code>zokrates compile -i hashexample.zok
 </code></pre>
 <p>As a next step we can create a witness file using the following command:</p>
-<pre><code class="language-sh">./zokrates compute-witness -a 0 0 0 5
+<pre><code>zokrates compute-witness -a 0 0 0 5
 </code></pre>
 <p>Using the flag <code>-a</code> we pass arguments to the program. Recall that our goal is to compute the hash for the number <code>5</code>. Consequently we set <code>a</code>, <code>b</code> and <code>c</code> to <code>0</code> and  <code>d</code> to  <code>5</code>.</p>
 <p>Still here? Great! At this point, we can check the <code>witness</code> file for the return values:</p>
-<pre><code class="language-sh">grep '~out' witness
+<pre><code>grep '~out' witness
 </code></pre>
 <p>which should lead to the following output:</p>
 <pre><code class="language-sh">~out_0 263561599766550617289250058199814760685
@@ -187,19 +187,19 @@ def main(private field a, private field b, private field c, private field d):
 </code></pre>
 <p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
 <p>So, having defined the program, Victor is now ready to compile the code:</p>
-<pre><code class="language-sh">./zokrates compile -i hashexample.zok
+<pre><code>zokrates compile -i hashexample.zok
 </code></pre>
 <p>Based on that Victor can run the setup phase and export a verifier smart contract as a Solidity file:</p>
-<pre><code class="language-sh">./zokrates setup
-./zokrates export-verifier
+<pre><code>zokrates setup
+zokrates export-verifier
 </code></pre>
 <p><code>setup</code> creates a <code>verifiation.key</code> file and a <code>proving.key</code> file. Victor gives the proving key to Peggy.</p>
 <p><code>export-verifier</code> creates a <code>verifier.sol</code> contract that contains our verification key and a function <code>verifyTx</code>. Victor deploys this smart contract to the Ethereum network.</p>
 <p>Peggy provides the correct pre-image as an argument to the program.</p>
-<pre><code class="language-sh">./zokrates compute-witness -a 0 0 0 5
+<pre><code>zokrates compute-witness -a 0 0 0 5
 </code></pre>
 <p>Finally, Peggy can run the command to construct the proof:</p>
-<pre><code class="language-sh">./zokrates generate-proof
+<pre><code>zokrates generate-proof
 </code></pre>
 <p>As the inputs were declared as private in the program, they do not appear in the proof thanks to the zero-knowledge property of the protocol.</p>
 <p>ZoKrates creates a file, <code>proof.json</code>,  consisting of the three elliptic curve points that make up the zkSNARKs proof. The <code>verifyTx</code> function in the smart contract deployed by Victor accepts these three values, along with an array of public inputs. The array of public inputs consists of:</p>
