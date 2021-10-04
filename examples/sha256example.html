@@ -193,7 +193,7 @@ def main(private field a, private field b, private field c, private field d):
 <pre><code>zokrates setup
 zokrates export-verifier
 </code></pre>
-<p><code>setup</code> creates a <code>verifiation.key</code> file and a <code>proving.key</code> file. Victor gives the proving key to Peggy.</p>
+<p><code>setup</code> creates a <code>verification.key</code> file and a <code>proving.key</code> file. Victor gives the proving key to Peggy.</p>
 <p><code>export-verifier</code> creates a <code>verifier.sol</code> contract that contains our verification key and a function <code>verifyTx</code>. Victor deploys this smart contract to the Ethereum network.</p>
 <p>Peggy provides the correct pre-image as an argument to the program.</p>
 <pre><code>zokrates compute-witness -a 0 0 0 5

@@ -140,7 +140,7 @@
 <p>ZoKrates currently exposes two primitive types and two complex types:</p>
 <a class="header" href="#primitive-types" id="primitive-types"><h2>Primitive Types</h2></a>
 <a class="header" href="#field" id="field"><h3><code>field</code></h3></a>
-<p>This is the most basic type in ZoKrates, and it represents a field element with positive integer values in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number. Standard arithmetic operations are supported; note that <a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">division in the finite field</a> behaves differently than in the case of integers.</p>
+<p>This is the most basic type in ZoKrates, and it represents a field element with positive integer values in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number.</p>
 <p>As an example, <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495617</code> when working with the <a href="../toolbox/proving_schemes.html#curves">ALT_BN128</a> curve supported by Ethereum.</p>
 <p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2, so that we have:</p>
 <pre><code class="language-zokrates">def main():
@@ -148,7 +148,8 @@
     assert(0 - 1 == pMinusOne)
     return
 </code></pre>
-<p>Note that for field elements, the division operation multiplies the numerator with the denominator's inverse field element. The results coincide with integer divisions for cases with remainder 0, but differ otherwise.</p>
+<p>Note that <a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">division in the finite field</a> behaves differently than in the case of integers.
+For field elements, the division operation multiplies the numerator with the denominator's inverse field element. The results coincide with integer divisions for cases with remainder 0, but differ otherwise.</p>
 <a class="header" href="#bool" id="bool"><h3><code>bool</code></h3></a>
 <p>Booleans are available in ZoKrates. When a boolean is used as a parameter of the main function, the program is constrained to only accept <code>0</code> or <code>1</code> for that parameter. A boolean can be asserted to be true using an <code>assert(bool)</code> statement.</p>
 <a class="header" href="#u8u16u32u64" id="u8u16u32u64"><h3><code>u8/u16/u32/u64</code></h3></a>

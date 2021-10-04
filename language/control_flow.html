@@ -213,7 +213,8 @@ def main(field x) -&gt; field:
     endfor
     return res
 </code></pre>
-<p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs. They can depend on generic parameters.</p>
+<p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs. They can depend on generic parameters.
+The range is half-open, meaning it is bounded inclusively below and exclusively above. The range <code>start..end</code> contains all values within <code>start &lt;= x &lt; end</code>. The range is empty if <code>start &gt;= end</code>.</p>
 <blockquote>
 <p>For loops are only syntactic sugar for repeating a block of statements many times. No condition of the type <code>index &lt; max</code> is being checked at run-time after each iteration. Instead, at compile-time, the index is incremented and the block is executed again. Therefore, assigning to the loop index does not have any influence on the number of iterations performed and is considered bad practice.</p>
 </blockquote>
