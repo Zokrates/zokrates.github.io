@@ -257,6 +257,7 @@ A struct definition starts with the <code>struct</code> keyword followed by a na
     field y
 }
 </code></pre>
+<p>Note that two struct definitions with the same members still introduce two entirely different types. For example, they cannot be compared with each other.</p>
 <a class="header" href="#declaration-and-initialization-1" id="declaration-and-initialization-1"><h4>Declaration and Initialization</h4></a>
 <p>Initialization of a variable of a struct type always needs to happen in the same statement as a declaration, unless the struct-typed variable is declared within a function's signature.</p>
 <p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
@@ -283,6 +284,21 @@ def main(field a) -&gt; (Point):
     p.y = p.x
     return p
 
+</code></pre>
+<a class="header" href="#type-aliases" id="type-aliases"><h3>Type aliases</h3></a>
+<p>Type aliases can be defined for any existing type. This can be useful for readability, or to specialize generic types.</p>
+<p>Note that type aliases are just syntactic sugar: in the type system, a type and its alias are exactly equivalent. For example, they can be compared.</p>
+<pre><code class="language-zokrates">type MyField = field
+
+type Rectangle&lt;L, W&gt; = bool[L][W]
+
+type Square&lt;S&gt; = Rectangle&lt;S, S&gt;
+
+def main():
+    MyField f = 42
+    Rectangle&lt;2, 2&gt; r = [[true; 2]; 2]
+    Square&lt;2&gt; s = r
+    return
 </code></pre>
 
                     </main>

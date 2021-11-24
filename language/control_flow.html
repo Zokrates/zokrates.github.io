@@ -166,6 +166,11 @@ def main() -&gt; field[2]:
   field y = if x + 2 == 3 then 1 else 5 fi
   return y
 </code></pre>
+<p>The conditional expression can also be written using a ternary operator:</p>
+<pre><code class="language-zokrates">def main(field x) -&gt; field:
+  field y = x + 2 == 3 ? 1 : 5
+  return y
+</code></pre>
 <p>There are two important caveats when it comes to conditional expressions. Before we go into them, let's define two concepts:</p>
 <ul>
 <li>for an execution of the program, <em>an executed branch</em> is a branch which has to be paid for when executing the program, generating proofs, etc.</li>
