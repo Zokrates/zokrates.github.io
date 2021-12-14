@@ -682,7 +682,8 @@ This section of the book describes the steps to perform a trusted setup for the 
 <a class="header" href="#compiling-a-circuit" id="compiling-a-circuit"><h2>Compiling a circuit</h2></a>
 <p>We will start this tutorial by using ZoKrates to compile a basic program.
 First, we create a new file named <code>program.zok</code> with the following content:</p>
-<pre><code class="language-zokrates">{{#include ../../../zokrates_cli/examples/book/mpc_tutorial/program.zok}}
+<pre><code class="language-zokrates">def main(private field a, private field b) -&gt; field:
+    return a * b
 </code></pre>
 <p>We compile the program using the <code>compile</code> command.</p>
 <pre><code>zokrates compile -i circuit.zok -o circuit
