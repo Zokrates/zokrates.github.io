@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.2.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.3.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.4.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.5.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.6.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.7.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -673,6 +673,140 @@ You can see an overview of the available subcommands by running</p>
 <p>You can get help about a particular subcommand with <code>--help</code>, for example:</p>
 <pre><code class="language-sh">zokrates compile --help
 </code></pre>
+<a class="header" href="#performing-a-trusted-setup-using-a-multi-party-computation-protocol-mpc" id="performing-a-trusted-setup-using-a-multi-party-computation-protocol-mpc"><h1>Performing a trusted setup using a multi-party computation protocol (MPC)</h1></a>
+<p>The zk-SNARK schemes supported by ZoKrates require a trusted setup. This procedure must be run to generate the proving and verification keys. This procedure generates some data often refered to as &quot;toxic waste&quot; which can be used to create fake proofs which will be accepted by the verifier. The entity running the trusted setup is trusted to delete this toxic waste.
+Using an MPC protocol, we can run the trusted setup in a decentralized way, so that this responsibility is shared among all participants of the setup. If at least one participant is honest and deletes their part of the toxic waste, then no fake proofs can be created by anyone.
+This section of the book describes the steps to perform a trusted setup for the Groth16 scheme.</p>
+<a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
+<p>The trusted setup is done in two steps. The first step, also known as &quot;phase 1&quot;, does not depend on the program and is called Powers of Tau. The second step is called &quot;phase 2&quot; and is circuit-specific, so it should be done separately for each different program. The Ethereum community runs a phase 1 setup called <a href="https://github.com/weijiekoh/perpetualpowersoftau">Perpetual Powers of Tau</a>, whose output we can use. Therefore, we only need to run phase 2 of the setup.</p>
+<a class="header" href="#compiling-a-circuit" id="compiling-a-circuit"><h2>Compiling a circuit</h2></a>
+<p>We will start this tutorial by using ZoKrates to compile a basic program.
+First, we create a new file named <code>program.zok</code> with the following content:</p>
+<pre><code class="language-zokrates">{{#include ../../../zokrates_cli/examples/book/mpc_tutorial/program.zok}}
+</code></pre>
+<p>We compile the program using the <code>compile</code> command.</p>
+<pre><code>zokrates compile -i circuit.zok -o circuit
+</code></pre>
+<a class="header" href="#initializing-a-phase-2-ceremony" id="initializing-a-phase-2-ceremony"><h2>Initializing a phase 2 ceremony</h2></a>
+<p>We then initialize a phase 2 ceremony with the following command:</p>
+<pre><code>$ zokrates mpc init -i circuit -o mpc.params -r ./phase1radix2m2
+
+Initializing MPC...
+Parameters written to `mpc.params`
+</code></pre>
+<p>Using the <code>-r</code> flag, we pass a path to the file which contains the parameters for our circuit with depth <code>2^n</code> (<code>phase1radix2m{n}</code>).
+The parameters for various circuit depths can be computed using the <a href="https://github.com/kobigurk/phase2-bn254">phase2-bn254</a> utility
+by picking the latest response from the <a href="https://github.com/weijiekoh/perpetualpowersoftau">Perpetual Powers of Tau</a> and following the instructions in the mentioned repositories.</p>
+<a class="header" href="#making-a-contribution" id="making-a-contribution"><h2>Making a contribution</h2></a>
+<p>In this example, we will conduct a ceremony that has 3 participants: Alice, Bob, and Charlie.
+Participants will run the contributions in sequential order, managed by the coordinator (us).</p>
+<p>Firstly, our initial <code>mpc.params</code> file is given to Alice who runs the following command:</p>
+<pre><code>$ zokrates mpc contribute -i mpc.params -o alice.params -e &quot;alice 1&quot;
+
+Contributing to `mpc.params`...
+The BLAKE2b hash of your contribution is:
+
+        4ebf1359 416fbc42 31af6476 9173cb33 
+        32b8c2f9 475d143a 25634a5c e461eb67 
+        5f7738b1 6478a020 7ec9d365 9170bca6 
+        154b31df d307b78e ca0c025f 59c5a7fb
+
+Your contribution has been written to `alice.params`
+</code></pre>
+<p>Alice must give some randomness to the contribution, which is done by the <code>-e</code> flag.</p>
+<p>Examples of entropy sources:</p>
+<ul>
+<li><code>/dev/urandom</code> from one or more devices</li>
+<li>The most recent block hash</li>
+<li>Randomly mashing keys on the keyboard</li>
+</ul>
+<p>Secondly, the output file <code>alice.params</code> is sent to Bob who runs his contribution:</p>
+<pre><code>$ zokrates mpc contribute -i alice.params -o bob.params -e &quot;bob 2&quot;
+
+Contributing to `alice.params`...
+The BLAKE2b hash of your contribution is:
+
+        1a4e0d17 449b00ec f31d2072 59bc173c
+        f30f6dbd 78c81921 869091a8 e40f454e
+        8c8d72e8 395bf044 cd777842 b6ab1d88
+        9e24cf7f 7d88b473 2190fb0c 730fb6fc
+
+Your contribution has been written to `bob.params`
+</code></pre>
+<p>Thirdly, with the same procedure as above, Charlie makes his contribution on top of Bob's:</p>
+<pre><code>$ zokrates mpc contribute -i bob.params -o charlie.params -e &quot;charlie 3&quot;
+
+Contributing to `bob.params`...
+The BLAKE2b hash of your contribution is:
+
+        46dc6c01 ec778382 93b333b2 116a4bfb
+        a9aca5dd eb6945f1 cbe07cda 6ffb3ffd 
+        cf4e4736 62fe2339 166d5b87 db392ca6
+        d2e87e36 92cc8f0e e618298f c3f7caf1
+
+Your contribution has been written to `charlie.params`
+</code></pre>
+<a class="header" href="#applying-a-random-beacon" id="applying-a-random-beacon"><h2>Applying a random beacon</h2></a>
+<p>To finalize the ceremony, we can apply a random beacon to get the final parameters:</p>
+<pre><code>$ zokrates mpc beacon -i charlie.params -o final.params -h b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9 -n 10
+
+Creating a beacon RNG
+0: b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+1: bc62d4b80d9e36da29c16c5d4d9f11731f36052c72401a76c23c0fb5a9b74423
+2: 76dfcb21a877aaeba06b3269d08dc2ed1d38c62ffec132800b46e94b14f72938
+...removed for brevity
+1022: dd842dc43d9ac5c6dff74cca18405123761d17edd36724b092ef57c237b31291
+1023: a11c8a03c22e9c31c037aa0085c061ba8dd19a3f599314570702eeef1baacd79
+Final result of beacon: ef8faec4fc31faf341f368084b82d267d380992e905c923a179e0717ce39708d
+
+Contributing to `charlie.params`...
+The BLAKE2b hash of your contribution is: 
+
+        83d67a6f 935fc4d0 5733ebed d43f2074 
+        5425b105 9a32a315 a790668a f5a1f021 
+        66f840e2 e6a5d441 38593163 5b86df09 
+        a00f352e 2ad2a88b ede07886 2134b889
+
+Your contribution has been written to `final.params`
+</code></pre>
+<p>The random beacon is the <code>2^n</code> iteration of <code>SHA256</code> over the hash evaluated on
+some high entropy and publicly available data. Possible sources of data could be:</p>
+<ul>
+<li>The closing value of the stock market on a certain date</li>
+<li>The output of a selected set of national lotteries</li>
+<li>The value of a block at a particular height in one or more blockchains</li>
+<li><a href="https://www.cloudflare.com/leagueofentropy/">League of Entropy</a> (drand)</li>
+</ul>
+<a class="header" href="#verifying-contributions" id="verifying-contributions"><h2>Verifying contributions</h2></a>
+<p>At any point in the ceremony we can verify contributions by running the following command:</p>
+<pre><code>$ zokrates mpc verify -i final.params -c circuit -r ./phase1radix2m2
+
+Verifying contributions...
+
+Transcript contains 4 contributions:
+0: 4ebf1359416fbc4231af64769173cb3332b8c2f9475d143a25634a5ce461eb675f7738b16478a0207ec9d3659170bca6154b31dfd307b78eca0c025f59c5a7fb
+1: 1a4e0d17449b00ecf31d207259bc173cf30f6dbd78c81921869091a8e40f454e8c8d72e8395bf044cd777842b6ab1d889e24cf7f7d88b4732190fb0c730fb6fc
+2: 46dc6c01ec77838293b333b2116a4bfba9aca5ddeb6945f1cbe07cda6ffb3ffdcf4e473662fe2339166d5b87db392ca6d2e87e3692cc8f0ee618298fc3f7caf1
+3: 83d67a6f935fc4d05733ebedd43f20745425b1059a32a315a790668af5a1f02166f840e2e6a5d441385931635b86df09a00f352e2ad2a88bede078862134b889
+
+Contributions verified
+</code></pre>
+<a class="header" href="#exporting-keys" id="exporting-keys"><h2>Exporting keys</h2></a>
+<p>Once the ceremony is finalized, we can export the keys and use them to generate proofs and verify them.</p>
+<pre><code># export keys from final parameters (proving and verification key)
+zokrates mpc export -i final.params
+
+# use the keys to generate proofs and verify
+zokrates compute-witness -i circuit -a 123456789 987654321 --verbose
+zokrates generate-proof -i circuit
+zokrates verify
+</code></pre>
+<a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
+<p>The secure generation of parameters for zk-SNARKs is a crucial step in the trustworthiness of the resulting proof system.
+The security of the ceremony relies entirely on the fact that at least one participant needs to securely delete their &quot;toxic waste&quot; for the resulting parameters to be generated honestly.
+Opening the ceremony to a large number of participants reduces the probability that the resulting parameters are dishonest.
+Once the ceremony is finalized, we can generate a verifier smart contract by using the keys we obtained through the trusted setup ceremony.
+At this point, we can safely deploy the contract and verify proofs on-chain.</p>
 <a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
 <p>ZoKrates comes with a number of reusable components in the form of a Standard Library. In order to import it as described in the <a href="../language/imports.html">imports</a> section, the <code>$ZOKRATES_STDLIB</code> environment variable must be set to the <code>stdlib</code> folder.</p>
 <p>The full ZoKrates Standard Library can be found <a href="https://github.com/Zokrates/ZoKrates/tree/latest/zokrates_stdlib/stdlib">here</a>.</p>
@@ -1075,8 +1209,8 @@ def main(u32[16] hashMe) -&gt; u32[8]:
 </code></pre>
 <p>Compile the program to a form that is usable for zero knowledge proofs. This command writes
 the binary to <code>get_hash</code>. You can see a textual representation, somewhat analogous to assembler
-coming from a compiler, at <code>get_hash.ztf</code> enabled by the <code>--ztf</code> command line option.</p>
-<pre><code>zokrates compile -i get_hash.zok -o get_hash --ztf
+coming from a compiler, at <code>get_hash.ztf</code> created by the <code>inspect</code> command.</p>
+<pre><code>zokrates compile -i get_hash.zok -o get_hash &amp;&amp; zokrates inspect -i get_hash
 </code></pre>
 <p>The input to the Zokrates program is sixteen 32 bit values, each in decimal. specify those values
 to get a hash. For example, to calculate the hash of <code>0x00000000000000010000000200000003000000040000000500000006...</code>
@@ -1278,7 +1412,7 @@ cheat[cheat.length-1] = cheat[cheat.length-1].replace(/[01]$/, cheat[cheat.lengt
 </code></pre>
 </li>
 </ol>
-<a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
+<a class="header" href="#conclusion-1" id="conclusion-1"><h2>Conclusion</h2></a>
 <p>At this point you should know how to use Zokrates to create zero knowledge proofs and verify them from the command
 line. You should also be able to publish a verifier to a blockchain, generate proofs from the command line, and submit
 them using JavaScript.</p>
@@ -1288,7 +1422,7 @@ them using JavaScript.</p>
 <p>Let's jump into ZoKrates by working through a hands-on project together!</p>
 <p>We'll implement an operation that's very typical in blockchain use-cases: proving knowledge of the preimage for a given hash digest.
 In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let's call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let's call him Victor, that she knows a hash preimage for a digest chosen by Victor, without revealing what the preimage is.</p>
-<a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
+<a class="header" href="#pre-requisites-1" id="pre-requisites-1"><h2>Pre-requisites</h2></a>
 <p>Make sure you have followed the instructions in the <a href="../gettingstarted.html">Getting Started</a> chapter and are able to run the &quot;Hello World&quot; example described there.</p>
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
 <p>We will start this tutorial by using ZoKrates to compute the hash for an arbitrarily chosen preimage, being the number <code>5</code> in this example.</p>
@@ -1358,7 +1492,7 @@ zokrates export-verifier
 <p>In the example we're considering, all inputs are private and there is a single return value of <code>1</code>, hence Peggy has to define her public input array as follows: <code>[1]</code>.</p>
 <p>Peggy can then submit her proof by calling <code>verifyTx</code>.</p>
 <p>Victor monitors the verification smart contract for the return value of Peggy's transaction. As soon as he observes a transaction from Peggy's public address with a <code>true</code> return value, he can be sure that she has a valid pre-image for the hash he set in the smart contract.</p>
-<a class="header" href="#conclusion-1" id="conclusion-1"><h2>Conclusion</h2></a>
+<a class="header" href="#conclusion-2" id="conclusion-2"><h2>Conclusion</h2></a>
 <p>At this point, you've successfully ran you first zkSNARK on the Ethereum blockchain. Congratulations!</p>
 <blockquote>
 <p>Remember that in this example only two parties were involved. This special case makes it easy to deal with the trust assumptions of zkSNARKs: only Victor was interested in verifying the claim by Peggy, hence he can trust his execution of the setup phase.</p>
