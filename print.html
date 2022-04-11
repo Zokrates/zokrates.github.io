@@ -330,9 +330,18 @@ This operation is called slicing, and the following example shows how to slice i
 <pre><code>field[3] a = [1, 2, 3]
 field[2] b = a[1..3]   // initialize an array copying a slice from `a`
 </code></pre>
+<a class="header" href="#tuples" id="tuples"><h3>Tuples</h3></a>
+<p>A tuple is a composite datatype representing a numbered collection of values.
+The following code shows an example of how to use tuples.</p>
+<pre><code class="language-zokrates">def main() -&gt; bool:
+    (field[2], bool) v = ([1, 2], true)
+    v.0 = [42, 43]
+    return v.1
+
+</code></pre>
+<p>In tuple types and values, the trailing comma is optional, unless the tuple contains a single element, in which case it is mandatory.</p>
 <a class="header" href="#structs" id="structs"><h3>Structs</h3></a>
-<p>A struct is a composite datatype representing a named collection of variables. Structs can be generic over constants, in order to wrap arrays of generic size. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>
-The contained variables can be of any type.</p>
+<p>A struct is a composite datatype representing a named collection of values. Structs can be generic over constants, in order to wrap arrays of generic size. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>. The contained variables can be of any type.</p>
 <p>The following code shows an example of how to use structs.</p>
 <pre><code class="language-zokrates">struct Bar&lt;N&gt; {
     field[N] c
