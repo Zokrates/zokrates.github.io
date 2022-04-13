@@ -139,7 +139,7 @@
                         <a class="header" href="#tutorial-proving-knowledge-of-a-hash-preimage" id="tutorial-proving-knowledge-of-a-hash-preimage"><h1>Tutorial: Proving knowledge of a hash preimage</h1></a>
 <p>Let's jump into ZoKrates by working through a hands-on project together!</p>
 <p>We'll implement an operation that's very typical in blockchain use-cases: proving knowledge of the preimage for a given hash digest.
-In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let's call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let's call him Victor, that she knows a hash preimage for a digest chosen by Victor, without revealing what the preimage is.</p>
+In particular, we'll show how ZoKrates and the Ethereum blockchain can be used to allow a prover, let's call her Peggy, to demonstrate beyond any reasonable doubt to a verifier, let's call him Victor, that she knows a hash preimage for a specific digest known by Victor, without revealing what the preimage is.</p>
 <a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
 <p>Make sure you have followed the instructions in the <a href="../gettingstarted.html">Getting Started</a> chapter and are able to run the &quot;Hello World&quot; example described there.</p>
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
@@ -174,7 +174,7 @@ def main(private field a, private field b, private field c, private field d) -&g
 <code>0xc6481e22c5ff4164af680b8cfaa5e8ed3120eeff89c4f307c4a6faaae059ce10</code></p>
 <a class="header" href="#prove-knowledge-of-pre-image" id="prove-knowledge-of-pre-image"><h2>Prove knowledge of pre-image</h2></a>
 <p>For now, we have seen that we can compute a hash using ZoKrates.</p>
-<p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor chooses the digest to be the one we found in our example above.</p>
+<p>Let's recall our goal: Peggy wants to prove to Victor that she knows a preimage for a specific hash digest, without revealing what the preimage is. Without loss of generality, let's now assume that Victor asks Alice to prove knowledge of the preimage for the digest in our example above.</p>
 <p>To make it work, the two parties have to follow their roles in the protocol:</p>
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
 <pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
