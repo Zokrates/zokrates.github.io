@@ -1067,7 +1067,7 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
 <pre><code class="language-js">import { initialize } from 'zokrates-js';
 </code></pre>
 <a class="header" href="#node" id="node"><h5>Node</h5></a>
-<pre><code class="language-js">const { initialize } = require('zokrates-js/node');
+<pre><code class="language-js">import { initialize } from 'zokrates-js/node'; // or require('zokrates-js/node')
 </code></pre>
 <a class="header" href="#example" id="example"><h2>Example</h2></a>
 <pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
@@ -1086,17 +1086,33 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
     const proof = zokratesProvider.generateProof(artifacts.program, witness, keypair.pk);
 
     // export solidity verifier
-    const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk, &quot;v1&quot;);
+    const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk);
+    
+    // or verify off-chain
+    const isVerified = zokratesProvider.verify(keypair.vk, proof);
 });
 </code></pre>
 <a class="header" href="#api" id="api"><h2>API</h2></a>
 <a class="header" href="#initialize" id="initialize"><h5>initialize()</h5></a>
 <p>Returns an initialized <code>ZoKratesProvider</code> as a promise.</p>
-<pre><code class="language-js">initialize().then(zokratesProvider =&gt; { 
+<pre><code class="language-js">initialize().then((zokratesProvider) =&gt; { 
     // call api functions here
 });
 </code></pre>
 <p>Returns: <code>Promise&lt;ZoKratesProvider&gt;</code></p>
+<a class="header" href="#withoptionsoptions" id="withoptionsoptions"><h5>withOptions(options)</h5></a>
+<p>Returns a <code>ZoKratesProvider</code> configured with given options.</p>
+<pre><code class="language-js">initialize().then((defaultProvider) =&gt; { 
+    let zokratesProvider = defaultProvider.withOptions({ curve: &quot;bls12_381&quot;, scheme: &quot;g16&quot; });
+    // ...
+});
+</code></pre>
+<p>Options:</p>
+<ul>
+<li><code>curve</code> - Elliptic curve (<code>bn128</code> | <code>bls12_381</code> | <code>bls12_377</code> | <code>bw6_761</code>)</li>
+<li><code>scheme</code> - Proving scheme (<code>g16</code> | <code>gm17</code> | <code>marlin</code>)</li>
+</ul>
+<p>Returns: <code>ZoKratesProvider</code></p>
 <a class="header" href="#compilesource-options" id="compilesource-options"><h5>compile(source[, options])</h5></a>
 <p>Compiles source code into ZoKrates internal representation of arithmetic circuits.</p>
 <p>Parameters:</p>
@@ -1160,14 +1176,21 @@ console.log(output); // Computation output: [&quot;4&quot;]
 <li><code>program</code> - Compiled program</li>
 </ul>
 <p>Returns: <code>SetupKeypair</code></p>
-<a class="header" href="#exportsolidityverifierverificationkey-abi" id="exportsolidityverifierverificationkey-abi"><h5>exportSolidityVerifier(verificationKey, abi)</h5></a>
-<p>Generates a Solidity contract which contains the generated verification key and a public function to verify proofs of computation of the compiled program.</p>
+<a class="header" href="#universalsetupsize" id="universalsetupsize"><h5>universalSetup(size)</h5></a>
+<p>Performs the universal phase of a trusted setup. Only available for the <code>marlin</code> scheme.</p>
 <p>Parameters:</p>
 <ul>
-<li><code>verificationKey</code> - Verification key from the setup keypair</li>
-<li><code>abi</code> - Abi version (<code>&quot;v1&quot;</code> | <code>&quot;v2&quot;</code>)</li>
+<li><code>size</code> - Size of the trusted setup passed as an exponent. For example, <code>8</code> for <code>2**8</code>.</li>
 </ul>
-<p>Returns: <code>string</code></p>
+<p>Returns: <code>Uint8Array</code></p>
+<a class="header" href="#setupwithsrssrs-program" id="setupwithsrssrs-program"><h5>setupWithSrs(srs, program)</h5></a>
+<p>Generates a trusted setup with universal public parameters for the compiled program. Only available for <code>marlin</code> scheme.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>srs</code> - Universal public parameters from the universal setup phase</li>
+<li><code>program</code> - Compiled program</li>
+</ul>
+<p>Returns: <code>SetupKeypair</code></p>
 <a class="header" href="#generateproofprogram-witness-provingkey" id="generateproofprogram-witness-provingkey"><h5>generateProof(program, witness, provingKey)</h5></a>
 <p>Generates a proof for a computation of the compiled program.</p>
 <p>Parameters:</p>
@@ -1185,6 +1208,13 @@ console.log(output); // Computation output: [&quot;4&quot;]
 <li><code>proof</code> - Generated proof</li>
 </ul>
 <p>Returns: <code>boolean</code></p>
+<a class="header" href="#exportsolidityverifierverificationkey" id="exportsolidityverifierverificationkey"><h5>exportSolidityVerifier(verificationKey)</h5></a>
+<p>Generates a Solidity contract which contains the generated verification key and a public function to verify proofs of computation of the compiled program.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>verificationKey</code> - Verification key from the setup keypair</li>
+</ul>
+<p>Returns: <code>string</code></p>
 <a class="header" href="#zokrates-examples" id="zokrates-examples"><h1>ZoKrates Examples</h1></a>
 <p>This section covers examples of using the ZoKrates programming language.</p>
 <ul>
