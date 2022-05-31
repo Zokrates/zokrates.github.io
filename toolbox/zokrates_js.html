@@ -143,12 +143,12 @@
 <a class="header" href="#importing" id="importing"><h2>Importing</h2></a>
 <a class="header" href="#bundlers" id="bundlers"><h5>Bundlers</h5></a>
 <p><strong>Note:</strong> As this library uses a model where the wasm module itself is natively an ES module, you will need a bundler of some form.
-Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a>.
+Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a> (<code>experiments.asyncWebAssembly</code> must be enabled).
 The choice of this default was done to reflect the trends of the JS ecosystem.</p>
 <pre><code class="language-js">import { initialize } from 'zokrates-js';
 </code></pre>
 <a class="header" href="#node" id="node"><h5>Node</h5></a>
-<pre><code class="language-js">import { initialize } from 'zokrates-js/node'; // or require('zokrates-js/node')
+<pre><code class="language-js">const { initialize } = require('zokrates-js')
 </code></pre>
 <a class="header" href="#example" id="example"><h2>Example</h2></a>
 <pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
