@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Generics - ZoKrates</title>
+        <title>Logging - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html" class="active"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html" class="active"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,34 +136,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#generics" id="generics"><h2>Generics</h2></a>
-<p>ZoKrates supports code that is generic over constants of the <code>u32</code> type. No specific keyword is used: the compiler determines if the generic parameters are indeed constant at compile time. Here's an example of generic code in ZoKrates:</p>
-<pre><code class="language-zokrates">def sum&lt;N&gt;(field[N] a) -&gt; field {
-    field mut res = 0;
-    for u32 i in 0..N {
-        res = res + a[i];
-    }
-    return res;
+                        <a class="header" href="#logging" id="logging"><h2>Logging</h2></a>
+<p>ZoKrates supports a command to log messages during execution in the interpreter.</p>
+<p>The values of expressions can be checked and basic string interpolation is supported:</p>
+<pre><code class="language-zokrates">struct Foo {
+    field[3] a;
+    bool b;
 }
 
-def main(field[3] a) -&gt; field {
-    return sum(a);
+def main(Foo x, field y) {
+    log(&quot;x is {}, y is {}&quot;, x, y);
+    return;
 }
-
 </code></pre>
+<p>By default, logs get removed during compilation. In order to include them in the compiled program, the <code>--debug</code> flag has to be enabled.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../language/functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/macros.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../language/imports.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../toolbox/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -175,13 +174,13 @@ def main(field[3] a) -&gt; field {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../language/functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/macros.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../language/imports.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../toolbox/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

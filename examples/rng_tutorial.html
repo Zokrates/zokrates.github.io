@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html" class="active"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html" class="active"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -156,11 +156,13 @@ two bits, so that neither of them can control the output.</li>
 <p>The first step is for Alice and Bob to each come up with a preimage value and calculate the hash to commit to it.
 There are many ways to calculate a hash, but here we use Zokrates.</p>
 <p>Create this file under the name <code>get_hash.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
 
-def main(u32[16] hashMe) -&gt; u32[8]:
-  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
-  return h
+def main(u32[16] hashMe) -&gt; u32[8] {
+    u32[8] h = sha256(hashMe[0..8], hashMe[8..16]);
+    return h;
+}
+
 </code></pre>
 <p>Compile the program to a form that is usable for zero knowledge proofs. This command writes
 the binary to <code>get_hash</code>. You can see a textual representation, somewhat analogous to assembler
@@ -185,47 +187,46 @@ Witness:
 You can see the specific function we are importing
 <a href="https://github.com/Zokrates/ZoKrates/blob/latest/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">here</a>. It will be
 called <code>sha256</code>.</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
 </code></pre>
 <p>This is the main function. The input (<code>u32[16]</code>) is an array of sixteen values, each an unsigned 32-bit integer (a number
 between (0) and (2^{32} - 1)). As you have seen above, you specify these numbers using the <code>-a</code> command
 line parameter. The total number of input bits is <em>32 × 16 = 512</em>.</p>
 <p>The output is <code>u32[8]</code>, a <em>32 × 8 = 256</em> bit value.</p>
-<pre><code class="language-zokrates">def main(u32[16] hashMe) -&gt; u32[8]:
+<pre><code class="language-zokrates">def main(u32[16] hashMe) -&gt; u32[8] {
 </code></pre>
 <p>This line does several things. First, <code>u32[8] h</code> defines a variable called <code>h</code>, whose type is an array of eight 32-bit unsigned integers.
 This variable is initialized using <code>sha256</code>, the function we
 <a href="https://github.com/Zokrates/ZoKrates/blob/latest/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">imported from the standard library</a>.
 The <code>sha256</code> function expects to get two arrays of eight values each, so we use a <a href="https://zokrates.github.io/language/types.html#slices">slice <code>..</code></a>
 to divide <code>hashMe</code> into two arrays.</p>
-<pre><code class="language-zokrates">  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
+<pre><code class="language-zokrates">    u32[8] h = sha256(hashMe[0..8], hashMe[8..16]);
 </code></pre>
 <p>Finally, return <code>h</code> to the caller to display the hash.</p>
-<pre><code class="language-zokrates">  return h
+<pre><code class="language-zokrates">    return h;
 </code></pre>
 <a class="header" href="#reveal-a-single-bit" id="reveal-a-single-bit"><h2>Reveal a single bit</h2></a>
 <p>The next step is to reveal a single bit.</p>
 <p>Use this program, <code>reveal_bit.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
-import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
+import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits;
 
 // Reveal a bit from a 512 bit value, and return it with the corresponding hash
 // for that value.
 //
 // WARNING, once enough bits have been revealed it is possible to brute force
 // the remaining preimage bits.
-
-def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
-  // Convert the preimage to bits
-  bool[512] preimageBits = [false; 512]
-  for u32 i in 0..16 do
-    bool[32] val = u32_to_bits(preimage[i])
-    for u32 bit in 0..32 do
-      preimageBits[i*32+bit] = val[bit]
-    endfor
-  endfor
-  
-  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool) {
+    // Convert the preimage to bits
+    bool[512] mut preimageBits = [false; 512];
+    for u32 i in 0..16 {
+        bool[32] val = u32_to_bits(preimage[i]);
+        for u32 bit in 0..32 {
+            preimageBits[i*32 + bit] = val[bit];
+        }
+    }
+    return (sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]);
+}
 </code></pre>
 <p>Compile and run as you did the previous program:</p>
 <pre><code>zokrates compile -i reveal_bit.zok -o reveal_bit
@@ -240,37 +241,37 @@ zokrates compute-witness --verbose -i reveal_bit -a 0 1 2 3 4 5 6 7 8 9 10 11 12
 <p>This line imports a function that converts a <code>u32</code> value to an array of 32 booleans.
 There are cast functions to convert <code>u8</code>s, <code>u16</code>s, and <code>u32</code>s to boolean arrays and back again,
 <a href="https://github.com/Zokrates/ZoKrates/blob/master/zokrates_stdlib/stdlib/utils/casts">you can see them here</a>.</p>
-<pre><code class="language-zokrates">import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+<pre><code class="language-zokrates">import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits;
 </code></pre>
 <p>The preimage is declared <code>private</code> so it won't be revealed by the zero knowledge proof.</p>
 <p>A Zokrates function can return multiple values. In this case, it returns the hash and a boolean which is the
 value of the bit being revealed.</p>
-<pre><code class="language-zokrates">def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
+<pre><code class="language-zokrates">    // Convert the preimage to bits
 </code></pre>
 <p>To find the value of the bit being revealed, we convert the entire preimage into bits and access it at the index <code>bitNum</code>.
 The first line defines an array of 512 boolean values (<code>bool[512]</code>) called <code>preimageBits</code>. It is initialized to
 an array of 512 <code>false</code> values. The syntax <code>[&lt;value&gt;; &lt;number&gt;]</code> initializes the an array of <code>&lt;number&gt;</code>
 copies of <code>&lt;value&gt;</code>. It is necessary to include it here because a Zokrates variable must be initialized
 when it is declared.</p>
-<pre><code class="language-zokrates">  // Convert the preimage to bits
-  bool[512] preimageBits = [false; 512]
+<pre><code class="language-zokrates">    bool[512] mut preimageBits = [false; 512];
+    for u32 i in 0..16 {
 </code></pre>
 <p>This is a <a href="https://zokrates.github.io/language/control_flow.html#for-loops">for loop</a>. For loops
 have to have an index of type <code>u32</code>, and their bounds need to be known at compile time.
 In this case, we go over each of the sixteen 32 bit words.</p>
-<pre><code class="language-zokrates">  for u32 i in 0..16 do
+<pre><code class="language-zokrates">        bool[32] val = u32_to_bits(preimage[i]);
 </code></pre>
 <p>The function we imported, <code>u32_to_bits</code>, converts a <code>u32</code> value to an array of bits.</p>
-<pre><code class="language-zokrates">    bool[32] val = u32_to_bits(preimage[i])
+<pre><code class="language-zokrates">        for u32 bit in 0..32 {
 </code></pre>
 <p>The inner loop copies the bits from <code>val</code> to <code>preimageBits</code>, the bit array for the preimage.</p>
-<pre><code class="language-zokrates">    for u32 bit in 0..32 do
-      preimageBits[i*32+bit] = val[bit]
-    endfor
-  endfor
+<pre><code class="language-zokrates">            preimageBits[i*32 + bit] = val[bit];
+        }
+    }
+    return (sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]);
 </code></pre>
 <p>To return multiple values, separate them by commas.</p>
-<pre><code class="language-zokrates">  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+<pre><code class="language-zokrates">
 </code></pre>
 <a class="header" href="#actually-using-zero-knowledge-proofs" id="actually-using-zero-knowledge-proofs"><h2>Actually using zero knowledge proofs</h2></a>
 <p>The <code>reveal_bit.zok</code> program reveals a bit from the preimage, but who runs it?</p>

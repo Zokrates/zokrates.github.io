@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html" class="active"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -143,10 +143,12 @@
 <p>This is the most basic type in ZoKrates, and it represents a field element with positive integer values in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number.</p>
 <p>As an example, <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495617</code> when working with the <a href="../toolbox/proving_schemes.html#curves">ALT_BN128</a> curve supported by Ethereum.</p>
 <p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2, so that we have:</p>
-<pre><code class="language-zokrates">def main():
-    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616
-    assert(0 - 1 == pMinusOne)
-    return
+<pre><code class="language-zokrates">def main() {
+    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616;
+    assert(0 - 1 == pMinusOne);
+    return;
+}
+
 </code></pre>
 <p>Note that <a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">division in the finite field</a> behaves differently than in the case of integers.
 For field elements, the division operation multiplies the numerator with the denominator's inverse field element. The results coincide with integer divisions for cases with remainder 0, but differ otherwise.</p>
@@ -160,15 +162,17 @@ For field elements, the division operation multiplies the numerator with the den
 <a class="header" href="#numeric-inference" id="numeric-inference"><h3>Numeric inference</h3></a>
 <p>In the case of decimal literals like <code>42</code>, the compiler tries to find the appropriate type (<code>field</code>, <code>u8</code>, <code>u16</code>, <code>u32</code> or <code>u64</code>) depending on the context. If it cannot converge to a single option, an error is returned. This means that there is no default type for decimal literals.</p>
 <p>All operations between literals have the semantics of the inferred type.</p>
-<pre><code class="language-zokrates">def main():
+<pre><code class="language-zokrates">def main() {
     // `255` is infered to `255f`, and the addition happens between field elements
-    assert(255 + 1f == 256)
+    assert(255 + 1f == 256);
 
     // `255` is infered to `255u8`, and the addition happens between u8
-    // This causes an overflow 
-    assert(255 + 1u8 == 0)
-    
-    return
+    // This causes an overflow
+    assert(255 + 1u8 == 0);
+
+    return;
+}
+
 </code></pre>
 <a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
 <p>ZoKrates provides two complex types: arrays and structs.</p>
@@ -176,17 +180,17 @@ For field elements, the division operation multiplies the numerator with the den
 <p>ZoKrates supports static arrays, i.e., whose length needs to be known at compile time. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>
 Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <p>The following example code shows examples of how to use arrays:</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-    field[3] a = [1, 2, 3] // initialize a field array with field values
-    a[2] = 4               // set a member to a value
-    field[4] b = [42; 4]   // initialize an array of 4 values all equal to 42
-    field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
-    field[2] d = a[1..3]   // initialize an array copying a slice from `a`
-    bool[3] e = [true, true || false, true] // initialize a boolean array
-    u32 SIZE = 3
-    field[SIZE] f = [1, 2, 3] // initialize a field array with a size that's a compile-time constant
-    return a[0] + b[1] + c[2]
-
+<pre><code class="language-zokrates">def main() -&gt; field {
+    field[3] mut a = [1, 2, 3]; // initialize a field array with field values
+    a[2] = 4;               // set a member to a value
+    field[4] b = [42; 4];   // initialize an array of 4 values all equal to 42
+    field[4] c = [...a, 4]; // initialize an array copying values from `a`, followed by 4
+    field[2] d = a[1..3];   // initialize an array copying a slice from `a`
+    bool[3] e = [true, true || false, true]; // initialize a boolean array
+    u32 SIZE = 3;
+    field[SIZE] f = [1, 2, 3]; // initialize a field array with a size that's a compile-time constant
+    return a[0] + b[1] + c[2];
+}
 </code></pre>
 <a class="header" href="#declaration-and-initialization" id="declaration-and-initialization"><h4>Declaration and Initialization</h4></a>
 <p>An array is defined by appending <code>[]</code> to a type literal representing the type of the array's elements.</p>
@@ -195,8 +199,8 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <p>ZoKrates offers a special shorthand syntax to initialize an array with a constant value:
 <code>[value; repetitions]</code></p>
 <p>The following code provides examples for declaration and initialization:</p>
-<pre><code class="language-zokrates">    field[3] a = [1, 2, 3] // initialize a field array with field values
-    bool[13] b = [false; 13] // initialize a bool array with value false
+<pre><code class="language-zokrates">field[3] a = [1, 2, 3]; // initialize a field array with field values
+bool[13] b = [false; 13]; // initialize a bool array with value false
 </code></pre>
 <a class="header" href="#multidimensional-arrays" id="multidimensional-arrays"><h4>Multidimensional Arrays</h4></a>
 <p>As an array can contain any type of elements, it can contain arrays again.
@@ -205,37 +209,39 @@ To declare an array of an inner array, i.e., and an array of elements of a type,
 In summary, this leads to the following scheme for array declarations:
 <code>data_type[size of 1st dimension][size of 2nd dimension]</code>.
 Consider the following example:</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-
+<pre><code class="language-zokrates">def main() -&gt; field {
     // Array of two elements of array of 3 elements
-    field[2][3] a = [[1, 2, 3],[4, 5, 6]]
+    field[2][3] a = [[1, 2, 3],[4, 5, 6]];
 
-    field[3] b = a[0] // should be [1, 2, 3]
+    field[3] b = a[0]; // should be [1, 2, 3]
 
     // allowed access [0..2][0..3]
-    return a[1][2]
+    return a[1][2];
+}
+
 </code></pre>
 <a class="header" href="#spreads-and-slices" id="spreads-and-slices"><h4>Spreads and Slices</h4></a>
 <p>ZoKrates provides some syntactic sugar to retrieve subsets of arrays.</p>
 <a class="header" href="#spreads" id="spreads"><h5>Spreads</h5></a>
 <p>The spread operator <code>...</code> applied to an array copies the elements of the existing array.
 This can be used to conveniently compose new arrays, as shown in the following example:</p>
-<pre><code>field[3] a = [1, 2, 3]
-field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
+<pre><code>field[3] a = [1, 2, 3];
+field[4] c = [...a, 4]; // initialize an array copying values from `a`, followed by 4
 </code></pre>
 <a class="header" href="#slices" id="slices"><h5>Slices</h5></a>
 <p>An array can also be assigned to by creating a copy of a subset of an existing array.
 This operation is called slicing, and the following example shows how to slice in ZoKrates:</p>
-<pre><code>field[3] a = [1, 2, 3]
-field[2] b = a[1..3]   // initialize an array copying a slice from `a`
+<pre><code>field[3] a = [1, 2, 3];
+field[2] b = a[1..3];   // initialize an array copying a slice from `a`
 </code></pre>
 <a class="header" href="#tuples" id="tuples"><h3>Tuples</h3></a>
 <p>A tuple is a composite datatype representing a numbered collection of values.
 The following code shows an example of how to use tuples.</p>
-<pre><code class="language-zokrates">def main() -&gt; bool:
-    (field[2], bool) v = ([1, 2], true)
-    v.0 = [42, 43]
-    return v.1
+<pre><code class="language-zokrates">def main() -&gt; bool {
+    (field[2], bool) mut v = ([1, 2], true);
+    v.0 = [42, 43];
+    return v.1;
+}
 
 </code></pre>
 <p>In tuple types and values, the trailing comma is optional, unless the tuple contains a single element, in which case it is mandatory.</p>
@@ -243,27 +249,28 @@ The following code shows an example of how to use tuples.</p>
 <p>A struct is a composite datatype representing a named collection of values. Structs can be generic over constants, in order to wrap arrays of generic size. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>. The contained variables can be of any type.</p>
 <p>The following code shows an example of how to use structs.</p>
 <pre><code class="language-zokrates">struct Bar&lt;N&gt; {
-    field[N] c
-    bool d
+    field[N] c;
+    bool d;
 }
 
 struct Foo&lt;P&gt; {
-    Bar&lt;P&gt; a
-    bool b
+    Bar&lt;P&gt; a;
+    bool b;
 }
 
-def main() -&gt; (Foo&lt;2&gt;):
-    Foo&lt;2&gt;[2] f = [Foo { a: Bar { c: [0, 0], d: false }, b: true}, Foo { a: Bar {c: [0, 0], d: false}, b: true}]
-    f[0].a.c = [42, 43]
-    return f[0]
+def main() -&gt; Foo&lt;2&gt; {
+    Foo&lt;2&gt;[2] mut f = [Foo { a: Bar { c: [0, 0], d: false }, b: true}, Foo { a: Bar {c: [0, 0], d: false}, b: true }];
+    f[0].a.c = [42, 43];
+    return f[0];
+}
 
 </code></pre>
 <a class="header" href="#definition" id="definition"><h4>Definition</h4></a>
 <p>Before a struct data type can be used, it needs to be defined.
 A struct definition starts with the <code>struct</code> keyword followed by a name. Afterwards, a new-line separated list of variables is declared in curly braces <code>{}</code>. For example:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 </code></pre>
 <p>Note that two struct definitions with the same members still introduce two entirely different types. For example, they cannot be compared with each other.</p>
@@ -271,43 +278,47 @@ A struct definition starts with the <code>struct</code> keyword followed by a na
 <p>Initialization of a variable of a struct type always needs to happen in the same statement as a declaration, unless the struct-typed variable is declared within a function's signature.</p>
 <p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 
-def main() -&gt; (Point):
-    Point p = Point {x: 1, y: 0}
-    return p
+def main() -&gt; Point {
+    Point p = Point { x: 1, y: 0 };
+    return p;
+}
 
 </code></pre>
 <a class="header" href="#assignment" id="assignment"><h4>Assignment</h4></a>
 <p>The variables within a struct instance, the so called members, can be accessed through the <code>.</code> operator as shown in the following extended example:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 
-def main(field a) -&gt; (Point):
-    Point p = Point {x: 1, y: 0}
-    p.x = a
-    p.y = p.x
-    return p
+def main(field a) -&gt; Point {
+    Point mut p = Point { x: 1, y: 0 };
+    p.x = a;
+    p.y = p.x;
+    return p;
+}
 
 </code></pre>
 <a class="header" href="#type-aliases" id="type-aliases"><h3>Type aliases</h3></a>
 <p>Type aliases can be defined for any existing type. This can be useful for readability, or to specialize generic types.</p>
 <p>Note that type aliases are just syntactic sugar: in the type system, a type and its alias are exactly equivalent. For example, they can be compared.</p>
-<pre><code class="language-zokrates">type MyField = field
+<pre><code class="language-zokrates">type MyField = field;
 
-type Rectangle&lt;L, W&gt; = bool[L][W]
+type Rectangle&lt;L, W&gt; = bool[L][W];
 
-type Square&lt;S&gt; = Rectangle&lt;S, S&gt;
+type Square&lt;S&gt; = Rectangle&lt;S, S&gt;;
 
-def main():
-    MyField f = 42
-    Rectangle&lt;2, 2&gt; r = [[true; 2]; 2]
-    Square&lt;2&gt; s = r
-    return
+def main() {
+    MyField f = 42;
+    Rectangle&lt;2, 2&gt; r = [[true; 2]; 2];
+    Square&lt;2&gt; s = r;
+    return;
+}
+
 </code></pre>
 
                     </main>

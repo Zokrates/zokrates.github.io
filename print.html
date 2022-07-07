@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -169,9 +169,11 @@ cd target/release
 </code></pre>
 <a class="header" href="#hello-zokrates" id="hello-zokrates"><h2>Hello ZoKrates!</h2></a>
 <p>First, create the text-file <code>root.zok</code> and implement your program. In this example, we will prove knowledge of the square root <code>a</code> of a number <code>b</code>:</p>
-<pre><code class="language-zokrates">def main(private field a, field b):
-  assert(a * a == b)
-  return
+<pre><code class="language-zokrates">def main(private field a, field b) {
+    assert(a * a == b);
+    return;
+}
+
 </code></pre>
 <p>Some observations:</p>
 <ul>
@@ -199,43 +201,60 @@ zokrates verify
 Variables are mutable, and always passed by value to functions.</p>
 <a class="header" href="#declaration" id="declaration"><h3>Declaration</h3></a>
 <p>Variables need to be declared to be used. Declaration and definition are always combined, so that undefined variables do not exist.</p>
-<pre><code class="language-zokrates">def main():
+<pre><code class="language-zokrates">def main() {
     // declare and define `my_variable`
-    field my_variable = 2
+    field mut my_variable = 2;
     // redefine `my_variable`
-    my_variable = 3
-    return
+    my_variable = 3;
+    return;
+}
+</code></pre>
+<a class="header" href="#mutability" id="mutability"><h3>Mutability</h3></a>
+<p>Variables are immutable by default. In order to declare a mutable variable, the <code>mut</code> keyword is used.</p>
+<pre><code class="language-zokrates">def main() {
+    field a = 42;
+    // a = 43; &lt;- not allowed, as `a` is immutable
+    field mut b = 42;
+    b = 43; // ok
+    return;
+}
 </code></pre>
 <a class="header" href="#shadowing" id="shadowing"><h3>Shadowing</h3></a>
 <p>Shadowing is not allowed.</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-    field a = 2
-    // field a = 3 &lt;- not allowed
-    for u32 i in 0..5 do
-        // field a = 7 &lt;- not allowed
-    endfor
-    return a
+<pre><code class="language-zokrates">def main() -&gt; field {
+    field a = 2;
+    // field a = 3; &lt;- not allowed
+    for u32 i in 0..5 {
+        // field a = 7; &lt;- not allowed
+    }
+    return a;
+}
+
 </code></pre>
 <a class="header" href="#scope" id="scope"><h3>Scope</h3></a>
 <a class="header" href="#function" id="function"><h4>Function</h4></a>
 <p>Functions have their own scope</p>
-<pre><code class="language-zokrates">def foo() -&gt; field:
-    // return myGlobal &lt;- not allowed
-    return 42
+<pre><code class="language-zokrates">def foo() -&gt; field {
+    // return myGlobal; &lt;- not allowed
+    return 42;
+}
 
-def main() -&gt; field:
-    field myGlobal = 42
-    return foo()
+def main() -&gt; field {
+    field myGlobal = 42;
+    return foo();
+}
+
 </code></pre>
 <a class="header" href="#for-loop" id="for-loop"><h4>For-loop</h4></a>
 <p>For-loops have their own scope</p>
-<pre><code class="language-zokrates">def main() -&gt; u32:
-    u32 a = 0
-    for u32 i in 0..5 do
-        a = a + i
-    endfor
-    // return i &lt;- not allowed
-    return a
+<pre><code class="language-zokrates">def main() -&gt; u32 {
+    u32 mut a = 0;
+    for u32 i in 0..5 {
+        a = a + i;
+    }
+    // return i; &lt;- not allowed
+    return a;
+}
 </code></pre>
 <a class="header" href="#types" id="types"><h1>Types</h1></a>
 <p>ZoKrates currently exposes two primitive types and two complex types:</p>
@@ -244,10 +263,12 @@ def main() -&gt; field:
 <p>This is the most basic type in ZoKrates, and it represents a field element with positive integer values in <code>[0, p - 1]</code> where <code>p</code> is a (large) prime number.</p>
 <p>As an example, <code>p</code> is set to <code>21888242871839275222246405745257275088548364400416034343698204186575808495617</code> when working with the <a href="../toolbox/proving_schemes.html#curves">ALT_BN128</a> curve supported by Ethereum.</p>
 <p>While <code>field</code> values mostly behave like unsigned integers, one should keep in mind that they overflow at <code>p</code> and not some power of 2, so that we have:</p>
-<pre><code class="language-zokrates">def main():
-    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616
-    assert(0 - 1 == pMinusOne)
-    return
+<pre><code class="language-zokrates">def main() {
+    field pMinusOne = 21888242871839275222246405745257275088548364400416034343698204186575808495616;
+    assert(0 - 1 == pMinusOne);
+    return;
+}
+
 </code></pre>
 <p>Note that <a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">division in the finite field</a> behaves differently than in the case of integers.
 For field elements, the division operation multiplies the numerator with the denominator's inverse field element. The results coincide with integer divisions for cases with remainder 0, but differ otherwise.</p>
@@ -261,15 +282,17 @@ For field elements, the division operation multiplies the numerator with the den
 <a class="header" href="#numeric-inference" id="numeric-inference"><h3>Numeric inference</h3></a>
 <p>In the case of decimal literals like <code>42</code>, the compiler tries to find the appropriate type (<code>field</code>, <code>u8</code>, <code>u16</code>, <code>u32</code> or <code>u64</code>) depending on the context. If it cannot converge to a single option, an error is returned. This means that there is no default type for decimal literals.</p>
 <p>All operations between literals have the semantics of the inferred type.</p>
-<pre><code class="language-zokrates">def main():
+<pre><code class="language-zokrates">def main() {
     // `255` is infered to `255f`, and the addition happens between field elements
-    assert(255 + 1f == 256)
+    assert(255 + 1f == 256);
 
     // `255` is infered to `255u8`, and the addition happens between u8
-    // This causes an overflow 
-    assert(255 + 1u8 == 0)
-    
-    return
+    // This causes an overflow
+    assert(255 + 1u8 == 0);
+
+    return;
+}
+
 </code></pre>
 <a class="header" href="#complex-types" id="complex-types"><h2>Complex Types</h2></a>
 <p>ZoKrates provides two complex types: arrays and structs.</p>
@@ -277,17 +300,17 @@ For field elements, the division operation multiplies the numerator with the den
 <p>ZoKrates supports static arrays, i.e., whose length needs to be known at compile time. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>
 Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <p>The following example code shows examples of how to use arrays:</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-    field[3] a = [1, 2, 3] // initialize a field array with field values
-    a[2] = 4               // set a member to a value
-    field[4] b = [42; 4]   // initialize an array of 4 values all equal to 42
-    field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
-    field[2] d = a[1..3]   // initialize an array copying a slice from `a`
-    bool[3] e = [true, true || false, true] // initialize a boolean array
-    u32 SIZE = 3
-    field[SIZE] f = [1, 2, 3] // initialize a field array with a size that's a compile-time constant
-    return a[0] + b[1] + c[2]
-
+<pre><code class="language-zokrates">def main() -&gt; field {
+    field[3] mut a = [1, 2, 3]; // initialize a field array with field values
+    a[2] = 4;               // set a member to a value
+    field[4] b = [42; 4];   // initialize an array of 4 values all equal to 42
+    field[4] c = [...a, 4]; // initialize an array copying values from `a`, followed by 4
+    field[2] d = a[1..3];   // initialize an array copying a slice from `a`
+    bool[3] e = [true, true || false, true]; // initialize a boolean array
+    u32 SIZE = 3;
+    field[SIZE] f = [1, 2, 3]; // initialize a field array with a size that's a compile-time constant
+    return a[0] + b[1] + c[2];
+}
 </code></pre>
 <a class="header" href="#declaration-and-initialization" id="declaration-and-initialization"><h4>Declaration and Initialization</h4></a>
 <p>An array is defined by appending <code>[]</code> to a type literal representing the type of the array's elements.</p>
@@ -296,8 +319,8 @@ Arrays can contain elements of any type and have arbitrary dimensions.</p>
 <p>ZoKrates offers a special shorthand syntax to initialize an array with a constant value:
 <code>[value; repetitions]</code></p>
 <p>The following code provides examples for declaration and initialization:</p>
-<pre><code class="language-zokrates">    field[3] a = [1, 2, 3] // initialize a field array with field values
-    bool[13] b = [false; 13] // initialize a bool array with value false
+<pre><code class="language-zokrates">field[3] a = [1, 2, 3]; // initialize a field array with field values
+bool[13] b = [false; 13]; // initialize a bool array with value false
 </code></pre>
 <a class="header" href="#multidimensional-arrays" id="multidimensional-arrays"><h4>Multidimensional Arrays</h4></a>
 <p>As an array can contain any type of elements, it can contain arrays again.
@@ -306,37 +329,39 @@ To declare an array of an inner array, i.e., and an array of elements of a type,
 In summary, this leads to the following scheme for array declarations:
 <code>data_type[size of 1st dimension][size of 2nd dimension]</code>.
 Consider the following example:</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-
+<pre><code class="language-zokrates">def main() -&gt; field {
     // Array of two elements of array of 3 elements
-    field[2][3] a = [[1, 2, 3],[4, 5, 6]]
+    field[2][3] a = [[1, 2, 3],[4, 5, 6]];
 
-    field[3] b = a[0] // should be [1, 2, 3]
+    field[3] b = a[0]; // should be [1, 2, 3]
 
     // allowed access [0..2][0..3]
-    return a[1][2]
+    return a[1][2];
+}
+
 </code></pre>
 <a class="header" href="#spreads-and-slices" id="spreads-and-slices"><h4>Spreads and Slices</h4></a>
 <p>ZoKrates provides some syntactic sugar to retrieve subsets of arrays.</p>
 <a class="header" href="#spreads" id="spreads"><h5>Spreads</h5></a>
 <p>The spread operator <code>...</code> applied to an array copies the elements of the existing array.
 This can be used to conveniently compose new arrays, as shown in the following example:</p>
-<pre><code>field[3] a = [1, 2, 3]
-field[4] c = [...a, 4] // initialize an array copying values from `a`, followed by 4
+<pre><code>field[3] a = [1, 2, 3];
+field[4] c = [...a, 4]; // initialize an array copying values from `a`, followed by 4
 </code></pre>
 <a class="header" href="#slices" id="slices"><h5>Slices</h5></a>
 <p>An array can also be assigned to by creating a copy of a subset of an existing array.
 This operation is called slicing, and the following example shows how to slice in ZoKrates:</p>
-<pre><code>field[3] a = [1, 2, 3]
-field[2] b = a[1..3]   // initialize an array copying a slice from `a`
+<pre><code>field[3] a = [1, 2, 3];
+field[2] b = a[1..3];   // initialize an array copying a slice from `a`
 </code></pre>
 <a class="header" href="#tuples" id="tuples"><h3>Tuples</h3></a>
 <p>A tuple is a composite datatype representing a numbered collection of values.
 The following code shows an example of how to use tuples.</p>
-<pre><code class="language-zokrates">def main() -&gt; bool:
-    (field[2], bool) v = ([1, 2], true)
-    v.0 = [42, 43]
-    return v.1
+<pre><code class="language-zokrates">def main() -&gt; bool {
+    (field[2], bool) mut v = ([1, 2], true);
+    v.0 = [42, 43];
+    return v.1;
+}
 
 </code></pre>
 <p>In tuple types and values, the trailing comma is optional, unless the tuple contains a single element, in which case it is mandatory.</p>
@@ -344,27 +369,28 @@ The following code shows an example of how to use tuples.</p>
 <p>A struct is a composite datatype representing a named collection of values. Structs can be generic over constants, in order to wrap arrays of generic size. For more details on generic array sizes, see <a href="../language/generics.html">constant generics</a>. The contained variables can be of any type.</p>
 <p>The following code shows an example of how to use structs.</p>
 <pre><code class="language-zokrates">struct Bar&lt;N&gt; {
-    field[N] c
-    bool d
+    field[N] c;
+    bool d;
 }
 
 struct Foo&lt;P&gt; {
-    Bar&lt;P&gt; a
-    bool b
+    Bar&lt;P&gt; a;
+    bool b;
 }
 
-def main() -&gt; (Foo&lt;2&gt;):
-    Foo&lt;2&gt;[2] f = [Foo { a: Bar { c: [0, 0], d: false }, b: true}, Foo { a: Bar {c: [0, 0], d: false}, b: true}]
-    f[0].a.c = [42, 43]
-    return f[0]
+def main() -&gt; Foo&lt;2&gt; {
+    Foo&lt;2&gt;[2] mut f = [Foo { a: Bar { c: [0, 0], d: false }, b: true}, Foo { a: Bar {c: [0, 0], d: false}, b: true }];
+    f[0].a.c = [42, 43];
+    return f[0];
+}
 
 </code></pre>
 <a class="header" href="#definition" id="definition"><h4>Definition</h4></a>
 <p>Before a struct data type can be used, it needs to be defined.
 A struct definition starts with the <code>struct</code> keyword followed by a name. Afterwards, a new-line separated list of variables is declared in curly braces <code>{}</code>. For example:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 </code></pre>
 <p>Note that two struct definitions with the same members still introduce two entirely different types. For example, they cannot be compared with each other.</p>
@@ -372,60 +398,64 @@ A struct definition starts with the <code>struct</code> keyword followed by a na
 <p>Initialization of a variable of a struct type always needs to happen in the same statement as a declaration, unless the struct-typed variable is declared within a function's signature.</p>
 <p>The following example shows declaration and initialization of a variable of the <code>Point</code> struct type:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 
-def main() -&gt; (Point):
-    Point p = Point {x: 1, y: 0}
-    return p
+def main() -&gt; Point {
+    Point p = Point { x: 1, y: 0 };
+    return p;
+}
 
 </code></pre>
 <a class="header" href="#assignment" id="assignment"><h4>Assignment</h4></a>
 <p>The variables within a struct instance, the so called members, can be accessed through the <code>.</code> operator as shown in the following extended example:</p>
 <pre><code class="language-zokrates">struct Point {
-    field x
-    field y
+    field x;
+    field y;
 }
 
-def main(field a) -&gt; (Point):
-    Point p = Point {x: 1, y: 0}
-    p.x = a
-    p.y = p.x
-    return p
+def main(field a) -&gt; Point {
+    Point mut p = Point { x: 1, y: 0 };
+    p.x = a;
+    p.y = p.x;
+    return p;
+}
 
 </code></pre>
 <a class="header" href="#type-aliases" id="type-aliases"><h3>Type aliases</h3></a>
 <p>Type aliases can be defined for any existing type. This can be useful for readability, or to specialize generic types.</p>
 <p>Note that type aliases are just syntactic sugar: in the type system, a type and its alias are exactly equivalent. For example, they can be compared.</p>
-<pre><code class="language-zokrates">type MyField = field
+<pre><code class="language-zokrates">type MyField = field;
 
-type Rectangle&lt;L, W&gt; = bool[L][W]
+type Rectangle&lt;L, W&gt; = bool[L][W];
 
-type Square&lt;S&gt; = Rectangle&lt;S, S&gt;
+type Square&lt;S&gt; = Rectangle&lt;S, S&gt;;
 
-def main():
-    MyField f = 42
-    Rectangle&lt;2, 2&gt; r = [[true; 2]; 2]
-    Square&lt;2&gt; s = r
-    return
+def main() {
+    MyField f = 42;
+    Rectangle&lt;2, 2&gt; r = [[true; 2]; 2];
+    Square&lt;2&gt; s = r;
+    return;
+}
+
 </code></pre>
 <a class="header" href="#operators" id="operators"><h2>Operators</h2></a>
 <p>The following table lists the precedence and associativity of all operators. Operators are listed top to bottom, in ascending precedence. Operators in the same cell have the same precedence. Operators are binary, unless the syntax is provided.</p>
-<table><thead><tr><th> Operator                   </th><th> Description                                                </th><th> <code>field</code>                      </th><th> <code>u8/u16</code> <code>u32/u64</code>            </th><th> <code>bool</code>                      </th><th> Associativity </th></tr></thead><tbody>
-<tr><td> <code>**</code><br>                   </td><td> Power                                                      </td><td> ✓<sup class="footnote-reference"><a href="#1">1</a></sup>                  </td><td>                          </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>+x</code><br><code>-x</code><br><code>!x</code><br>   </td><td> Positive<br>Negative<br>Negation<br>                       </td><td> ✓<br>✓<br>  </td><td> ✓<br>✓<br>✓  </td><td>  <br> <br>✓ </td><td> Right         </td></tr>
-<tr><td> <code>*</code><br><code>/</code><br><code>%</code><br>      </td><td> Multiplication<br> Division<br> Remainder<br>              </td><td> ✓<br>✓<br>  </td><td> ✓<br>✓<br>✓ </td><td>  <br> <br>   </td><td> Left          </td></tr>
-<tr><td> <code>+</code><br><code>-</code><br>             </td><td> Addition<br> Subtraction<br>                               </td><td> ✓                      </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>&lt;&lt;</code><br><code>&gt;&gt;</code><br>           </td><td> Left shift<br> Right shift<br>                             </td><td>                         </td><td> ✓<sup class="footnote-reference"><a href="#2">2</a></sup>                   </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>&amp;</code>                        </td><td> Bitwise AND                                                </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>|</code>        </td><td> Bitwise OR                                                 </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>^</code>                        </td><td> Bitwise XOR                                                </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>&gt;=</code><br><code>&gt;</code><br><code>&lt;=</code><br><code>&lt;</code> </td><td> Greater or equal<br>Greater<br>Lower or equal<br>Lower<br> </td><td> ✓<sup class="footnote-reference"><a href="#3">3</a></sup>                  </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
-<tr><td> <code>!=</code><br><code>==</code><br>           </td><td> Not Equal<br>Equal<br>                                     </td><td> ✓                      </td><td> ✓                       </td><td> ✓                     </td><td> Left          </td></tr>
-<tr><td> <code>&amp;&amp;</code>                       </td><td> Boolean AND                                                </td><td>                         </td><td>                          </td><td> ✓                     </td><td> Left          </td></tr>
-<tr><td> <code>||</code>  </td><td> Boolean OR                                                 </td><td>                         </td><td>                          </td><td> ✓                     </td><td> Left          </td></tr>
-<tr><td> <code>c ? x : y</code><br><br><code>if c then x else y fi</code>    </td><td> Conditional expression                                     </td><td> ✓                      </td><td> ✓                       </td><td> ✓                     </td><td> Right         </td><td>         </td></tr>
+<table><thead><tr><th> Operator                                   </th><th> Description                                                </th><th> <code>field</code>                      </th><th> <code>u8/u16</code> <code>u32/u64</code>            </th><th> <code>bool</code>                      </th><th> Associativity </th></tr></thead><tbody>
+<tr><td> <code>**</code><br>                                   </td><td> Power                                                      </td><td> ✓<sup class="footnote-reference"><a href="#1">1</a></sup>                  </td><td>                          </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>+x</code><br><code>-x</code><br><code>!x</code><br>                   </td><td> Positive<br>Negative<br>Negation<br>                       </td><td> ✓<br>✓<br>  </td><td> ✓<br>✓<br>✓ </td><td>  <br> <br>✓ </td><td> Right         </td></tr>
+<tr><td> <code>*</code><br><code>/</code><br><code>%</code><br>                      </td><td> Multiplication<br> Division<br> Remainder<br>              </td><td> ✓<br>✓<br>  </td><td> ✓<br>✓<br>✓ </td><td>  <br> <br>   </td><td> Left          </td></tr>
+<tr><td> <code>+</code><br><code>-</code><br>                             </td><td> Addition<br> Subtraction<br>                               </td><td> ✓                      </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>&lt;&lt;</code><br><code>&gt;&gt;</code><br>                           </td><td> Left shift<br> Right shift<br>                             </td><td>                         </td><td> ✓<sup class="footnote-reference"><a href="#2">2</a></sup>                   </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>&amp;</code>                                        </td><td> Bitwise AND                                                </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>|</code>                        </td><td> Bitwise OR                                                 </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>^</code>                                        </td><td> Bitwise XOR                                                </td><td>                         </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>&gt;=</code><br><code>&gt;</code><br><code>&lt;=</code><br><code>&lt;</code>                 </td><td> Greater or equal<br>Greater<br>Lower or equal<br>Lower<br> </td><td> ✓<sup class="footnote-reference"><a href="#3">3</a></sup>                  </td><td> ✓                       </td><td>                        </td><td> Left          </td></tr>
+<tr><td> <code>!=</code><br><code>==</code><br>                           </td><td> Not Equal<br>Equal<br>                                     </td><td> ✓                      </td><td> ✓                       </td><td> ✓                     </td><td> Left          </td></tr>
+<tr><td> <code>&amp;&amp;</code>                                       </td><td> Boolean AND                                                </td><td>                         </td><td>                          </td><td> ✓                     </td><td> Left          </td></tr>
+<tr><td> <code>||</code>                  </td><td> Boolean OR                                                 </td><td>                         </td><td>                          </td><td> ✓                     </td><td> Left          </td></tr>
+<tr><td> <code>c ? x : y</code><br><br><code>if c { x } else { y }</code> </td><td> Conditional expression                                     </td><td> ✓                      </td><td> ✓                       </td><td> ✓                     </td><td> Right         </td></tr>
 </tbody></table>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>The exponent must be a compile-time constant of type <code>u32</code></p>
@@ -442,35 +472,44 @@ Failing to respect this condition will lead to a runtime error.</p>
 <a class="header" href="#function-calls" id="function-calls"><h3>Function calls</h3></a>
 <p>Function calls help make programs clear and modular.</p>
 <p>Arguments are passed by value.</p>
-<pre><code class="language-zokrates">def incr(field a) -&gt; field:
-    a = a + 1
-    return a
+<p>Function parameters can be declared as mutable to allow for mutation within the function's body. However, mutable function arguments are still passed by value, so the original value can never be mutated.</p>
+<pre><code class="language-zokrates">def incr(field mut a) -&gt; field {
+    a = a + 1;
+    return a;
+}
 
-def main():
-    field x = 1
-    field res = incr(x)
-    assert(x == 1) // x has not changed
-    return
+def main() {
+    field x = 1;
+    field res = incr(x);
+    assert(x == 1); // x has not changed
+    return;
+}
+
 </code></pre>
-<p>Generic paramaters, if any, must be compile-time constants. They are inferred by the compiler if that is possible, but can also be provided explicitly.</p>
-<pre><code class="language-zokrates">def foo&lt;N, P&gt;() -&gt; field[P]:
-    return [42; P]
+<p>Generic parameters, if any, must be compile-time constants. They are inferred by the compiler if that is possible, but can also be provided explicitly.</p>
+<pre><code class="language-zokrates">def foo&lt;N, P&gt;() -&gt; field[P] {
+    return [42; P];
+}
 
-def main() -&gt; field[2]:
+def main() -&gt; field[2] {
     // `P` is inferred from the declaration of `res`, while `N` is provided explicitly
-    field[2] res = foo::&lt;3, _&gt;()
-    return res
+    field[2] res = foo::&lt;3, _&gt;();
+    return res;
+}
+
 </code></pre>
-<a class="header" href="#if-expressions" id="if-expressions"><h3>If-expressions</h3></a>
-<p>An if-expression allows you to branch your code depending on a boolean condition.</p>
-<pre><code class="language-zokrates">def main(field x) -&gt; field:
-  field y = if x + 2 == 3 then 1 else 5 fi
-  return y
+<a class="header" href="#conditional-expressions" id="conditional-expressions"><h3>Conditional expressions</h3></a>
+<p>A conditional expression allows you to branch your code depending on a boolean condition.</p>
+<pre><code class="language-zokrates">def main(field x) -&gt; field {
+    field y = if x + 2 == 3 { 1 } else { 5 };
+    return y;
+}
 </code></pre>
 <p>The conditional expression can also be written using a ternary operator:</p>
-<pre><code class="language-zokrates">def main(field x) -&gt; field:
-  field y = x + 2 == 3 ? 1 : 5
-  return y
+<pre><code class="language-zokrates">def main(field x) -&gt; field {
+    field y = x + 2 == 3 ? 1 : 5;
+    return y;
+}
 </code></pre>
 <p>There are two important caveats when it comes to conditional expressions. Before we go into them, let's define two concepts:</p>
 <ul>
@@ -481,28 +520,32 @@ def main() -&gt; field[2]:
 <ul>
 <li><strong>Both branches are always executed</strong>. No short-circuiting happens based on the value of the condition. Therefore, the complexity of a program in terms of the number of constraints it compiles down to is the <em>sum</em> of the cost of all branches.</li>
 </ul>
-<pre><code class="language-zokrates">def cheap(field x) -&gt; field:
-    return x + 1
+<pre><code class="language-zokrates">def cheap(field x) -&gt; field {
+    return x + 1;
+}
 
-def expensive(field x) -&gt; field:
-    return x**1000
+def expensive(field x) -&gt; field {
+    return x**1000;
+}
 
-def main(field x) -&gt; field:
-    return if x == 1 then\
-        cheap(x)\// executed
-        else\
-        expensive(x)\// also executed
-    fi
+def main(field x) -&gt; field {
+    return if x == 1 {
+        cheap(x)
+    } else {
+        expensive(x) // both branches executed
+    };
+}
 </code></pre>
 <ul>
 <li><strong>An unsatisfied constraint inside any branch will make the whole execution fail, even if this branch is not logically executed</strong>. Also, the compiler itself inserts assertions which can fail. This can lead to unexpected results:</li>
 </ul>
-<pre><code class="language-zokrates">def main(field x) -&gt; field:
-    return if x == 0 then\
-        0\
-        else\
-        1/x\// executed even for x := 0, which leads to the execution failing
-    fi
+<pre><code class="language-zokrates">def main(field x) -&gt; field {
+    return if x == 0 {
+        0
+    } else {
+        1 / x // executed even for x := 0, which leads to the execution failing
+    };
+}
 </code></pre>
 <p>The experimental flag <code>--branch-isolation</code> can be activated in the CLI in order to restrict any unsatisfied constraint to make the execution fail only if it is in a logically executed branch. This way, the execution of the program above will always succeed.</p>
 <blockquote>
@@ -510,14 +553,15 @@ def main(field x) -&gt; field:
 </blockquote>
 <a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
 <p>For loops are available with the following syntax:</p>
-<pre><code class="language-zokrates">def main() -&gt; u32:
-    u32 res = 0
-    for u32 i in 0..4 do
-        for u32 j in i..5 do
-            res = res + i
-        endfor
-    endfor
-    return res
+<pre><code class="language-zokrates">def main() -&gt; u32 {
+    u32 mut res = 0;
+    for u32 i in 0..4 {
+        for u32 j in i..5 {
+            res = res + i;
+        }
+    }
+    return res;
+}
 </code></pre>
 <p>The bounds have to be constant at compile-time, therefore they cannot depend on execution inputs. They can depend on generic parameters.
 The range is half-open, meaning it is bounded inclusively below and exclusively above. The range <code>start..end</code> contains all values within <code>start &lt;= x &lt; end</code>. The range is empty if <code>start &gt;= end</code>.</p>
@@ -526,109 +570,110 @@ The range is half-open, meaning it is bounded inclusively below and exclusively 
 </blockquote>
 <a class="header" href="#assertions" id="assertions"><h3>Assertions</h3></a>
 <p>Any boolean can be asserted to be true using the <code>assert</code> function.</p>
-<pre><code class="language-zokrates">def main() -&gt; ():
-    assert(1f + 1f == 2f)
-    return
+<pre><code class="language-zokrates">def main() {
+    assert(1f + 1f == 2f);
+    return;
+}
+
 </code></pre>
 <p>If any assertion fails, execution stops as no valid proof could be generated from it.</p>
 <a class="header" href="#constants" id="constants"><h2>Constants</h2></a>
 <p>Constants must be globally defined outside all other scopes by using a <code>const</code> keyword. Constants can be set only to a constant expression.</p>
-<pre><code class="language-zokrates">const field PRIME = 31
+<pre><code class="language-zokrates">const field PRIME = 31;
 
-def main() -&gt; field:
-    return PRIME
+def main() -&gt; field {
+    return PRIME;
+}
+
 </code></pre>
 <p>The value of a constant can't be changed through reassignment, and it can't be redeclared.</p>
 <p>Constants must be explicitly typed. One can reference other constants inside the expression, as long as the referenced constant is already defined.</p>
-<pre><code class="language-zokrates">const field ONE = 1
-const field TWO = ONE + ONE
+<pre><code class="language-zokrates">const field ONE = 1;
+const field TWO = ONE + ONE;
 
-def main() -&gt; field:
-    return TWO
+def main() -&gt; field {
+    return TWO;
+}
+
 </code></pre>
 <p>The naming convention for constants are similar to that of variables. All characters in a constant name are usually in uppercase.</p>
 <a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
 <p>A function has to be declared at the top level before it is called.</p>
-<pre><code class="language-zokrates">def foo(field a, field b) -&gt; field:
-    return a + b
+<pre><code class="language-zokrates">def foo(field a, field b) -&gt; field {
+    return a + b;
+}
 
-def main() -&gt; field:
-    return foo(1, 2)
+def main() -&gt; field {
+    return foo(1, 2);
+}
+
 </code></pre>
 <p>A function's signature has to be explicitly provided.</p>
 <p>A function can be generic over any number of values of type <code>u32</code>.</p>
-<pre><code class="language-zokrates">def foo&lt;N&gt;() -&gt; field[N]:
-    return [42; N]
+<pre><code class="language-zokrates">def foo&lt;N&gt;() -&gt; field[N] {
+    return [42; N];
+}
 
-def main() -&gt; field[2]:
-    field[2] res = foo()
-    return res
+def main() -&gt; field[2] {
+    field[2] res = foo();
+    return res;
+}
+
 </code></pre>
 <p>The generic parameters can be provided explicitly, especially when they cannot be inferred.</p>
 <pre><code class="language-zokrates">// a function to sum the N first powers of a field element
-def sum_powers&lt;N&gt;(field a) -&gt; field:
-    field res = 0
-    for u32 i in 0..N do
-        res = res + a ** i
-    endfor
-    return res
+def sum_powers&lt;N&gt;(field a) -&gt; field {
+    field mut res = 0;
+    for u32 i in 0..N {
+        res = res + a ** i;
+    }
+    return res;
+}
 
-def main(field a) -&gt; field:
+def main(field a) -&gt; field {
     // call `sum_powers` providing the explicit generic parameter `N := 5`
-    return sum_powers::&lt;5&gt;(a)
-</code></pre>
-<p>Functions can return multiple values by providing them as a comma-separated list.</p>
-<pre><code class="language-zokrates">def main() -&gt; (field, field[3]):
-    return 1, [2, 3, 4]
-</code></pre>
-<a class="header" href="#variable-declaration" id="variable-declaration"><h3>Variable declaration</h3></a>
-<p>When defining a variable as the return value of a function, types are provided when the variable needs to be declared:</p>
-<pre><code class="language-zokrates">def foo() -&gt; (field, field):
-    return 21, 42
-
-def main():
-    // a is declared here
-    field a = 1
-    // b is declared here
-    a, field b = foo()
-    return
+    return sum_powers::&lt;5&gt;(a);
+}
 </code></pre>
 <a class="header" href="#generics" id="generics"><h2>Generics</h2></a>
 <p>ZoKrates supports code that is generic over constants of the <code>u32</code> type. No specific keyword is used: the compiler determines if the generic parameters are indeed constant at compile time. Here's an example of generic code in ZoKrates:</p>
-<pre><code class="language-zokrates">def sum&lt;N&gt;(field[N] a) -&gt; field:
-    field res = 0
-    for u32 i in 0..N do
-        res = res + a[i]
-    endfor
-    return res
+<pre><code class="language-zokrates">def sum&lt;N&gt;(field[N] a) -&gt; field {
+    field mut res = 0;
+    for u32 i in 0..N {
+        res = res + a[i];
+    }
+    return res;
+}
 
-def main(field[3] a) -&gt; field:
-    return sum(a)
+def main(field[3] a) -&gt; field {
+    return sum(a);
+}
+
 </code></pre>
 <a class="header" href="#imports" id="imports"><h2>Imports</h2></a>
 <p>You can separate your code into multiple ZoKrates files using <code>import</code> statements to import symbols, ignoring the <code>.zok</code> extension of the imported file.</p>
 <a class="header" href="#import-syntax" id="import-syntax"><h3>Import syntax</h3></a>
 <a class="header" href="#symbol-selection" id="symbol-selection"><h4>Symbol selection</h4></a>
 <p>The preferred way to import a symbol is by module and name:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol;
 
 // `MySymbol` is now in scope.
 </code></pre>
 <p>To import multiple symbols with a single import statement, separate the symbols names with commas:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol, MyOtherSymbol
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol, MyOtherSymbol;
 </code></pre>
 <a class="header" href="#aliasing" id="aliasing"><h4>Aliasing</h4></a>
 <p>The <code>as</code> keyword enables renaming symbols:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias;
 
 // `MySymbol` is now in scope under the alias MyAlias.
 </code></pre>
 <a class="header" href="#legacy" id="legacy"><h4>Legacy</h4></a>
 <p>The legacy way to import a symbol is by only specifying a module:</p>
-<pre><code>import &quot;./path/to/my/module&quot;
+<pre><code>import &quot;./path/to/my/module&quot;;
 </code></pre>
 <p>In this case, the name of the symbol is assumed to be <code>main</code> and the alias is assumed to be the module's filename so that the above is equivalent to</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module;
 
 // `main` is now in scope under the alias `module`.
 </code></pre>
@@ -643,20 +688,22 @@ def main(field[3] a) -&gt; field:
 <p>Constants declared with the <code>const</code> keyword are imported by name.</p>
 <a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
 <p>You can import a resource in the same folder directly, like this:</p>
-<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo
+<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo;
 </code></pre>
 <p>Imports up the file-system tree are supported:</p>
-<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
+<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo;
 </code></pre>
 <a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
 <p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="../toolbox/stdlib.html">section</a> for more details.</p>
 <a class="header" href="#comments" id="comments"><h2>Comments</h2></a>
 <a class="header" href="#inline-comments" id="inline-comments"><h2>Inline comments</h2></a>
 <p>Inline (single-line) comments allow narrative on only one line at a time. Single-line comments can begin in any column of a given line and end at a new line or carriage return. Inline comments can be added with double-slashes.</p>
-<pre><code class="language-zokrates">def main() -&gt; field:
-    field a = 42 // this is an end of line comment
+<pre><code class="language-zokrates">def main() -&gt; field {
+    field a = 42; // this is an end of line comment
     // this is a full line comment
-    return a
+    return a;
+}
+
 </code></pre>
 <a class="header" href="#multi-line-comments" id="multi-line-comments"><h2>Multi-line comments</h2></a>
 <p>Multi-line comments have one or more lines of narrative within a set of comment delimiters. The <code>/*</code> delimiter marks the beginning of the comment, and the <code>*/</code> marks the end. Any content between those delimiters is considered a comment.</p>
@@ -664,14 +711,30 @@ def main(field[3] a) -&gt; field:
     This is a multi-line comment
     written in more than just one line.
 */
-def main() -&gt; field:
-    return 42
+def main() -&gt; field {
+    return 42;
+}
+
 </code></pre>
 <a class="header" href="#macros" id="macros"><h2>Macros</h2></a>
 <p>ZoKrates currently exposes a single macro:</p>
 <pre><code>#pragma curve $CURVE
 </code></pre>
 <p>The effect of this macro is to abort compilation if this file is being compiled for a curve different from <code>$CURVE</code>.</p>
+<a class="header" href="#logging" id="logging"><h2>Logging</h2></a>
+<p>ZoKrates supports a command to log messages during execution in the interpreter.</p>
+<p>The values of expressions can be checked and basic string interpolation is supported:</p>
+<pre><code class="language-zokrates">struct Foo {
+    field[3] a;
+    bool b;
+}
+
+def main(Foo x, field y) {
+    log(&quot;x is {}, y is {}&quot;, x, y);
+    return;
+}
+</code></pre>
+<p>By default, logs get removed during compilation. In order to include them in the compiled program, the <code>--debug</code> flag has to be enabled.</p>
 <a class="header" href="#zokrates-reference" id="zokrates-reference"><h1>ZoKrates Reference</h1></a>
 <p>The reference covers the details of the ZoKrates toolbox beyond the ZoKrates language.</p>
 <a class="header" href="#command-line-tool" id="command-line-tool"><h1>Command Line Tool</h1></a>
@@ -691,8 +754,10 @@ This section of the book describes the steps to perform a trusted setup for the 
 <a class="header" href="#compiling-a-circuit" id="compiling-a-circuit"><h2>Compiling a circuit</h2></a>
 <p>We will start this tutorial by using ZoKrates to compile a basic program.
 First, we create a new file named <code>program.zok</code> with the following content:</p>
-<pre><code class="language-zokrates">def main(private field a, private field b) -&gt; field:
-    return a * b
+<pre><code class="language-zokrates">def main(private field a, private field b) -&gt; field {
+    return a * b;
+}
+
 </code></pre>
 <p>We compile the program using the <code>compile</code> command.</p>
 <pre><code>zokrates compile -i circuit.zok -o circuit
@@ -808,8 +873,8 @@ zokrates mpc export -i final.params
 
 # use the keys to generate proofs and verify
 zokrates compute-witness -i circuit -a 123456789 987654321 --verbose
-zokrates generate-proof -i circuit
-zokrates verify
+zokrates generate-proof -i circuit -b bellman
+zokrates verify -b bellman
 </code></pre>
 <a class="header" href="#conclusion" id="conclusion"><h2>Conclusion</h2></a>
 <p>The secure generation of parameters for zk-SNARKs is a crucial step in the trustworthiness of the resulting proof system.
@@ -886,7 +951,6 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <tr><td> <a href="https://eprint.iacr.org/2016/260">G16</a> </td><td> <code>--proving-scheme g16</code> </td><td> ALTBN_128, BLS12_381                     </td><td> No </td></tr>
 <tr><td> <a href="https://eprint.iacr.org/2017/540">GM17</a> </td><td> <code>--proving-scheme gm17</code> </td><td> ALTBN_128, BLS12_381, BLS12_377, BW6_761 </td><td> No </td></tr>
 <tr><td> <a href="https://eprint.iacr.org/2019/1047">Marlin</a> </td><td> <code>--proving-scheme marlin</code> </td><td> ALTBN_128, BLS12_381, BLS12_377, BW6_761 </td><td> Yes </td></tr>
-<tr><td> <a href="https://eprint.iacr.org/2013/279">PGHR13</a> </td><td> <code>--proving-scheme pghr13</code> </td><td> ALTBN_128                                </td><td> No </td></tr>
 </tbody></table>
 <p>All schemes have a circuit-specific setup phase called <code>setup</code>. Universal schemes also feature a preliminary, circuit-agnostic step called <code>universal-setup</code>. The advantage of universal schemes is that only the <code>universal-setup</code> step requires trust, so that it can be run a single time and reused trustlessly for many programs.</p>
 <p>Default: <code>G16</code>, except for <code>universal-setup</code> for which the default is <code>Marlin</code></p>
@@ -902,7 +966,6 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <p>ZoKrates supports multiple backends. The options are the following:</p>
 <table><thead><tr><th> Backend </th><th> CLI flag </th><th> Proving schemes   </th><th> Curves                                   </th></tr></thead><tbody>
 <tr><td> Bellman </td><td> <code>--backend bellman</code> </td><td> G16               </td><td> ALTBN_128, BLS12_381                     </td></tr>
-<tr><td> Libsnark </td><td> <code>--backend libsnark</code> </td><td> GM17, PGHR13      </td><td> ALTBN_128                                </td></tr>
 <tr><td> Ark </td><td> <code>--backend ark</code> </td><td> G16, GM17, MARLIN </td><td> ALTBN_128, BLS12_381, BLS12_377, BW6_761 </td></tr>
 </tbody></table>
 <p>Default: <code>bellman</code></p>
@@ -913,10 +976,6 @@ tions of Cryptographic Techniques. Springer. 2008, pp. 181–197.</p>
 <li><code>generate-proof</code></li>
 <li><code>verify</code></li>
 </ul>
-<p>To include libsnark in the build, compile ZoKrates from <a href="https://github.com/ZoKrates/ZoKrates/">source</a> with the <code>libsnark</code> feature:</p>
-<pre><code class="language-bash">cargo +nightly -Z package-features build --release --package zokrates_cli --features=&quot;libsnark&quot;
-</code></pre>
-<p>Note, that this is only tested for Linux. If you are on another OS, consider using our Docker container, which includes a libsnark installation.</p>
 <a class="header" href="#g16-malleability" id="g16-malleability"><h2>G16 malleability</h2></a>
 <p>When using G16, developers should pay attention to the fact that an attacker, seeing a valid proof, can very easily generate a different but still valid proof. Therefore, depending on the use case, making sure on chain that the same proof cannot be submitted twice may <em>not</em> be enough to guarantee that attackers cannot replay proofs. Mechanisms to solve this issue include:</p>
 <ul>
@@ -968,16 +1027,18 @@ To mitigate this, ZIR applies an isomorphism when displaying field elements: the
 <p>In order to interact programatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
 <p>To illustrate this, we'll use the following example program:</p>
 <pre><code>struct Bar {
-    field a
+    field a;
 }
 
 struct Foo {
-    u8 a
-    Bar b
+    u8 a;
+    Bar b;
 }
 
-def main(Foo foo, bool[2] bar, field num) -&gt; field:
-    return 42
+def main(Foo foo, bool[2] bar, field num) -&gt; field {
+    return 42;
+}
+
 </code></pre>
 <a class="header" href="#abi-specification" id="abi-specification"><h2>ABI specification</h2></a>
 <p>When compiling a program, an ABI specification is generated and describes the interface of the program.</p>
@@ -1026,11 +1087,9 @@ def main(Foo foo, bool[2] bar, field num) -&gt; field:
          &quot;type&quot;:&quot;field&quot;
       }
    ],
-   &quot;outputs&quot;:[
-      {
-         &quot;type&quot;:&quot;field&quot;
-      }
-   ]
+   &quot;output&quot;: {
+     &quot;type&quot;:&quot;field&quot;
+   }
 }
 </code></pre>
 <a class="header" href="#abi-input-format" id="abi-input-format"><h2>ABI input format</h2></a>
@@ -1062,7 +1121,7 @@ def main(Foo foo, bool[2] bar, field num) -&gt; field:
 <a class="header" href="#importing" id="importing"><h2>Importing</h2></a>
 <a class="header" href="#bundlers" id="bundlers"><h5>Bundlers</h5></a>
 <p><strong>Note:</strong> As this library uses a model where the wasm module itself is natively an ES module, you will need a bundler of some form.
-Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a> (<code>experiments.asyncWebAssembly</code> must be enabled).
+Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a> (<code>experiments.syncWebAssembly</code> must be enabled).
 The choice of this default was done to reflect the trends of the JS ecosystem.</p>
 <pre><code class="language-js">import { initialize } from 'zokrates-js';
 </code></pre>
@@ -1071,7 +1130,7 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
 </code></pre>
 <a class="header" href="#example" id="example"><h2>Example</h2></a>
 <pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
-    const source = &quot;def main(private field a) -&gt; field: return a * a&quot;;
+    const source = &quot;def main(private field a) -&gt; field { return a * a; }&quot;;
 
     // compilation
     const artifacts = zokratesProvider.compile(source);
@@ -1123,7 +1182,7 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
 <p>Returns: <code>CompilationArtifacts</code></p>
 <p><strong>Examples:</strong></p>
 <p>Compilation:</p>
-<pre><code class="language-js">const artifacts = zokratesProvider.compile(&quot;def main() -&gt; (): return&quot;);
+<pre><code class="language-js">const artifacts = zokratesProvider.compile(&quot;def main() { return; }&quot;);
 </code></pre>
 <p>Compilation with custom options:</p>
 <pre><code class="language-js">const source = &quot;...&quot;;
@@ -1132,7 +1191,7 @@ const options = {
     resolveCallback: (currentLocation, importLocation) =&gt; {
         console.log(currentLocation + ' is importing ' + importLocation);
         return { 
-            source: &quot;def main() -&gt; (): return&quot;, 
+            source: &quot;def main() { return; }&quot;, 
             location: importLocation 
         };
     }
@@ -1161,13 +1220,13 @@ const fileSystemResolver = (from, to) =&gt; {
 </ul>
 <p>Returns: <code>ComputationResult</code></p>
 <p><strong>Example:</strong></p>
-<pre><code class="language-js">const code = 'def main(private field a) -&gt; (field): return a * a';
+<pre><code class="language-js">const code = 'def main(private field a) -&gt; field { return a * a; }';
 const artifacts = zokratesProvider.compile(code);
 
 const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
 
 console.log(witness); // Resulting witness which can be used to generate a proof
-console.log(output); // Computation output: [&quot;4&quot;]
+console.log(output); // Computation output: &quot;4&quot;
 </code></pre>
 <a class="header" href="#setupprogram" id="setupprogram"><h5>setup(program)</h5></a>
 <p>Generates a trusted setup for the compiled program.</p>
@@ -1241,11 +1300,13 @@ two bits, so that neither of them can control the output.</li>
 <p>The first step is for Alice and Bob to each come up with a preimage value and calculate the hash to commit to it.
 There are many ways to calculate a hash, but here we use Zokrates.</p>
 <p>Create this file under the name <code>get_hash.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
 
-def main(u32[16] hashMe) -&gt; u32[8]:
-  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
-  return h
+def main(u32[16] hashMe) -&gt; u32[8] {
+    u32[8] h = sha256(hashMe[0..8], hashMe[8..16]);
+    return h;
+}
+
 </code></pre>
 <p>Compile the program to a form that is usable for zero knowledge proofs. This command writes
 the binary to <code>get_hash</code>. You can see a textual representation, somewhat analogous to assembler
@@ -1270,47 +1331,46 @@ Witness:
 You can see the specific function we are importing
 <a href="https://github.com/Zokrates/ZoKrates/blob/latest/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">here</a>. It will be
 called <code>sha256</code>.</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
 </code></pre>
 <p>This is the main function. The input (<code>u32[16]</code>) is an array of sixteen values, each an unsigned 32-bit integer (a number
 between (0) and (2^{32} - 1)). As you have seen above, you specify these numbers using the <code>-a</code> command
 line parameter. The total number of input bits is <em>32 × 16 = 512</em>.</p>
 <p>The output is <code>u32[8]</code>, a <em>32 × 8 = 256</em> bit value.</p>
-<pre><code class="language-zokrates">def main(u32[16] hashMe) -&gt; u32[8]:
+<pre><code class="language-zokrates">def main(u32[16] hashMe) -&gt; u32[8] {
 </code></pre>
 <p>This line does several things. First, <code>u32[8] h</code> defines a variable called <code>h</code>, whose type is an array of eight 32-bit unsigned integers.
 This variable is initialized using <code>sha256</code>, the function we
 <a href="https://github.com/Zokrates/ZoKrates/blob/latest/zokrates_stdlib/stdlib/hashes/sha256/512bit.zok">imported from the standard library</a>.
 The <code>sha256</code> function expects to get two arrays of eight values each, so we use a <a href="https://zokrates.github.io/language/types.html#slices">slice <code>..</code></a>
 to divide <code>hashMe</code> into two arrays.</p>
-<pre><code class="language-zokrates">  u32[8] h = sha256(hashMe[0..8], hashMe[8..16])
+<pre><code class="language-zokrates">    u32[8] h = sha256(hashMe[0..8], hashMe[8..16]);
 </code></pre>
 <p>Finally, return <code>h</code> to the caller to display the hash.</p>
-<pre><code class="language-zokrates">  return h
+<pre><code class="language-zokrates">    return h;
 </code></pre>
 <a class="header" href="#reveal-a-single-bit" id="reveal-a-single-bit"><h2>Reveal a single bit</h2></a>
 <p>The next step is to reveal a single bit.</p>
 <p>Use this program, <code>reveal_bit.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256
-import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bit&quot; as sha256;
+import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits;
 
 // Reveal a bit from a 512 bit value, and return it with the corresponding hash
 // for that value.
 //
 // WARNING, once enough bits have been revealed it is possible to brute force
 // the remaining preimage bits.
-
-def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
-  // Convert the preimage to bits
-  bool[512] preimageBits = [false; 512]
-  for u32 i in 0..16 do
-    bool[32] val = u32_to_bits(preimage[i])
-    for u32 bit in 0..32 do
-      preimageBits[i*32+bit] = val[bit]
-    endfor
-  endfor
-  
-  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool) {
+    // Convert the preimage to bits
+    bool[512] mut preimageBits = [false; 512];
+    for u32 i in 0..16 {
+        bool[32] val = u32_to_bits(preimage[i]);
+        for u32 bit in 0..32 {
+            preimageBits[i*32 + bit] = val[bit];
+        }
+    }
+    return (sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]);
+}
 </code></pre>
 <p>Compile and run as you did the previous program:</p>
 <pre><code>zokrates compile -i reveal_bit.zok -o reveal_bit
@@ -1325,37 +1385,37 @@ zokrates compute-witness --verbose -i reveal_bit -a 0 1 2 3 4 5 6 7 8 9 10 11 12
 <p>This line imports a function that converts a <code>u32</code> value to an array of 32 booleans.
 There are cast functions to convert <code>u8</code>s, <code>u16</code>s, and <code>u32</code>s to boolean arrays and back again,
 <a href="https://github.com/Zokrates/ZoKrates/blob/master/zokrates_stdlib/stdlib/utils/casts">you can see them here</a>.</p>
-<pre><code class="language-zokrates">import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits
+<pre><code class="language-zokrates">import &quot;utils/casts/u32_to_bits&quot; as u32_to_bits;
 </code></pre>
 <p>The preimage is declared <code>private</code> so it won't be revealed by the zero knowledge proof.</p>
 <p>A Zokrates function can return multiple values. In this case, it returns the hash and a boolean which is the
 value of the bit being revealed.</p>
-<pre><code class="language-zokrates">def main(private u32[16] preimage, u32 bitNum) -&gt; (u32[8], bool):
+<pre><code class="language-zokrates">    // Convert the preimage to bits
 </code></pre>
 <p>To find the value of the bit being revealed, we convert the entire preimage into bits and access it at the index <code>bitNum</code>.
 The first line defines an array of 512 boolean values (<code>bool[512]</code>) called <code>preimageBits</code>. It is initialized to
 an array of 512 <code>false</code> values. The syntax <code>[&lt;value&gt;; &lt;number&gt;]</code> initializes the an array of <code>&lt;number&gt;</code>
 copies of <code>&lt;value&gt;</code>. It is necessary to include it here because a Zokrates variable must be initialized
 when it is declared.</p>
-<pre><code class="language-zokrates">  // Convert the preimage to bits
-  bool[512] preimageBits = [false; 512]
+<pre><code class="language-zokrates">    bool[512] mut preimageBits = [false; 512];
+    for u32 i in 0..16 {
 </code></pre>
 <p>This is a <a href="https://zokrates.github.io/language/control_flow.html#for-loops">for loop</a>. For loops
 have to have an index of type <code>u32</code>, and their bounds need to be known at compile time.
 In this case, we go over each of the sixteen 32 bit words.</p>
-<pre><code class="language-zokrates">  for u32 i in 0..16 do
+<pre><code class="language-zokrates">        bool[32] val = u32_to_bits(preimage[i]);
 </code></pre>
 <p>The function we imported, <code>u32_to_bits</code>, converts a <code>u32</code> value to an array of bits.</p>
-<pre><code class="language-zokrates">    bool[32] val = u32_to_bits(preimage[i])
+<pre><code class="language-zokrates">        for u32 bit in 0..32 {
 </code></pre>
 <p>The inner loop copies the bits from <code>val</code> to <code>preimageBits</code>, the bit array for the preimage.</p>
-<pre><code class="language-zokrates">    for u32 bit in 0..32 do
-      preimageBits[i*32+bit] = val[bit]
-    endfor
-  endfor
+<pre><code class="language-zokrates">            preimageBits[i*32 + bit] = val[bit];
+        }
+    }
+    return (sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]);
 </code></pre>
 <p>To return multiple values, separate them by commas.</p>
-<pre><code class="language-zokrates">  return sha256(preimage[0..8], preimage[8..16]), preimageBits[bitNum]
+<pre><code class="language-zokrates">
 </code></pre>
 <a class="header" href="#actually-using-zero-knowledge-proofs" id="actually-using-zero-knowledge-proofs"><h2>Actually using zero knowledge proofs</h2></a>
 <p>The <code>reveal_bit.zok</code> program reveals a bit from the preimage, but who runs it?</p>
@@ -1467,11 +1527,12 @@ In particular, we'll show how ZoKrates and the Ethereum blockchain can be used t
 <a class="header" href="#computing-a-hash-using-zokrates" id="computing-a-hash-using-zokrates"><h2>Computing a Hash using ZoKrates</h2></a>
 <p>We will start this tutorial by using ZoKrates to compute the hash for an arbitrarily chosen preimage, being the number <code>5</code> in this example.</p>
 <p>First, we create a new file named <code>hashexample.zok</code> with the following content:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed;
 
-def main(private field a, private field b, private field c, private field d) -&gt; field[2]:
-    field[2] h = sha256packed([a, b, c, d])
-    return h
+def main(private field a, private field b, private field c, private field d) -&gt; field[2] {
+    field[2] h = sha256packed([a, b, c, d]);
+    return h;
+}
 </code></pre>
 <p>The first line imports the <code>sha256packed</code> function from the ZoKrates standard library.</p>
 <p><code>sha256packed</code> is a SHA256 implementation that is optimized for the use in the ZoKrates DSL. Here is how it works: We want to pass 512 bits of input to SHA256. However, a <code>field</code> value can only hold 254 bits due to the size of the underlying prime field we are using. As a consequence, we use four field elements, each one encoding 128 bits, to represent our input. The four elements are then concatenated in ZoKrates and passed to SHA256. Given that the resulting hash is 256 bit long, we split it in two and return each value as a 128 bit number.</p>
@@ -1499,13 +1560,14 @@ def main(private field a, private field b, private field c, private field d) -&g
 <p>Let's recall our goal: Peggy wants to prove that she knows a preimage for a digest chosen by Victor, without revealing what the preimage is. Without loss of generality, let's now assume that Victor chooses the digest to be the one we found in our example above.</p>
 <p>To make it work, the two parties have to follow their roles in the protocol:</p>
 <p>First, Victor has to specify what hash he is interested in. Therefore, we have to adjust the zkSNARK circuit, compiled by ZoKrates, such that in addition to computing the digest, it also validates it against the digest of interest, provided by Victor. This leads to the following update for <code>hashexample.zok</code>:</p>
-<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed
+<pre><code class="language-zokrates">import &quot;hashes/sha256/512bitPacked&quot; as sha256packed;
 
-def main(private field a, private field b, private field c, private field d):
-    field[2] h = sha256packed([a, b, c, d])
-    assert(h[0] == 263561599766550617289250058199814760685)
-    assert(h[1] == 65303172752238645975888084098459749904)
-    return
+def main(private field a, private field b, private field c, private field d) {
+    field[2] h = sha256packed([a, b, c, d]);
+    assert(h[0] == 263561599766550617289250058199814760685);
+    assert(h[1] == 65303172752238645975888084098459749904);
+    return;
+}
 </code></pre>
 <p>Note that we now compare the result of <code>sha256packed</code> with the hard-coded correct solution defined by Victor. The lines which we added are treated as assertions: the verifier will not accept a proof where these constraints were not satisfied. Clearly, this program only returns 1 if all of the computed bits are equal.</p>
 <p>So, having defined the program, Victor is now ready to compile the code:</p>

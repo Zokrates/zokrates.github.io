@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html" class="active"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html" class="active"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -141,25 +141,25 @@
 <a class="header" href="#import-syntax" id="import-syntax"><h3>Import syntax</h3></a>
 <a class="header" href="#symbol-selection" id="symbol-selection"><h4>Symbol selection</h4></a>
 <p>The preferred way to import a symbol is by module and name:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol;
 
 // `MySymbol` is now in scope.
 </code></pre>
 <p>To import multiple symbols with a single import statement, separate the symbols names with commas:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol, MyOtherSymbol
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol, MyOtherSymbol;
 </code></pre>
 <a class="header" href="#aliasing" id="aliasing"><h4>Aliasing</h4></a>
 <p>The <code>as</code> keyword enables renaming symbols:</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import MySymbol as MyAlias;
 
 // `MySymbol` is now in scope under the alias MyAlias.
 </code></pre>
 <a class="header" href="#legacy" id="legacy"><h4>Legacy</h4></a>
 <p>The legacy way to import a symbol is by only specifying a module:</p>
-<pre><code>import &quot;./path/to/my/module&quot;
+<pre><code>import &quot;./path/to/my/module&quot;;
 </code></pre>
 <p>In this case, the name of the symbol is assumed to be <code>main</code> and the alias is assumed to be the module's filename so that the above is equivalent to</p>
-<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module
+<pre><code class="language-zokrates">from &quot;./path/to/my/module&quot; import main as module;
 
 // `main` is now in scope under the alias `module`.
 </code></pre>
@@ -174,10 +174,10 @@
 <p>Constants declared with the <code>const</code> keyword are imported by name.</p>
 <a class="header" href="#relative-imports" id="relative-imports"><h3>Relative Imports</h3></a>
 <p>You can import a resource in the same folder directly, like this:</p>
-<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo
+<pre><code class="language-zokrates">from &quot;./mycode&quot; import foo;
 </code></pre>
 <p>Imports up the file-system tree are supported:</p>
-<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo
+<pre><code class="language-zokrates">from &quot;../../../mycode&quot; import foo;
 </code></pre>
 <a class="header" href="#absolute-imports" id="absolute-imports"><h3>Absolute Imports</h3></a>
 <p>Absolute imports don't start with <code>./</code> or <code>../</code> in the path and are used to import components from the ZoKrates standard library. Please check the according <a href="../toolbox/stdlib.html">section</a> for more details.</p>
