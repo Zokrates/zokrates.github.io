@@ -184,14 +184,19 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
 <a class="header" href="#withoptionsoptions" id="withoptionsoptions"><h5>withOptions(options)</h5></a>
 <p>Returns a <code>ZoKratesProvider</code> configured with given options.</p>
 <pre><code class="language-js">initialize().then((defaultProvider) =&gt; { 
-    let zokratesProvider = defaultProvider.withOptions({ curve: &quot;bls12_381&quot;, scheme: &quot;g16&quot; });
+    let zokratesProvider = defaultProvider.withOptions({ 
+        backend: &quot;ark&quot;,
+        curve: &quot;bls12_381&quot;,
+        scheme: &quot;g16&quot;
+    });
     // ...
 });
 </code></pre>
 <p>Options:</p>
 <ul>
-<li><code>curve</code> - Elliptic curve (<code>bn128</code> | <code>bls12_381</code> | <code>bls12_377</code> | <code>bw6_761</code>)</li>
-<li><code>scheme</code> - Proving scheme (<code>g16</code> | <code>gm17</code> | <code>marlin</code>)</li>
+<li><code>backend</code> - Backend (options: <code>ark</code> | <code>bellman</code>, default: <code>ark</code>)</li>
+<li><code>curve</code> - Elliptic curve (options: <code>bn128</code> | <code>bls12_381</code> | <code>bls12_377</code> | <code>bw6_761</code>, default: <code>bn128</code>)</li>
+<li><code>scheme</code> - Proving scheme (options: <code>g16</code> | <code>gm17</code> | <code>marlin</code>, default: <code>g16</code>)</li>
 </ul>
 <p>Returns: <code>ZoKratesProvider</code></p>
 <a class="header" href="#compilesource-options" id="compilesource-options"><h5>compile(source[, options])</h5></a>
@@ -233,12 +238,13 @@ const fileSystemResolver = (from, to) =&gt; {
   return { source, location };
 };
 </code></pre>
-<a class="header" href="#computewitnessartifacts-args" id="computewitnessartifacts-args"><h5>computeWitness(artifacts, args)</h5></a>
+<a class="header" href="#computewitnessartifacts-args-options" id="computewitnessartifacts-args-options"><h5>computeWitness(artifacts, args[, options])</h5></a>
 <p>Computes a valid assignment of the variables, which include the results of the computation.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>artifacts</code> - Compilation artifacts</li>
 <li><code>args</code> - Array of arguments (eg. <code>[&quot;1&quot;, &quot;2&quot;, true]</code>)</li>
+<li><code>options</code> - Computation options</li>
 </ul>
 <p>Returns: <code>ComputationResult</code></p>
 <p><strong>Example:</strong></p>
