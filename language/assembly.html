@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Functions - ZoKrates</title>
+        <title>Assembly - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html" class="active"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li><li><a href="../language/assembly.html"><strong aria-hidden="true">3.12.</strong> Assembly</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="../examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li><li><a href="../language/assembly.html" class="active"><strong aria-hidden="true">3.12.</strong> Assembly</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="../examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,48 +136,78 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#functions" id="functions"><h2>Functions</h2></a>
-<p>Functions are declared using the <code>def</code> keyword. A function's signature has to be explicitly provided.
-Its arguments are type annotated, just like variables, and, if the function returns a value,
-the return type must be specified after an arrow <code>-&gt;</code>.</p>
-<p>A function has to be declared at the top level before it is called.</p>
-<pre><code class="language-zokrates">def foo(field a, field b) -&gt; field {
-    return a + b;
-}
-
-def main() -&gt; field {
-    return foo(1, 2);
-}
-
-</code></pre>
-<p>A function can be generic over any number of values of type <code>u32</code>.</p>
-<pre><code class="language-zokrates">def foo&lt;N&gt;() -&gt; field[N] {
-    return [42; N];
-}
-
-def main() -&gt; field[2] {
-    field[2] res = foo();
-    return res;
-}
-
-</code></pre>
-<p>The generic parameters can be provided explicitly, especially when they cannot be inferred.</p>
-<pre><code class="language-zokrates">// a function to sum the N first powers of a field element
-def sum_powers&lt;N&gt;(field a) -&gt; field {
-    field mut res = 0;
-    for u32 i in 0..N {
-        res = res + a ** i;
+                        <a class="header" href="#assembly" id="assembly"><h2>Assembly</h2></a>
+<p>ZoKrates allows developers to define constraints through assembly blocks. Assembly blocks are considered <strong>unsafe</strong>, as safety and correctness of the resulting arithmetic circuit is in the hands of the developer. Usage of assembly is recommended only in optimization efforts for experienced developers to minimize constraint count of an arithmetic circuit.</p>
+<blockquote>
+<p>The usage of assembly blocks in ZoKrates is experimental. In particular, while assembly blocks help minimise constraint count in some cases, they currently can at the same time lead to larger compiler output and slower witness generation.</p>
+</blockquote>
+<a class="header" href="#writing-assembly" id="writing-assembly"><h2>Writing assembly</h2></a>
+<p>All constraints must be enclosed within an <code>asm</code> block. In an assembly block we can do the following:</p>
+<ol>
+<li>Assign to a witness variable using <code>&lt;--</code></li>
+<li>Define a constraint using <code>===</code></li>
+</ol>
+<p>Assigning a value, in general, should be combined with adding a constraint:</p>
+<pre><code class="language-zok">def main(field a, field b) -&gt; field {
+    field mut c = 0;
+    field mut invb = 0;
+    asm {
+        invb &lt;-- b == 0 ? 0 : 1 / b;
+        invb * b === 1;
+        c &lt;-- invb * a;
+        a === b * c;
     }
-    return res;
-}
-
-def main(field a) -&gt; field {
-    // call `sum_powers` providing the explicit generic parameter `N := 5`
-    return sum_powers::&lt;5&gt;(a);
+    return c;
 }
 </code></pre>
-<p>If the return type of a function is the empty tuple <code>()</code>, the return type as well as the return statement can be omitted.</p>
-<pre><code class="language-zokrates">def main() {}
+<blockquote>
+<p>The operator <code>&lt;--</code> can be sometimes misused, as this operator does not generate any constraints, resulting in unconstrained variables in the constraint system.</p>
+</blockquote>
+<p>In some cases we can combine the witness assignment and constraint generation with the <code>&lt;==</code> operator:</p>
+<pre><code class="language-zok">asm {
+    c &lt;== 1 - a*b;
+}
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code class="language-zok">asm {
+    c &lt;-- 1 - a*b;
+    c === 1 - a*b;
+}
+</code></pre>
+<p>A constraint can contain arithmetic expressions that are built using multiplication, addition, and other variables or <code>field</code> values. Only quadratic expressions are allowed to be included in constraints. Non-quadratic expressions or usage of other arithmetic operators like division or power are not allowed as constraints, but can be used in the witness assignment expression.</p>
+<p>The following code is not allowed:</p>
+<pre><code class="language-zok">asm {
+    d === a*b*c;
+}
+</code></pre>
+<p>as the constraint <code>d === a*b*c</code> is not quadratic.</p>
+<p>In some cases, ZoKrates will apply minor transformations on the defined constraints in order to meet the correct format:</p>
+<pre><code class="language-zok">asm {
+    x * (x - 1) === 0;
+}
+</code></pre>
+<p>will be transformed to:</p>
+<pre><code class="language-zok">asm {
+    x === x * x;
+}
+</code></pre>
+<a class="header" href="#type-casting" id="type-casting"><h2>Type casting</h2></a>
+<p>Assembly is a low-level part of the compiler which does not have type safety. In some cases we might want to do zero-cost conversions between <code>field</code> and <code>bool</code> type.</p>
+<a class="header" href="#field_to_bool_unsafe" id="field_to_bool_unsafe"><h3>field_to_bool_unsafe</h3></a>
+<p>This call is unsafe because it is the responsibility of the user to constrain the field input:</p>
+<pre><code class="language-zok">from &quot;EMBED&quot; import field_to_bool_unsafe;
+
+def main(field x) -&gt; bool {
+    // we constrain `x` to be 0 or 1
+    asm {
+        x * (x - 1) === 0;
+    }
+    // we can convert `x` to `bool` afterwards, as we constrained it properly
+    // if we failed to constrain `x` to `0` or `1`, the call to `field_to_bool_unsafe` introduces undefined behavior
+    // `field_to_bool_unsafe` call does not produce any extra constraints
+    bool out = field_to_bool_unsafe(x);
+    return out;
+}
 </code></pre>
 
                     </main>
@@ -185,13 +215,13 @@ def main(field a) -&gt; field {
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../language/constants.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../language/logging.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../language/generics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../toolbox/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -203,13 +233,13 @@ def main(field a) -&gt; field {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../language/constants.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../language/logging.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../language/generics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../toolbox/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

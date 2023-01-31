@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li><li><a href="language/assembly.html"><strong aria-hidden="true">3.12.</strong> Assembly</a></li></ol></li><li><a href="toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li></ol></li><li><a href="examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -286,10 +286,10 @@ For field elements, the division operation multiplies the numerator with the den
 <p>In the case of decimal literals like <code>42</code>, the compiler tries to find the appropriate type (<code>field</code>, <code>u8</code>, <code>u16</code>, <code>u32</code> or <code>u64</code>) depending on the context. If it cannot converge to a single option, an error is returned. This means that there is no default type for decimal literals.</p>
 <p>All operations between literals have the semantics of the inferred type.</p>
 <pre><code class="language-zokrates">def main() {
-    // `255` is infered to `255f`, and the addition happens between field elements
+    // `255` is inferred to `255f`, and the addition happens between field elements
     assert(255 + 1f == 256);
 
-    // `255` is infered to `255u8`, and the addition happens between u8
+    // `255` is inferred to `255u8`, and the addition happens between u8
     // This causes an overflow
     assert(255 + 1u8 == 0);
 
@@ -743,6 +743,79 @@ def main(Foo x, field y) {
 }
 </code></pre>
 <p>By default, logs get removed during compilation. In order to include them in the compiled program, the <code>--debug</code> flag has to be enabled.</p>
+<a class="header" href="#assembly" id="assembly"><h2>Assembly</h2></a>
+<p>ZoKrates allows developers to define constraints through assembly blocks. Assembly blocks are considered <strong>unsafe</strong>, as safety and correctness of the resulting arithmetic circuit is in the hands of the developer. Usage of assembly is recommended only in optimization efforts for experienced developers to minimize constraint count of an arithmetic circuit.</p>
+<blockquote>
+<p>The usage of assembly blocks in ZoKrates is experimental. In particular, while assembly blocks help minimise constraint count in some cases, they currently can at the same time lead to larger compiler output and slower witness generation.</p>
+</blockquote>
+<a class="header" href="#writing-assembly" id="writing-assembly"><h2>Writing assembly</h2></a>
+<p>All constraints must be enclosed within an <code>asm</code> block. In an assembly block we can do the following:</p>
+<ol>
+<li>Assign to a witness variable using <code>&lt;--</code></li>
+<li>Define a constraint using <code>===</code></li>
+</ol>
+<p>Assigning a value, in general, should be combined with adding a constraint:</p>
+<pre><code class="language-zok">def main(field a, field b) -&gt; field {
+    field mut c = 0;
+    field mut invb = 0;
+    asm {
+        invb &lt;-- b == 0 ? 0 : 1 / b;
+        invb * b === 1;
+        c &lt;-- invb * a;
+        a === b * c;
+    }
+    return c;
+}
+</code></pre>
+<blockquote>
+<p>The operator <code>&lt;--</code> can be sometimes misused, as this operator does not generate any constraints, resulting in unconstrained variables in the constraint system.</p>
+</blockquote>
+<p>In some cases we can combine the witness assignment and constraint generation with the <code>&lt;==</code> operator:</p>
+<pre><code class="language-zok">asm {
+    c &lt;== 1 - a*b;
+}
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code class="language-zok">asm {
+    c &lt;-- 1 - a*b;
+    c === 1 - a*b;
+}
+</code></pre>
+<p>A constraint can contain arithmetic expressions that are built using multiplication, addition, and other variables or <code>field</code> values. Only quadratic expressions are allowed to be included in constraints. Non-quadratic expressions or usage of other arithmetic operators like division or power are not allowed as constraints, but can be used in the witness assignment expression.</p>
+<p>The following code is not allowed:</p>
+<pre><code class="language-zok">asm {
+    d === a*b*c;
+}
+</code></pre>
+<p>as the constraint <code>d === a*b*c</code> is not quadratic.</p>
+<p>In some cases, ZoKrates will apply minor transformations on the defined constraints in order to meet the correct format:</p>
+<pre><code class="language-zok">asm {
+    x * (x - 1) === 0;
+}
+</code></pre>
+<p>will be transformed to:</p>
+<pre><code class="language-zok">asm {
+    x === x * x;
+}
+</code></pre>
+<a class="header" href="#type-casting" id="type-casting"><h2>Type casting</h2></a>
+<p>Assembly is a low-level part of the compiler which does not have type safety. In some cases we might want to do zero-cost conversions between <code>field</code> and <code>bool</code> type.</p>
+<a class="header" href="#field_to_bool_unsafe" id="field_to_bool_unsafe"><h3>field_to_bool_unsafe</h3></a>
+<p>This call is unsafe because it is the responsibility of the user to constrain the field input:</p>
+<pre><code class="language-zok">from &quot;EMBED&quot; import field_to_bool_unsafe;
+
+def main(field x) -&gt; bool {
+    // we constrain `x` to be 0 or 1
+    asm {
+        x * (x - 1) === 0;
+    }
+    // we can convert `x` to `bool` afterwards, as we constrained it properly
+    // if we failed to constrain `x` to `0` or `1`, the call to `field_to_bool_unsafe` introduces undefined behavior
+    // `field_to_bool_unsafe` call does not produce any extra constraints
+    bool out = field_to_bool_unsafe(x);
+    return out;
+}
+</code></pre>
 <a class="header" href="#zokrates-reference" id="zokrates-reference"><h1>ZoKrates Reference</h1></a>
 <p>The reference covers the details of the ZoKrates toolbox beyond the ZoKrates language.</p>
 <a class="header" href="#command-line-tool" id="command-line-tool"><h1>Command Line Tool</h1></a>
@@ -754,7 +827,7 @@ You can see an overview of the available subcommands by running</p>
 <pre><code class="language-sh">zokrates compile --help
 </code></pre>
 <a class="header" href="#performing-a-trusted-setup-using-a-multi-party-computation-protocol-mpc" id="performing-a-trusted-setup-using-a-multi-party-computation-protocol-mpc"><h1>Performing a trusted setup using a multi-party computation protocol (MPC)</h1></a>
-<p>The zk-SNARK schemes supported by ZoKrates require a trusted setup. This procedure must be run to generate the proving and verification keys. This procedure generates some data often refered to as &quot;toxic waste&quot; which can be used to create fake proofs which will be accepted by the verifier. The entity running the trusted setup is trusted to delete this toxic waste.
+<p>The zk-SNARK schemes supported by ZoKrates require a trusted setup. This procedure must be run to generate the proving and verification keys. This procedure generates some data often referred to as &quot;toxic waste&quot; which can be used to create fake proofs which will be accepted by the verifier. The entity running the trusted setup is trusted to delete this toxic waste.
 Using an MPC protocol, we can run the trusted setup in a decentralized way, so that this responsibility is shared among all participants of the setup. If at least one participant is honest and deletes their part of the toxic waste, then no fake proofs can be created by anyone.
 This section of the book describes the steps to perform a trusted setup for the Groth16 scheme.</p>
 <a class="header" href="#pre-requisites" id="pre-requisites"><h2>Pre-requisites</h2></a>
@@ -768,7 +841,7 @@ First, we create a new file named <code>program.zok</code> with the following co
 
 </code></pre>
 <p>We compile the program using the <code>compile</code> command.</p>
-<pre><code>zokrates compile -i circuit.zok -o circuit
+<pre><code>zokrates compile -i program.zok -o circuit
 </code></pre>
 <a class="header" href="#initializing-a-phase-2-ceremony" id="initializing-a-phase-2-ceremony"><h2>Initializing a phase 2 ceremony</h2></a>
 <p>We then initialize a phase 2 ceremony with the following command:</p>
@@ -1032,7 +1105,7 @@ To mitigate this, ZIR applies an isomorphism when displaying field elements: the
 <pre><code>-1
 </code></pre>
 <a class="header" href="#zokrates-abi" id="zokrates-abi"><h1>ZoKrates ABI</h1></a>
-<p>In order to interact programatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
+<p>In order to interact programmatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
 <p>To illustrate this, we'll use the following example program:</p>
 <pre><code>struct Bar {
     field a;
@@ -1127,55 +1200,64 @@ def main(Foo foo, bool[2] bar, field num) -&gt; field {
 <pre><code class="language-bash">npm install zokrates-js
 </code></pre>
 <a class="header" href="#importing" id="importing"><h2>Importing</h2></a>
-<a class="header" href="#bundlers" id="bundlers"><h5>Bundlers</h5></a>
-<p><strong>Note:</strong> As this library uses a model where the wasm module itself is natively an ES module, you will need a bundler of some form.
-Currently the only known bundler known to be fully compatible with <code>zokrates-js</code> is <a href="https://webpack.js.org/">Webpack</a> (<code>experiments.syncWebAssembly</code> must be enabled).
-The choice of this default was done to reflect the trends of the JS ecosystem.</p>
-<pre><code class="language-js">import { initialize } from 'zokrates-js';
+<a class="header" href="#es-modules" id="es-modules"><h4>ES modules</h4></a>
+<pre><code class="language-js">import { initialize } from &quot;zokrates-js&quot;;
 </code></pre>
-<a class="header" href="#node" id="node"><h5>Node</h5></a>
-<pre><code class="language-js">const { initialize } = require('zokrates-js')
+<a class="header" href="#commonjs" id="commonjs"><h4>CommonJS</h4></a>
+<pre><code class="language-js">let { initialize } = await import(&quot;zokrates-js&quot;);
+</code></pre>
+<a class="header" href="#cdn" id="cdn"><h4>CDN</h4></a>
+<pre><code class="language-html">&lt;script src=&quot;https://unpkg.com/zokrates-js@latest/umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  zokrates.initialize().then((zokratesProvider) =&gt; {
+    /* ... */
+  });
+&lt;/script&gt;
 </code></pre>
 <a class="header" href="#example" id="example"><h2>Example</h2></a>
 <pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
-    const source = &quot;def main(private field a) -&gt; field { return a * a; }&quot;;
+  const source = &quot;def main(private field a) -&gt; field { return a * a; }&quot;;
 
-    // compilation
-    const artifacts = zokratesProvider.compile(source);
+  // compilation
+  const artifacts = zokratesProvider.compile(source);
 
-    // computation
-    const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
+  // computation
+  const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
 
-    // run setup
-    const keypair = zokratesProvider.setup(artifacts.program);
+  // run setup
+  const keypair = zokratesProvider.setup(artifacts.program);
 
-    // generate proof
-    const proof = zokratesProvider.generateProof(artifacts.program, witness, keypair.pk);
+  // generate proof
+  const proof = zokratesProvider.generateProof(
+    artifacts.program,
+    witness,
+    keypair.pk
+  );
 
-    // export solidity verifier
-    const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk);
-    
-    // or verify off-chain
-    const isVerified = zokratesProvider.verify(keypair.vk, proof);
+  // export solidity verifier
+  const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk);
+
+  // or verify off-chain
+  const isVerified = zokratesProvider.verify(keypair.vk, proof);
 });
 </code></pre>
 <a class="header" href="#api" id="api"><h2>API</h2></a>
 <a class="header" href="#initialize" id="initialize"><h5>initialize()</h5></a>
 <p>Returns an initialized <code>ZoKratesProvider</code> as a promise.</p>
-<pre><code class="language-js">initialize().then((zokratesProvider) =&gt; { 
-    // call api functions here
+<pre><code class="language-js">initialize().then((zokratesProvider) =&gt; {
+  // call api functions here
 });
 </code></pre>
 <p>Returns: <code>Promise&lt;ZoKratesProvider&gt;</code></p>
 <a class="header" href="#withoptionsoptions" id="withoptionsoptions"><h5>withOptions(options)</h5></a>
 <p>Returns a <code>ZoKratesProvider</code> configured with given options.</p>
-<pre><code class="language-js">initialize().then((defaultProvider) =&gt; { 
-    let zokratesProvider = defaultProvider.withOptions({ 
-        backend: &quot;ark&quot;,
-        curve: &quot;bls12_381&quot;,
-        scheme: &quot;g16&quot;
-    });
-    // ...
+<pre><code class="language-js">initialize().then((defaultProvider) =&gt; {
+  let zokratesProvider = defaultProvider.withOptions({
+    backend: &quot;ark&quot;,
+    curve: &quot;bls12_381&quot;,
+    scheme: &quot;g16&quot;,
+  });
+  // ...
 });
 </code></pre>
 <p>Options:</p>
@@ -1200,23 +1282,23 @@ The choice of this default was done to reflect the trends of the JS ecosystem.</
 <p>Compilation with custom options:</p>
 <pre><code class="language-js">const source = &quot;...&quot;;
 const options = {
-    location: &quot;main.zok&quot;, // location of the root module
-    resolveCallback: (currentLocation, importLocation) =&gt; {
-        console.log(currentLocation + ' is importing ' + importLocation);
-        return { 
-            source: &quot;def main() { return; }&quot;, 
-            location: importLocation 
-        };
-    }
+  location: &quot;main.zok&quot;, // location of the root module
+  resolveCallback: (currentLocation, importLocation) =&gt; {
+    console.log(currentLocation + &quot; is importing &quot; + importLocation);
+    return {
+      source: &quot;def main() { return; }&quot;,
+      location: importLocation,
+    };
+  },
 };
 const artifacts = zokratesProvider.compile(source, options);
 </code></pre>
 <p><strong>Note:</strong> The <code>resolveCallback</code> function is used to resolve dependencies.
 This callback receives the current module location and the import location of the module which is being imported.
 The callback must synchronously return either an error, <code>null</code> or a valid <code>ResolverResult</code> object like shown in the example above.
-A simple file system resolver for a node environment can be implemented as follows:</p>
-<pre><code class="language-js">const fs = require(&quot;fs&quot;);
-const path = require(&quot;path&quot;);
+A simple file system resolver in a node environment can be implemented as follows:</p>
+<pre><code class="language-js">import fs from &quot;fs&quot;;
+import path from &quot;path&quot;;
 
 const fileSystemResolver = (from, to) =&gt; {
   const location = path.resolve(path.dirname(path.resolve(from)), to);
@@ -1234,7 +1316,7 @@ const fileSystemResolver = (from, to) =&gt; {
 </ul>
 <p>Returns: <code>ComputationResult</code></p>
 <p><strong>Example:</strong></p>
-<pre><code class="language-js">const code = 'def main(private field a) -&gt; field { return a * a; }';
+<pre><code class="language-js">const code = &quot;def main(private field a) -&gt; field { return a * a; }&quot;;
 const artifacts = zokratesProvider.compile(code);
 
 const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&quot;]);
@@ -1242,18 +1324,20 @@ const { witness, output } = zokratesProvider.computeWitness(artifacts, [&quot;2&
 console.log(witness); // Resulting witness which can be used to generate a proof
 console.log(output); // Computation output: &quot;4&quot;
 </code></pre>
-<a class="header" href="#setupprogram" id="setupprogram"><h5>setup(program)</h5></a>
+<a class="header" href="#setupprogram-entropy" id="setupprogram-entropy"><h5>setup(program[, entropy])</h5></a>
 <p>Generates a trusted setup for the compiled program.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>program</code> - Compiled program</li>
+<li><code>entropy</code> - User provided randomness (optional)</li>
 </ul>
 <p>Returns: <code>SetupKeypair</code></p>
-<a class="header" href="#universalsetupsize" id="universalsetupsize"><h5>universalSetup(size)</h5></a>
+<a class="header" href="#universalsetupsize-entropy" id="universalsetupsize-entropy"><h5>universalSetup(size[, entropy])</h5></a>
 <p>Performs the universal phase of a trusted setup. Only available for the <code>marlin</code> scheme.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>size</code> - Size of the trusted setup passed as an exponent. For example, <code>8</code> for <code>2**8</code>.</li>
+<li><code>entropy</code> - User provided randomness (optional)</li>
 </ul>
 <p>Returns: <code>Uint8Array</code></p>
 <a class="header" href="#setupwithsrssrs-program" id="setupwithsrssrs-program"><h5>setupWithSrs(srs, program)</h5></a>
@@ -1264,13 +1348,14 @@ console.log(output); // Computation output: &quot;4&quot;
 <li><code>program</code> - Compiled program</li>
 </ul>
 <p>Returns: <code>SetupKeypair</code></p>
-<a class="header" href="#generateproofprogram-witness-provingkey" id="generateproofprogram-witness-provingkey"><h5>generateProof(program, witness, provingKey)</h5></a>
+<a class="header" href="#generateproofprogram-witness-provingkey-entropy" id="generateproofprogram-witness-provingkey-entropy"><h5>generateProof(program, witness, provingKey[, entropy])</h5></a>
 <p>Generates a proof for a computation of the compiled program.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>program</code> - Compiled program</li>
 <li><code>witness</code> - Witness (valid assignment of the variables) from the computation result</li>
 <li><code>provingKey</code> - Proving key from the setup keypair</li>
+<li><code>entropy</code> - User provided randomness (optional)</li>
 </ul>
 <p>Returns: <code>Proof</code></p>
 <a class="header" href="#verifyverificationkey-proof" id="verifyverificationkey-proof"><h5>verify(verificationKey, proof)</h5></a>
@@ -1288,6 +1373,13 @@ console.log(output); // Computation output: &quot;4&quot;
 <li><code>verificationKey</code> - Verification key from the setup keypair</li>
 </ul>
 <p>Returns: <code>string</code></p>
+<a class="header" href="#utilsformatproofproof" id="utilsformatproofproof"><h5>utils.formatProof(proof)</h5></a>
+<p>Formats the proof into an array of field elements that are compatible as input to the generated solidity contract</p>
+<p>Parameters:</p>
+<ul>
+<li><code>proof</code> - Generated proof</li>
+</ul>
+<p>Returns: <code>array</code></p>
 <a class="header" href="#zokrates-examples" id="zokrates-examples"><h1>ZoKrates Examples</h1></a>
 <p>This section covers examples of using the ZoKrates programming language.</p>
 <ul>
