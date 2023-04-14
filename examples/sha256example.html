@@ -161,17 +161,14 @@ def main(private field a, private field b, private field c, private field d) -&g
 <pre><code>zokrates compile -i hashexample.zok
 </code></pre>
 <p>As a next step we can create a witness file using the following command:</p>
-<pre><code>zokrates compute-witness -a 0 0 0 5
+<pre><code>zokrates compute-witness -a 0 0 0 5 --verbose
 </code></pre>
 <p>Using the flag <code>-a</code> we pass arguments to the program. Recall that our goal is to compute the hash for the number <code>5</code>. Consequently we set <code>a</code>, <code>b</code> and <code>c</code> to <code>0</code> and  <code>d</code> to  <code>5</code>.</p>
-<p>Still here? Great! At this point, we can check the <code>witness</code> file for the return values:</p>
-<pre><code>grep '~out' witness
+<p>Still here? Great! At this point we can check the return values. We should see the following output:</p>
+<pre><code>Witness: 
+[&quot;263561599766550617289250058199814760685&quot;,&quot;65303172752238645975888084098459749904&quot;]
 </code></pre>
-<p>which should lead to the following output:</p>
-<pre><code class="language-sh">~out_0 263561599766550617289250058199814760685
-~out_1 65303172752238645975888084098459749904
-</code></pre>
-<p>Hence, by concatenating the outputs as 128 bit numbers, we arrive at the following value as the hash for our selected pre-image :
+<p>By concatenating the outputs as 128 bit numbers, we arrive at the following value as the hash for our selected pre-image :
 <code>0xc6481e22c5ff4164af680b8cfaa5e8ed3120eeff89c4f307c4a6faaae059ce10</code></p>
 <a class="header" href="#prove-knowledge-of-pre-image" id="prove-knowledge-of-pre-image"><h2>Prove knowledge of pre-image</h2></a>
 <p>For now, we have seen that we can compute a hash using ZoKrates.</p>
