@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>JSON ABI - ZoKrates</title>
+        <title>Experimental - ZoKrates</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li><li><a href="../language/assembly.html"><strong aria-hidden="true">3.12.</strong> Assembly</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html" class="active"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li><li><a href="../toolbox/experimental.html"><strong aria-hidden="true">4.9.</strong> Experimental</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="../examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
+            <ol class="chapter"><li><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../gettingstarted.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li><a href="../language/index.html"><strong aria-hidden="true">3.</strong> Language</a></li><li><ol class="section"><li><a href="../language/variables.html"><strong aria-hidden="true">3.1.</strong> Variables</a></li><li><a href="../language/types.html"><strong aria-hidden="true">3.2.</strong> Types</a></li><li><a href="../language/operators.html"><strong aria-hidden="true">3.3.</strong> Operators</a></li><li><a href="../language/control_flow.html"><strong aria-hidden="true">3.4.</strong> Control flow</a></li><li><a href="../language/constants.html"><strong aria-hidden="true">3.5.</strong> Constants</a></li><li><a href="../language/functions.html"><strong aria-hidden="true">3.6.</strong> Functions</a></li><li><a href="../language/generics.html"><strong aria-hidden="true">3.7.</strong> Generics</a></li><li><a href="../language/imports.html"><strong aria-hidden="true">3.8.</strong> Imports</a></li><li><a href="../language/comments.html"><strong aria-hidden="true">3.9.</strong> Comments</a></li><li><a href="../language/macros.html"><strong aria-hidden="true">3.10.</strong> Macros</a></li><li><a href="../language/logging.html"><strong aria-hidden="true">3.11.</strong> Logging</a></li><li><a href="../language/assembly.html"><strong aria-hidden="true">3.12.</strong> Assembly</a></li></ol></li><li><a href="../toolbox/index.html"><strong aria-hidden="true">4.</strong> Toolbox</a></li><li><ol class="section"><li><a href="../toolbox/cli.html"><strong aria-hidden="true">4.1.</strong> CLI</a></li><li><a href="../toolbox/trusted_setup.html"><strong aria-hidden="true">4.2.</strong> Trusted Setup</a></li><li><a href="../toolbox/stdlib.html"><strong aria-hidden="true">4.3.</strong> Standard Library</a></li><li><a href="../toolbox/proving_schemes.html"><strong aria-hidden="true">4.4.</strong> Proving schemes</a></li><li><a href="../toolbox/verification.html"><strong aria-hidden="true">4.5.</strong> Verification</a></li><li><a href="../toolbox/ir.html"><strong aria-hidden="true">4.6.</strong> ZIR</a></li><li><a href="../toolbox/abi.html"><strong aria-hidden="true">4.7.</strong> JSON ABI</a></li><li><a href="../toolbox/zokrates_js.html"><strong aria-hidden="true">4.8.</strong> zokrates.js</a></li><li><a href="../toolbox/experimental.html" class="active"><strong aria-hidden="true">4.9.</strong> Experimental</a></li></ol></li><li><a href="../examples/index.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li><ol class="section"><li><a href="../examples/rng_tutorial.html"><strong aria-hidden="true">5.1.</strong> A SNARK Powered RNG</a></li><li><a href="../examples/sha256example.html"><strong aria-hidden="true">5.2.</strong> Proving knowledge of a hash preimage</a></li><li><a href="../examples/magic_square.html"><strong aria-hidden="true">5.3.</strong> A ZK Magic Square in the browser</a></li></ol></li><li><a href="../testing.html"><strong aria-hidden="true">6.</strong> Testing</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,96 +136,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#zokrates-abi" id="zokrates-abi"><h1>ZoKrates ABI</h1></a>
-<p>In order to interact programmatically with compiled ZoKrates programs, ZoKrates supports passing arguments using an ABI.</p>
-<p>To illustrate this, we'll use the following example program:</p>
-<pre><code>struct Bar {
-    field a;
-}
-
-struct Foo {
-    u8 a;
-    Bar b;
-}
-
-def main(Foo foo, bool[2] bar, field num) -&gt; field {
-    return 42;
-}
-
+                        <a class="header" href="#experimental-features" id="experimental-features"><h1>Experimental features</h1></a>
+<p>ZoKrates supports some experimental features.</p>
+<a class="header" href="#nova" id="nova"><h2>Nova</h2></a>
+<p>ZoKrates supports the <code>nova</code> proof system using the <code>bellperson</code> backend. Nova is accessed with the subcommand <code>nova</code>.</p>
+<a class="header" href="#api" id="api"><h3>API</h3></a>
+<p>To use Nova, programs must have the following signature, for any types <code>State</code> and <code>StepInput</code>:</p>
+<pre><code>def main(public State state, private StepInput step_input) -&gt; State
 </code></pre>
-<a class="header" href="#abi-specification" id="abi-specification"><h2>ABI specification</h2></a>
-<p>When compiling a program, an ABI specification is generated and describes the interface of the program.</p>
-<p>In this example, the ABI specification is:</p>
-<pre><code class="language-json">{
-   &quot;inputs&quot;:[
-      {
-         &quot;name&quot;:&quot;foo&quot;,
-         &quot;public&quot;:true,
-         &quot;type&quot;:&quot;struct&quot;,
-         &quot;components&quot;:{
-            &quot;name&quot;:&quot;Foo&quot;,
-            &quot;members&quot;:[
-               {
-                  &quot;name&quot;:&quot;a&quot;,
-                  &quot;type&quot;:&quot;u8&quot;
-               },
-               {
-                  &quot;name&quot;:&quot;b&quot;,
-                  &quot;type&quot;:&quot;struct&quot;,
-                  &quot;components&quot;:{
-                     &quot;name&quot;:&quot;Bar&quot;,
-                     &quot;members&quot;:[
-                        {
-                           &quot;name&quot;:&quot;a&quot;,
-                           &quot;type&quot;:&quot;field&quot;
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         &quot;name&quot;:&quot;bar&quot;,
-         &quot;public&quot;:true,
-         &quot;type&quot;:&quot;array&quot;,
-         &quot;components&quot;:{
-            &quot;size&quot;:2,
-            &quot;type&quot;:&quot;bool&quot;
-         }
-      },
-      {
-         &quot;name&quot;:&quot;num&quot;,
-         &quot;public&quot;:true,
-         &quot;type&quot;:&quot;field&quot;
-      }
-   ],
-   &quot;output&quot;: {
-     &quot;type&quot;:&quot;field&quot;
-   }
+<p>Then, using Nova lets the user prove many steps of this program, given an initial state.</p>
+<p>For example:</p>
+<pre><code>def main(public field sum, private field element) -&gt; field {
+    return sum + element;
 }
 </code></pre>
-<a class="header" href="#abi-input-format" id="abi-input-format"><h2>ABI input format</h2></a>
-<p>When executing a program, arguments can be passed as a JSON object of the following form:</p>
-<pre><code class="language-json">[
-   {
-      &quot;a&quot;:&quot;0x2a&quot;,
-      &quot;b&quot;:{
-         &quot;a&quot;:&quot;42&quot;
-      }
-   },
-   [
-      true,
-      false
-   ],
-   &quot;42&quot;
-]
+<p>We compile this program using the Pallas curve:</p>
+<pre><code class="language-bash">zokrates compile -i sum.zok --curve pallas
 </code></pre>
-<p>Note the following:</p>
+<p>Then we can prove three iterations as follows:</p>
+<pre><code class="language-bash">echo &quot;\&quot;0\&quot;&quot; &gt; init.json
+echo &quot;[\&quot;1\&quot;, \&quot;7\&quot;, \&quot;42\&quot;]&quot; &gt; steps.json
+zokrates nova prove
+</code></pre>
+<p>The proof created at <code>proof.json</code> proves the statement <code>0 + 1 + 7 + 42 == 50</code>.</p>
+<p>We can extend it by running more steps, for example with the same intermediate inputs:</p>
+<pre><code>zokrates nova prove --continue
+</code></pre>
+<p>The proof updated at <code>proof.json</code> proves the statement <code>50 + (0 + 1 + 7 + 42) == 100</code>.</p>
+<p>Once we're done, we compress the proof to a compressed snark:</p>
+<pre><code>zokrates nova compress
+</code></pre>
+<p>Finally, we can verify this proof</p>
+<pre><code>zokrates nova verify
+</code></pre>
+<a class="header" href="#limitations" id="limitations"><h3>Limitations</h3></a>
 <ul>
-<li>Field elements are passed as JSON strings in order to support arbitrary large numbers</li>
-<li>Unsigned integers are passed as JSON strings containing their hexadecimal representation</li>
-<li>Structs are passed as JSON objects, ignoring the struct name</li>
+<li>The step circuit must be compiled with <code>--curve pallas</code></li>
+<li>The resulting recursive proof cannot currently be verified on the EVM</li>
 </ul>
 
                     </main>
@@ -233,13 +180,13 @@ def main(Foo foo, bool[2] bar, field num) -&gt; field {
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../toolbox/ir.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../toolbox/zokrates_js.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../toolbox/zokrates_js.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../examples/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -251,13 +198,13 @@ def main(Foo foo, bool[2] bar, field num) -&gt; field {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../toolbox/ir.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../toolbox/zokrates_js.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../toolbox/zokrates_js.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../examples/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
