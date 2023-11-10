@@ -161,9 +161,16 @@
 }
 </code></pre>
 <blockquote>
-<p>The operator <code>&lt;--</code> can be sometimes misused, as this operator does not generate any constraints, resulting in unconstrained variables in the constraint system.</p>
+<p>Note that operator <code>&lt;--</code> is used for unconstrained assignment and can be easily misused. This operator does not generate constraints, which could result in unconstrained variables in the constraint system.</p>
 </blockquote>
-<p>In some cases we can combine the witness assignment and constraint generation with the <code>&lt;==</code> operator:</p>
+<p>Unconstrained assignment <code>&lt;--</code> allows assignment to variables with complex types. The type must consist of field elements only (eg. <code>field[3]</code>):</p>
+<pre><code class="language-zok">field[3] mut c = [0; 3];
+asm {
+    c &lt;-- [2, 2, 4];
+    c[0] * c[1] === c[2];
+}
+</code></pre>
+<p>In some cases we can combine the witness assignment and constraint generation with the <code>&lt;==</code> operator (constrained assignment):</p>
 <pre><code class="language-zok">asm {
     c &lt;== 1 - a*b;
 }
@@ -174,6 +181,7 @@
     c === 1 - a*b;
 }
 </code></pre>
+<p>In the case of constrained assignment <code>&lt;==</code>, both sides of the statement have to be of type <code>field</code>.</p>
 <p>A constraint can contain arithmetic expressions that are built using multiplication, addition, and other variables or <code>field</code> values. Only quadratic expressions are allowed to be included in constraints. Non-quadratic expressions or usage of other arithmetic operators like division or power are not allowed as constraints, but can be used in the witness assignment expression.</p>
 <p>The following code is not allowed:</p>
 <pre><code class="language-zok">asm {

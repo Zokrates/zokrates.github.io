@@ -216,9 +216,8 @@ def main(field x) -&gt; field {
     };
 }
 </code></pre>
-<p>The experimental flag <code>--branch-isolation</code> can be activated in the CLI in order to restrict any unsatisfied constraint to make the execution fail only if it is in a logically executed branch. This way, the execution of the program above will always succeed.</p>
 <blockquote>
-<p>The reason for these caveats is that the program is compiled down to an arithmetic circuit. This construct does not support jumping to a branch depending on a condition as you could do on traditional architectures. Instead, all branches are inlined as if they were printed on a circuit board. The <code>branch-isolation</code> feature comes with overhead for each assertion in each branch, and this overhead compounds when deeply nesting conditionals.</p>
+<p>The reason for these caveats is that the program is compiled down to an arithmetic circuit. This construct does not support jumping to a branch depending on a condition as you could do on traditional architectures. Instead, all branches are inlined as if they were printed on a circuit board.</p>
 </blockquote>
 <a class="header" href="#for-loops" id="for-loops"><h3>For loops</h3></a>
 <p>For loops are available with the following syntax:</p>
